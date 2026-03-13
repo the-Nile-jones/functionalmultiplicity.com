@@ -1,5 +1,6 @@
 name = "billowing-union-4aec"
 compatibility_date = "2026-03-06"
+account_id = "9036215943344b5beee6a2a3b09b6f8d"
 
 [assets]
 directory = "."
