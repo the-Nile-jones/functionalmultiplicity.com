@@ -1,35 +1,32 @@
-/* Functional Multiplicity — Universal Design v2
-   Palette B: Navy + Amber | Dark default, Light opt-in
+/* Functional Multiplicity — Universal Design v3
+   Palette: Dark Slate + Emerald | Dark default, Light opt-in
    Font: Atkinson Hyperlegible (low-vision optimised)
    WCAG AA/AAA compliant in both modes
 */
 
 /* ── Tokens ──────────────────────────────────────────── */
 :root {
-  /* Dark mode (default) */
-  --bg:          #0D1B2A;
-  --bg-card:     #112236;
-  --bg-card-alt: rgba(244, 162, 97, 0.06);
-  --border:      #1E3A5F;
-  --text:        #F0EAD6;
-  --text-muted:  #9BAFC4;
-  --accent:      #F4A261;
-  --accent-dark: #E8894A;
-  --accent-on:   #0D1B2A;
-  --focus-ring:  #F4A261;
+  --bg:          #1A1F2E;
+  --bg-card:     #212840;
+  --border:      #2E3650;
+  --text:        #E8EDF2;
+  --text-muted:  #8A9AB5;
+  --accent:      #10B981;
+  --accent-dark: #0D9668;
+  --accent-on:   #0D1A14;
+  --focus-ring:  #10B981;
 }
 
 [data-theme="light"] {
-  --bg:          #F5F0E8;
+  --bg:          #EFF6F3;
   --bg-card:     #FFFFFF;
-  --bg-card-alt: rgba(196, 98, 45, 0.05);
-  --border:      #D4C5B0;
-  --text:        #1A1A2E;
-  --text-muted:  #5C5470;
-  --accent:      #C4622D;
-  --accent-dark: #A84E22;
+  --border:      #C0D9CE;
+  --text:        #1A1F2E;
+  --text-muted:  #4A5568;
+  --accent:      #0A8C63;
+  --accent-dark: #077A55;
   --accent-on:   #FFFFFF;
-  --focus-ring:  #C4622D;
+  --focus-ring:  #0A8C63;
 }
 
 /* ── Reset ───────────────────────────────────────────── */
@@ -105,17 +102,14 @@ nav {
   font-family: inherit;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  transition: border-color 0.2s, color 0.2s;
   white-space: nowrap;
 }
 .theme-toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
-.toggle-icon {
-  font-size: 0.9rem;
-  line-height: 1;
-}
+.toggle-icon { font-size: 0.9rem; line-height: 1; }
 
 /* ── Main ────────────────────────────────────────────── */
 main {
@@ -179,10 +173,7 @@ a:hover, a:focus {
 .ledger-value { color: var(--accent); font-weight: 700; text-align: right; }
 
 /* ── Muted text ──────────────────────────────────────── */
-.muted {
-  color: var(--text-muted);
-  font-size: 0.875rem;
-}
+.muted { color: var(--text-muted); font-size: 0.875rem; }
 
 /* ── Footer ──────────────────────────────────────────── */
 footer {
@@ -193,7 +184,7 @@ footer {
   transition: border-color 0.25s ease;
 }
 
-/* ── Focus states (universal) ────────────────────────── */
+/* ── Focus states ────────────────────────────────────── */
 *:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 3px;
@@ -201,10 +192,7 @@ footer {
 
 /* ── Reduced motion ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
 
