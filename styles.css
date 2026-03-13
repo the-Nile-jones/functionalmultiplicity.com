@@ -1,32 +1,32 @@
-/* Functional Multiplicity — Universal Design v3
-   Palette: Dark Slate + Emerald | Dark default, Light opt-in
+/* Functional Multiplicity — Universal Design v4
+   Palette: Deep Forest + Bright Emerald | Dark default, Light opt-in
    Font: Atkinson Hyperlegible (low-vision optimised)
    WCAG AA/AAA compliant in both modes
 */
 
 /* ── Tokens ──────────────────────────────────────────── */
 :root {
-  --bg:          #1A1F2E;
-  --bg-card:     #212840;
-  --border:      #2E3650;
-  --text:        #E8EDF2;
-  --text-muted:  #8A9AB5;
-  --accent:      #10B981;
-  --accent-dark: #0D9668;
-  --accent-on:   #0D1A14;
-  --focus-ring:  #10B981;
+  --bg:          #0D1A0D;
+  --bg-card:     #122012;
+  --border:      #1E361E;
+  --text:        #F0F5F0;
+  --text-muted:  #7FAF7F;
+  --accent:      #4ADE80;
+  --accent-dark: #36C46A;
+  --accent-on:   #0A1A0A;
+  --focus-ring:  #4ADE80;
 }
 
 [data-theme="light"] {
-  --bg:          #EFF6F3;
+  --bg:          #F0F5F0;
   --bg-card:     #FFFFFF;
-  --border:      #C0D9CE;
-  --text:        #1A1F2E;
-  --text-muted:  #4A5568;
-  --accent:      #0A8C63;
-  --accent-dark: #077A55;
+  --border:      #B8D9B8;
+  --text:        #0D1A0D;
+  --text-muted:  #3D6B3D;
+  --accent:      #16A34A;
+  --accent-dark: #15803D;
   --accent-on:   #FFFFFF;
-  --focus-ring:  #0A8C63;
+  --focus-ring:  #16A34A;
 }
 
 /* ── Reset ───────────────────────────────────────────── */
