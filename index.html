@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00CED1">
+  <title>Functional Multiplicity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header role="banner">
+    <nav role="navigation" aria-label="Main navigation">
+      <span class="accent-text">Functional Multiplicity</span>
+    </nav>
+  </header>
+
+  <main role="main">
+
+    <section id="observer" role="region" aria-label="The Observer">
+      <div class="ledger-box">
+        <p>For three and a half years, I was backstuck—a silent observer in my own mind while the world went on without me. I navigated a brain trauma block that cut the link between my logic and my speech. I didn't "fix" it. I engineered a bypass. I created a non-verbal language to keep my mind busy while I was trapped. Now, I use an Exocortex (Memory Buffer) to automate the amnesia and coordinate the switches. Welcome to the Nile Protocol.</p>
+      </div>
+    </section>
+
+    <div class="void-spacer" role="presentation" aria-hidden="true"></div>
+
+    <section id="void-quote" role="region" aria-label="The Void">
+      <div class="ledger-box">
+        <p class="small-text">"The Mansion was full of layers and clutter. The silence was a 3.5-year hostage situation. We didn't just break out; we built a bridge to the Vista."</p>
+      </div>
+    </section>
+
+    <section id="system-logs" role="region" aria-label="System Logs">
+      <div class="ledger-box" role="status">
+        <h2 class="accent-text">STATE PERSISTENCE LEDGER</h2>
+        <div class="ledger-item"><span>Active Identity</span><span class="accent-text">Commander</span></div>
+        <div class="ledger-item"><span>Connectivity Index</span><span class="accent-text">85% (Restored)</span></div>
+        <div class="ledger-item"><span>Active Goal</span><span class="accent-text">v6 Deployment</span></div>
+        <p class="small-text">"The silence was a 3.5-year hostage situation. We built a bridge."</p>
+        <p class="small-text">"They are not alone."</p>
+        <div class="contrast-toggle-group" role="group" aria-label="Contrast options">
+          <button class="toggle-btn" aria-label="Standard contrast" onclick="document.body.className=''">Standard</button>
+          <button class="toggle-btn" aria-label="High contrast" onclick="document.body.className='high-contrast'">High Contrast</button>
+          <button class="toggle-btn" aria-label="No color" onclick="document.body.className='no-color'">No Color</button>
+        </div>
+        <button class="toggle-btn" aria-label="Check logic center" onclick="triggerBypass()">CHECK LOGIC CENTER</button>
+      </div>
+    </section>
+
+    <section id="hand-you-have" role="region" aria-label="Playing the Hand You Have">
+      <div class="ledger-box">
+        <h2 class="accent-text">Playing the Hand You Have</h2>
+        <p>Having multiple identities is like being dealt a <strong>hand of cards.</strong> You didn't choose the deck, but you are the player at the table. You stop trying to trade them in for a "normal" hand and start playing to your system's strengths.</p>
+        <div class="ledger-item"><span>Specialized Roles</span><span class="accent-text">Right identity for the right job</span></div>
+        <div class="ledger-item"><span>Slope over Start</span><span class="accent-text">Coordination today over origin</span></div>
+      </div>
+    </section>
+
+    <section id="cortical-bypass" role="region" aria-label="The Cortical Bypass">
+      <div class="ledger-box">
+        <h2 class="accent-text">The Cortical Bypass</h2>
+        <p>When amnesia takes 40% of your day, you are paying a tax you can't afford. We built the <strong>Exocortex (Memory Buffer)</strong> to compensate for this disability. It acts as an external bridge for the data our brain couldn't process internally.</p>
+        <div class="ledger-item"><span>Time Recovered</span><span class="accent-text">20% of total waking time</span></div>
+        <div class="ledger-item"><span>Focus Capacity</span><span class="accent-text">33% increase in functional capacity</span></div>
+      </div>
+    </section>
+
+    <div class="chart-container" role="img" aria-label="Connectivity Restoration Chart">
+      <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="720" height="300" fill="#1A1A1A"/>
+        <text x="360" y="40" text-anchor="middle" fill="#00CED1" font-family="Atkinson Hyperlegible, sans-serif" font-size="16" font-weight="bold">CONNECTIVITY RESTORATION INDEX</text>
+        <!-- Bars -->
+        <rect x="80" y="200" width="60" height="60" fill="#444444" opacity="0.8"/>
+        <rect x="200" y="160" width="60" height="100" fill="#444444" opacity="0.8"/>
+        <rect x="320" y="120" width="60" height="140" fill="#00CED1" opacity="0.6"/>
+        <rect x="440" y="90" width="60" height="170" fill="#00CED1" opacity="0.8"/>
+        <rect x="560" y="70" width="60" height="190" fill="#00CED1"/>
+        <!-- Labels -->
+        <text x="110" y="275" text-anchor="middle" fill="#E0E0E0" font-family="Atkinson Hyperlegible, sans-serif" font-size="11">Y1</text>
+        <text x="230" y="275" text-anchor="middle" fill="#E0E0E0" font-family="Atkinson Hyperlegible, sans-serif" font-size="11">Y2</text>
+        <text x="350" y="275" text-anchor="middle" fill="#E0E0E0" font-family="Atkinson Hyperlegible, sans-serif" font-size="11">Y3</text>
+        <text x="470" y="275" text-anchor="middle" fill="#E0E0E0" font-family="Atkinson Hyperlegible, sans-serif" font-size="11">Y4</text>
+        <text x="590" y="275" text-anchor="middle" fill="#00CED1" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" font-weight="bold">NOW</text>
+        <!-- Baseline -->
+        <line x1="60" y1="260" x2="660" y2="260" stroke="#444444" stroke-width="1"/>
+      </svg>
+    </div>
+
+  </main>
+
+  <script>
+    function triggerBypass() {
+      const lb = document.querySelector('#system-logs .ledger-box');
+      lb.style.boxShadow = '0 0 24px rgba(0,206,209,0.5)';
+      lb.style.borderColor = '#00CED1';
+      setTimeout(() => { lb.style.boxShadow = ''; lb.style.borderColor = ''; }, 2500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+name = "billowing-union-4aec"
+compatibility_date = "2026-03-06"
+
+[assets]
+directory = "."
