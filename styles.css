@@ -205,3 +205,131 @@ footer {
   .ledger-item { flex-direction: column; gap: 0.15rem; }
   .ledger-value { text-align: left; }
 }
+
+/* ── DID Term Tooltips ───────────────────────────────── */
+.did-term {
+  border-bottom: 1px dotted var(--accent);
+  cursor: help;
+  color: inherit;
+  background: none;
+  padding: 0;
+  font: inherit;
+  text-decoration: none;
+  display: inline;
+}
+.did-term:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+#did-tooltip {
+  position: fixed;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 0.875rem 1rem;
+  width: 300px;
+  max-width: min(300px, 92vw);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+#did-tooltip.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+#did-tooltip[hidden] {
+  display: none;
+}
+
+.did-tooltip-label {
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+  font-size: 0.95rem;
+}
+.did-tooltip-body {
+  color: var(--text);
+}
+.did-tooltip-source {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.did-tooltip-close {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.1rem 0.3rem;
+  line-height: 1;
+  font-family: inherit;
+}
+.did-tooltip-close:hover { color: var(--text); }
+.did-tooltip-close:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Arrow */
+#did-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+#did-tooltip.arrow-below::before {
+  bottom: -6px;
+  left: var(--arrow-x, 50%);
+  margin-left: -5px;
+  border-top: none;
+  border-left: none;
+}
+#did-tooltip.arrow-above::before {
+  top: -6px;
+  left: var(--arrow-x, 50%);
+  margin-left: -5px;
+  border-bottom: none;
+  border-right: none;
+}
+
+/* ── Void (Section 2 scroll transition) ─────────────── */
+#void {
+  height: 300vh;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--bg)        0%,
+    #0a0a0a         25%,
+    #000000         50%,
+    #0a0a0a         75%,
+    var(--bg)       100%
+  );
+  pointer-events: none;
+}
+
+[data-theme="light"] #void {
+  background: linear-gradient(
+    to bottom,
+    var(--bg)        0%,
+    #d0d0d0         25%,
+    #b8b8b8         50%,
+    #d0d0d0         75%,
+    var(--bg)       100%
+  );
+}
