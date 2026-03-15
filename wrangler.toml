@@ -1,6 +1,7 @@
 name = "functionalmultiplicity"
 compatibility_date = "2026-03-06"
 account_id = "9036215943344b5beee6a2a3b09b6f8d"
+pages_build_output_dir = "."
 
 routes = [
   { pattern = "functionalmultiplicity.com", custom_domain = true }
@@ -8,3 +9,4 @@ routes = [
 
 [assets]
 directory = "."
+
