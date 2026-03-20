@@ -364,25 +364,32 @@ footer {
 }
 
 /* ── Pipeline / scoring tables ───────────────────────── */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1rem 0;
+}
 .pipeline-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1rem 0;
   font-size: 0.95rem;
+  table-layout: auto;
 }
 .pipeline-table th,
 .pipeline-table td {
   padding: 0.6rem 0.875rem;
   text-align: left;
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--accent);
+}
+.pipeline-table thead tr {
+  background: var(--bg-card);
 }
 .pipeline-table th {
   color: var(--accent);
   font-weight: 700;
-  border-bottom: 2px solid var(--accent);
 }
-.pipeline-table tr:last-child td {
-  border-bottom: none;
+.pipeline-table tbody tr:nth-child(even) {
+  background: var(--bg-card);
 }
 @media (max-width: 600px) {
   .pipeline-table { font-size: 0.85rem; }
