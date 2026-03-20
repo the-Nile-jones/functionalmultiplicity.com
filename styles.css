@@ -63,7 +63,7 @@ body {
 .skip-link:focus { top: 0; }
 
 /* ── Header ──────────────────────────────────────────── */
-header {
+header[role="banner"] {
   position: sticky;
   top: 0;
   background: var(--bg);
