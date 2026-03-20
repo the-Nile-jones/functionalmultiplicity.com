@@ -345,6 +345,21 @@ footer {
   );
 }
 
+/* ── Prompt block (copyable AI prompt) ──────────────── */
+.prompt-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
+  font-style: normal;
+  user-select: all;
+}
+
 /* ── Code block ──────────────────────────────────────── */
 .code-block {
   background: var(--bg-card);
