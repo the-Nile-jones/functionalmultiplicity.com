@@ -345,6 +345,50 @@ footer {
   );
 }
 
+/* ── Code block ──────────────────────────────────────── */
+.code-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* ── Pipeline / scoring tables ───────────────────────── */
+.pipeline-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+.pipeline-table th,
+.pipeline-table td {
+  padding: 0.6rem 0.875rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.pipeline-table th {
+  color: var(--accent);
+  font-weight: 700;
+  border-bottom: 2px solid var(--accent);
+}
+.pipeline-table tr:last-child td {
+  border-bottom: none;
+}
+@media (max-width: 600px) {
+  .pipeline-table { font-size: 0.85rem; }
+  .pipeline-table th, .pipeline-table td { padding: 0.5rem 0.5rem; }
+}
+
 /* ── Nav links (Human Terms / AI Terms) ─────────────── */
 .nav-links {
   display: flex;
