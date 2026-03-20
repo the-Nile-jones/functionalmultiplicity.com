@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1C1C1C" id="theme-meta">
+  <title>Human Terms — Functional Multiplicity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+
+<header role="banner">
+    <nav role="navigation" aria-label="Main navigation">
+      <span class="site-title">Functional Multiplicity</span>
+      <div class="nav-links">
+        <a href="/HumanTerms" class="nav-link">Human Terms</a>
+        <a href="/AITerms" class="nav-link">AI Terms</a>
+      </div>
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="Switch to light mode"
+        title="Toggle light/dark mode"
+      >
+        <span class="toggle-icon" aria-hidden="true">☀</span>
+        <span class="toggle-label">Light Mode</span>
+      </button>
+    </nav>
+  </header>
+
+<main id="main-content" role="main">
+  <article class="post-article">
+    <header class="post-header">
+      <h1 id="human" class="post-title">Human Terms</h1>
+    </header>
+
+    <div class="post-body">
+      <p>Language for gender, identity, and plurality is still being built — by the communities who live it, not by institutions.</p>
+      <p>The resources below are peer-led references. They are starting points, not authorities. Your System's language for itself is the final word.</p>
+
+      <section aria-labelledby="heading-dictionary">
+        <h2 id="heading-dictionary">DIDictionary</h2>
+        <p>A community-built glossary of Dissociative Identity Disorder terminology, written by and for plurals.</p>
+        <p><a href="https://didictionary.carrd.co/" target="_blank" rel="noopener noreferrer" class="external-link">Visit DIDictionary →</a></p>
+      </section>
+
+      <section aria-labelledby="heading-theysaurus">
+        <h2 id="heading-theysaurus">Theysaurus</h2>
+        <p>A thesaurus for gender-neutral and gender-inclusive language. Useful for finding alternatives to gendered terms when writing for or about plural systems.</p>
+        <p><a href="https://www.theysaurus.com/" target="_blank" rel="noopener noreferrer" class="external-link">Visit Theysaurus →</a></p>
+      </section>
+
+      <section aria-labelledby="heading-note">
+        <h2 id="heading-note">A note on terminology</h2>
+        <p>This site uses terminology from <a href="https://thepluralassociation.org" target="_blank" rel="noopener noreferrer">The Plural Association</a> and <a href="https://powertotheplurals.com" target="_blank" rel="noopener noreferrer">Power to the Plurals</a> as its baseline. Both are plural-founded, community-led organisations. Their language is their authority. This site simply provides a starting point.</p>
+        <p>If Your System uses different language for itself, that language takes precedence — here and everywhere else.</p>
+        <p>Ready to train Your AI? → <a href="/AITerms">AI Terms</a></p>
+      </section>
+    </div>
+  </article>
+</main>
+
+<script>
+    (function () {
+      const STORAGE_KEY = 'fm-theme';
+      const btn = document.getElementById('theme-toggle');
+      const meta = document.getElementById('theme-meta');
+
+      const themes = {
+        dark:  { label: 'Light Mode', icon: '☀', metaColor: '#1C1C1C' },
+        light: { label: 'Dark Mode',  icon: '☾', metaColor: '#F5F0E8' }
+      };
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const t = themes[theme];
+        btn.setAttribute('aria-label', 'Switch to ' + t.label.toLowerCase());
+        btn.querySelector('.toggle-label').textContent = t.label;
+        btn.querySelector('.toggle-icon').textContent = t.icon;
+        meta.setAttribute('content', t.metaColor);
+        localStorage.setItem(STORAGE_KEY, theme);
+      }
+
+      // Determine initial theme: localStorage → prefers-color-scheme → dark
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = saved || (prefersDark ? 'dark' : 'dark');
+      applyTheme(initial);
+
+      btn.addEventListener('click', function () {
+        const current = document.documentElement.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    })();
+  </script>
+
+</body>
+</html>
