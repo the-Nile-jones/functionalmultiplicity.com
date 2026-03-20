@@ -137,15 +137,17 @@
   cr <- round((f * 0.25) + (d * 0.35) + (i * 0.40), 2)
   # 0.85+ Confirmed | 0.65–0.84 Likely | 0.40–0.64 Hypothesis | below 0.40 Noise
 }</pre></div>
-      <table class="pipeline-table">
-        <thead><tr><th>c_r score</th><th>Tier</th><th>How to use it</th></tr></thead>
-        <tbody>
-          <tr><td>0.85+</td><td>Confirmed</td><td>Load-bearing. Build on it.</td></tr>
-          <tr><td>0.65–0.84</td><td>Likely</td><td>Use it, flag it, watch for disconfirmation.</td></tr>
-          <tr><td>0.40–0.64</td><td>Hypothesis</td><td>Interesting. Do not build on it yet.</td></tr>
-          <tr><td>Below 0.40</td><td>Noise</td><td>Set aside. Revisit after new data.</td></tr>
-        </tbody>
-      </table>
+      <div class="table-wrapper">
+        <table class="pipeline-table">
+          <thead><tr><th>c_r score</th><th>Tier</th><th>How to use it</th></tr></thead>
+          <tbody>
+            <tr><td>0.85+</td><td>Confirmed</td><td>Load-bearing. Build on it.</td></tr>
+            <tr><td>0.65–0.84</td><td>Likely</td><td>Use it, flag it, watch for disconfirmation.</td></tr>
+            <tr><td>0.40–0.64</td><td>Hypothesis</td><td>Interesting. Do not build on it yet.</td></tr>
+            <tr><td>Below 0.40</td><td>Noise</td><td>Set aside. Revisit after new data.</td></tr>
+          </tbody>
+        </table>
+      </div>
       <p class="search-terms"><em>Search terms: confidence scoring, reliability analysis, Bayesian inference, weighted scoring models, signal detection theory.</em></p>
 
       <hr>
@@ -175,7 +177,8 @@
       <hr>
 
       <h2>The Full Pipeline</h2>
-      <table class="pipeline-table">
+      <div class="table-wrapper">
+        <table class="pipeline-table">
         <thead><tr><th>Step</th><th>Action</th><th>Concept</th></tr></thead>
         <tbody>
           <tr><td>1</td><td>Something works — a tool, a decision, a behavior</td><td>Operating environment</td></tr>
@@ -191,7 +194,8 @@
           <tr><td>11</td><td>Metanalytics audits the system periodically</td><td>6</td></tr>
           <tr><td>12</td><td>What survives at 0.65+ and closes the validation gap gets implemented. Everything else archived.</td><td>All</td></tr>
         </tbody>
-      </table>
+        </table>
+      </div>
 
       <hr>
 
