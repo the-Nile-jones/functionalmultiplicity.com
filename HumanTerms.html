@@ -41,23 +41,82 @@
 
     <div class="post-body">
       <p>Language for gender, identity, and plurality is still being built — by the communities who live it, not by institutions.</p>
-      <p>The resources below are peer-led references. They are starting points, not authorities. Your System's language for itself is the final word.</p>
+      <p>The terms below are the ones this site uses. Your System's language for itself is the final word.</p>
 
       <section aria-labelledby="heading-dictionary">
         <h2 id="heading-dictionary">DIDictionary</h2>
-        <p>A community-built glossary of Dissociative Identity Disorder terminology, written by and for plurals.</p>
-        <p><a href="https://didictionary.carrd.co/" target="_blank" rel="noopener noreferrer" class="external-link">Visit DIDictionary →</a></p>
+        <p>System mechanics — how plurality works from the inside.</p>
+        <dl>
+          <dt>Functional Multiplicity</dt>
+          <dd>A state of high-functioning cooperation and internal democracy among parts without requiring final fusion.</dd>
+
+          <dt>Amnesia Tax</dt>
+          <dd>The cognitive, temporal, and metabolic cost incurred by memory gaps and the energy required to bridge them during identity switches.</dd>
+
+          <dt>Distributed Cognition (DCog)</dt>
+          <dd>A framework where cognitive processes are spread across internal members, material artifacts (the Exocortex), and the environment.</dd>
+
+          <dt>24/7 Co-Consciousness</dt>
+          <dd>The ability for multiple internal members to remain aware and present simultaneously, allowing for concurrent task performance.</dd>
+
+          <dt>Base Operating Layer (BOL)</dt>
+          <dd>The fundamental "Good Human" rules and ethical recursion that establish a safety floor for the entire system.</dd>
+
+          <dt>Persona Identity Layers (PILs)</dt>
+          <dd>The individual roles, demeanors, and mission-specific identities that sit atop the BOL.</dd>
+
+          <dt>Contextual Lens Files (CLFs)</dt>
+          <dd>Specialized background data and scripts triggered by specific environmental cues to inform individual personas.</dd>
+
+          <dt>Pink Noise (1/f) Dynamics</dt>
+          <dd>A mathematical signature of metastability and optimal coordination within a plural system.</dd>
+
+          <dt>System Mapping</dt>
+          <dd>Visual methods — heat maps, flowcharts, or internal landscapes — used to externalize internal relationships and combat denial.</dd>
+
+          <dt>Asking Inside</dt>
+          <dd>A technique of posing mental questions and monitoring for auditory, somatic, or emotional responses to build internal trust.</dd>
+
+          <dt>Apparently Normal Parts (ANPs) &amp; Emotional Parts (EPs)</dt>
+          <dd>Terms from structural dissociation theory describing parts focused on daily survival vs. those holding trauma memories.</dd>
+
+          <dt>Somatic Snap</dt>
+          <dd>Physical posture flex → focused intent → snap → release tension. Reduces fronting time from seconds to instant. Built during the DID period.</dd>
+        </dl>
       </section>
 
       <section aria-labelledby="heading-theysaurus">
         <h2 id="heading-theysaurus">Theysaurus</h2>
-        <p>A thesaurus for gender-neutral and gender-inclusive language. Useful for finding alternatives to gendered terms when writing for or about plural systems.</p>
-        <p><a href="https://www.theysaurus.com/" target="_blank" rel="noopener noreferrer" class="external-link">Visit Theysaurus →</a></p>
+        <p>Voice and interface markers — how this System communicates and how AI is calibrated to meet it.</p>
+        <dl>
+          <dt>Staccato</dt>
+          <dd>Rhythmic, sharp, direct speech pattern for high-velocity tasks.</dd>
+
+          <dt>Cinematic</dt>
+          <dd>Atmospheric, visually descriptive narrative voice for creative synthesis.</dd>
+
+          <dt>NF-inspired</dt>
+          <dd>High-intensity, emotionally resonant cadence with rhythmic flow.</dd>
+
+          <dt>Mirror Mandate</dt>
+          <dd>Instruction for an AI node to mirror the functional need rather than assuming a specific identity.</dd>
+
+          <dt>1-Bit Logic</dt>
+          <dd>High-structure Safety Mode — Yes/No questions only. Triggered during low-mana or high-confusion states.</dd>
+
+          <dt>Poughkeepsie Protocol</dt>
+          <dd>Hard anchor and safety trigger derived from Supernatural. Stop-everything signal for dissociative states. Pre-existing trust deployed as architecture.</dd>
+
+          <dt>Mana-Pacing Alignment</dt>
+          <dd>Proposals must require less than 10% of current estimated mana reserves to implement.</dd>
+
+          <dt>Zero-Friction Index</dt>
+          <dd>Whether the user can find the same file in the same place even when disoriented.</dd>
+        </dl>
       </section>
 
       <section aria-labelledby="heading-note">
         <h2 id="heading-note">A note on terminology</h2>
-        <p>This site uses terminology from <a href="https://thepluralassociation.org" target="_blank" rel="noopener noreferrer">The Plural Association</a> and <a href="https://powertotheplurals.com" target="_blank" rel="noopener noreferrer">Power to the Plurals</a> as its baseline. Both are plural-founded, community-led organisations. Their language is their authority. This site simply provides a starting point.</p>
         <p>If Your System uses different language for itself, that language takes precedence — here and everywhere else.</p>
         <p>Ready to train Your AI? → <a href="/AITerms">AI Terms</a></p>
       </section>
@@ -86,7 +145,6 @@
         localStorage.setItem(STORAGE_KEY, theme);
       }
 
-      // Determine initial theme: localStorage → prefers-color-scheme → dark
       const saved = localStorage.getItem(STORAGE_KEY);
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const initial = saved || (prefersDark ? 'dark' : 'dark');
