@@ -422,7 +422,7 @@ footer {
 }
 
 .nav-link {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--accent);
   text-decoration: none;
   letter-spacing: 0.02em;
@@ -440,7 +440,7 @@ footer {
     gap: 0.5rem;
   }
   .nav-link {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     white-space: nowrap;
   }
 }
