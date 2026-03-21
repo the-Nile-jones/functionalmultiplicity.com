@@ -66,15 +66,14 @@
       const meta = document.getElementById('theme-meta');
 
       const themes = {
-        dark:  { label: 'Light Mode', icon: '☀', metaColor: '#1C1C1C' },
-        light: { label: 'Dark Mode',  icon: '☾', metaColor: '#F5F0E8' }
+        dark:  { icon: '☀', metaColor: '#1C1C1C' },
+        light: { icon: '☾', metaColor: '#F5F0E8' }
       };
 
       function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         const t = themes[theme];
-        btn.setAttribute('aria-label', 'Switch to ' + t.label.toLowerCase());
-        btn.querySelector('.toggle-label').textContent = t.label;
+        btn.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
         btn.querySelector('.toggle-icon').textContent = t.icon;
         meta.setAttribute('content', t.metaColor);
         localStorage.setItem(STORAGE_KEY, theme);
