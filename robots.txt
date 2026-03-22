@@ -2,6 +2,10 @@ User-agent: *
 Allow: /
 Disallow: /private/
 
+# Allow Internet Archive (Wayback Machine)
+User-agent: ia_archiver
+Allow: /
+
 # Block AI training crawlers
 User-agent: ClaudeBot
 Disallow: /
