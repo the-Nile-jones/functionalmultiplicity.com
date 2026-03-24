@@ -1,3 +1,33 @@
+/* Self-hosted Atkinson Hyperlegible — no Google Fonts DNS leak */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/atkinson-normal-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/atkinson-normal-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/atkinson-italic-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/atkinson-italic-700.woff2') format('woff2');
+}
+
 /* Functional Multiplicity — Universal Design v5
    Palette: Dark Charcoal + Emerald | Dark default, Light opt-in
    Font: Atkinson Hyperlegible (low-vision optimised)
