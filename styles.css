@@ -163,7 +163,7 @@ main {
   padding: 2.5rem 1.5rem 4rem;
 }
 
-section { margin-bottom: 2rem; }
+section { margin-bottom: 2rem; scroll-margin-top: 4rem; }
 
 /* ── Cards ───────────────────────────────────────────── */
 .card {
