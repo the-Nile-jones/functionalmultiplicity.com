@@ -440,6 +440,7 @@ footer {
   padding: 0.6rem 0.875rem;
   text-align: left;
   border: 1px solid var(--accent);
+  color: var(--text);
 }
 .pipeline-table thead tr {
   background: var(--bg-card);
@@ -447,6 +448,9 @@ footer {
 .pipeline-table th {
   color: var(--accent);
   font-weight: 700;
+}
+.pipeline-table tbody tr {
+  background: var(--bg);
 }
 .pipeline-table tbody tr:nth-child(even) {
   background: var(--bg-card);
