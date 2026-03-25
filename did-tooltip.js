@@ -178,6 +178,11 @@
       label: "Plural",
       definition: "Having multiple distinct Identities in one body. Many Systems use 'plural' as an affirming self-descriptor.",
       source: "Community"
+    },
+    "Proprioception": {
+      label: "Proprioception",
+      definition: "The body's internal sense of its own position, movement, and spatial orientation — felt without looking. In FM: turning inward to sense who is present, where tension lives, and what the body is telling You right now. Not dissociation — the opposite. Grounding through awareness of the body You all share.",
+      source: "FM / Clinical"
     }
   };
 
