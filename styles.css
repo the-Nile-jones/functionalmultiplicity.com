@@ -137,12 +137,13 @@ nav {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 2px solid var(--accent);
+  border: 1.5px solid var(--accent);
   color: var(--accent);
   width: 36px;
   height: 36px;
   padding: 0;
   border-radius: 50%;
+  box-sizing: border-box;
   font-family: inherit;
   font-size: 1rem;
   cursor: pointer;
