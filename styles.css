@@ -236,7 +236,7 @@ footer {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 2rem;
-  color: var(--text);
+  color: var(--accent);
   opacity: 0.85;
 }
 
