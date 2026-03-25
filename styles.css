@@ -121,28 +121,39 @@ nav {
 .site-logo svg {
   display: block;
 }
+.site-logo svg circle {
+  fill: var(--bg);
+  stroke: var(--accent);
+  transition: fill 0.25s ease, stroke 0.25s ease;
+}
+.site-logo svg text {
+  fill: var(--accent);
+  transition: fill 0.25s ease;
+}
 
 /* ── Theme toggle ────────────────────────────────────── */
 .theme-toggle {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
   background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  padding: 0.35rem 0.75rem;
-  border-radius: 2rem;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
   font-family: inherit;
-  font-size: 0.85rem;
+  font-size: 1rem;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s;
+  flex-shrink: 0;
 }
 .theme-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-on);
 }
-.toggle-icon { font-size: 0.9rem; line-height: 1; }
+.toggle-icon { font-size: 1rem; line-height: 1; }
 
 /* ── Main ────────────────────────────────────────────── */
 main {

@@ -31,6 +31,11 @@
       source: "FM Functional Language"
     },
 
+    "Sovereignty": {
+      label: "Sovereignty",
+      definition: "The FM principle that every Identity in a System has the right to exist, to hold a role, and to participate in decisions that affect the collective. Not independence from the System — authority within it.",
+      source: "FM Functional Language"
+    },
     "Systemic Cooperation": {
       label: "Systemic Cooperation",
       definition: "The coordinated collaboration between alters toward shared goals—a core FM value. Prioritized over internal competition, suppression, or forced integration.",
