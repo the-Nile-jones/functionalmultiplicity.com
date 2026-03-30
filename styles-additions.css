@@ -6,6 +6,17 @@
   text-underline-offset: 3px;
 }
 
+/* ── Handbook intro blurb ────────────────────────────── */
+.handbook-intro {
+  max-width: 720px;
+  margin: 2.5rem auto 0;
+  padding: 0 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
 /* ── Config bar ──────────────────────────────────────── */
 .config-bar {
   background: var(--bg-card);
