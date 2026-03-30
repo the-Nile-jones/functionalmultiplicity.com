@@ -327,7 +327,6 @@
         document.documentElement.setAttribute('data-theme', theme);
         const t = themes[theme];
         btn.setAttribute('aria-label', 'Switch to ' + t.label.toLowerCase());
-        btn.querySelector('.toggle-label').textContent = t.label;
         btn.querySelector('.toggle-icon').textContent = t.icon;
         meta.setAttribute('content', t.metaColor);
         localStorage.setItem(STORAGE_KEY, theme);
