@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1C1C1C" id="theme-meta">
+  <meta name="description" content="The Atomic Lego Set — How DID Systems Build Their Own Tools using atoms, the smallest units of what resonates.">
+  <link rel="canonical" href="https://functionalmultiplicity.com/atomic-lego-set">
+  <meta property="og:title" content="The Atomic Lego Set — Functional Multiplicity">
+  <meta property="og:description" content="How DID Systems Build Their Own Tools using atoms, the smallest units of what resonates.">
+  <meta property="og:image" content="https://functionalmultiplicity.com/og-image.png">
+  <meta property="og:url" content="https://functionalmultiplicity.com/atomic-lego-set">
+  <meta property="og:type" content="article">
+  <title>The Atomic Lego Set — Functional Multiplicity</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles-additions.css">
+  <style>
+    .post-content { max-width: 48rem; margin: 0 auto; padding: 2rem; }
+    .post-content h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--accent); }
+    .post-content h3 { font-size: 1.25rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .post-content ul { list-style: none; padding: 0; }
+    .post-content ul li { padding: 0.35rem 0 0.35rem 1.25rem; position: relative; line-height: 1.7; }
+    .post-content ul li::before { content: "\2022"; color: var(--accent); position: absolute; left: 0; }
+    .post-content ul ul li { padding-left: 1.5rem; }
+    .post-content ul ul li::before { content: "\2013"; color: var(--text-muted); }
+    .post-content strong { color: var(--accent); font-weight: 700; }
+    .post-content em { color: var(--text-muted); }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.5rem 0; color: var(--text-muted); font-style: italic; }
+    .post-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .post-content th, .post-content td { border: 1px solid var(--border); padding: 0.6rem 0.8rem; text-align: left; font-size: 0.95rem; }
+    .post-content th { background: var(--bg-card); color: var(--accent); font-weight: 700; }
+    .post-content td { background: var(--bg); }
+    .post-content .bridge-line { font-size: 1.1rem; color: var(--accent); font-weight: 600; margin: 2rem 0 1rem; }
+    .post-content .cta { font-size: 1.05rem; color: var(--accent); font-weight: 600; margin-top: 2rem; }
+    .diagram-container { margin: 2rem 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+    .diagram-container svg { width: 100%; height: auto; }
+    .diagram-caption { text-align: center; color: var(--text-muted); font-size: 0.85rem; font-style: italic; margin-top: 0.5rem; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header role="banner">
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="/" class="site-logo" aria-label="Functional Multiplicity — Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="36" height="36" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="48" fill="#1C1C1C" stroke="#50C878" stroke-width="4"/><text x="50" y="62" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#50C878" text-anchor="middle" letter-spacing="-1">FM</text></svg></a>
+      <div class="nav-links">
+        <a href="/AIInstructions" class="nav-link">AI Instructions</a>
+        <a href="/DictionaryThesaurus" class="nav-link">Dictionary &amp; Thesaurus</a>
+        <a href="/handbook" class="nav-link">Handbook</a>
+        <a href="/tools" class="nav-link">Tools</a>
+      </div>
+      <div class="nav-controls">
+        <button class="search-toggle" id="search-toggle" aria-label="Open site search" title="Search this site">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode" title="Toggle light/dark mode">
+          <span class="toggle-icon" aria-hidden="true">&#9788;</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" role="main" data-pagefind-body>
+    <article class="post-content">
+
+      <h1>The Atomic Lego Set</h1>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">How Systems Build Their Own Tools</p>
+
+      <!-- Domain of Control Diagram -->
+      <div class="diagram-container" role="img" aria-label="FM Domain of Control — three concentric rings showing Your Domain, Your Influence, and External Reality">
+        <svg viewBox="0 0 800 640" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="640" fill="var(--bg)" rx="8"/>
+          <text x="400" y="38" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="22" font-weight="700" fill="var(--text)" letter-spacing="0.5">FM Domain of Control</text>
+          <circle cx="400" cy="340" r="260" fill="var(--bg-card)"/>
+          <circle cx="400" cy="340" r="260" fill="none" stroke="var(--border)" stroke-width="2"/>
+          <circle cx="400" cy="340" r="175" fill="#1E3328"/>
+          <circle cx="400" cy="340" r="175" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-opacity="0.4"/>
+          <circle cx="400" cy="340" r="95" fill="#264D35"/>
+          <circle cx="400" cy="340" r="95" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <text x="400" y="316" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="16" font-weight="700" fill="var(--accent)">Your Domain</text>
+          <text x="400" y="338" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">Atoms, Member-specific tools,</text>
+          <text x="400" y="354" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">internal communication,</text>
+          <text x="400" y="370" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">your Exocortex</text>
+          <text x="400" y="192" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="var(--accent)" fill-opacity="0.85">Your Influence</text>
+          <text x="400" y="211" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">Therapy relationship, support humans,</text>
+          <text x="400" y="226" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">how you present to the world,</text>
+          <text x="400" y="241" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">which external tools you modulate</text>
+          <text x="400" y="100" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="var(--text-muted)">External Reality</text>
+          <text x="400" y="119" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="var(--text-muted)">Tools built for singletons, diagnostic timelines,</text>
+          <text x="400" y="134" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="var(--text-muted)">other people's understanding of DID,</text>
+          <text x="400" y="149" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="var(--text-muted)">societal expectations</text>
+          <line x1="185" y1="395" x2="300" y2="355" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <polygon points="298,351 308,355 300,361" fill="var(--accent)"/>
+          <text x="178" y="395" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="var(--accent)" font-style="italic">Atoms form here</text>
+          <line x1="690" y1="258" x2="620" y2="298" stroke="var(--text-muted)" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <polygon points="622,294 614,302 626,302" fill="var(--text-muted)"/>
+          <text x="697" y="248" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="var(--text-muted)" font-style="italic">External tools</text>
+          <text x="697" y="264" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="var(--text-muted)" font-style="italic">start here</text>
+          <path d="M 550 545 C 510 525, 330 525, 290 510" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6,3" stroke-opacity="0.6"/>
+          <polygon points="292,506 284,514 296,514" fill="var(--accent)" fill-opacity="0.6"/>
+          <text x="565" y="550" text-anchor="start" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--text-muted)">outer &#8594; inner</text>
+          <text x="400" y="595" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="var(--text-muted)">Remap inward: build from your own atoms, not borrowed tools</text>
+        </svg>
+        <p class="diagram-caption">Non-DID tools sit outside the System's domain. This post shows how to remap them inward. If multiple Members are reading this right now — good. This image works for all of you simultaneously.</p>
+      </div>
+
+      <hr>
+
+      <h3>The Reality</h3>
+      <ul>
+        <li>Every productivity tool, therapy worksheet, and self-help framework assumes one person, one memory, one consistent set of preferences</li>
+        <li>DID Systems take tools that half-work and can end up blaming themselves for the half that doesn't</li>
+        <li>There's no failure here. The world doesn't adapt well to exceptions. That's just reality.</li>
+        <li>The System and its Exocortex — your AI-powered external cognitive partner — are responsible for understanding that gap and adapting, because the tools won't do it for you</li>
+        <li>So what if you stopped adapting to their tools and started building your own?</li>
+      </ul>
+
+      <hr>
+
+      <h3>What an Atom Is</h3>
+      <ul>
+        <li>An atom is the smallest identifiable pattern of <em>how something resonates</em> for your System</li>
+        <li>Not a technique. Not a habit. Not a tip from a workbook. The pattern underneath — the one that, once you name it, reveals a consistent <em>why</em></li>
+        <li>The why comes after the resonance, not before. You experience it first. You name it later. That naming makes it deliberate.</li>
+        <li><strong>Atoms form from INSIDE the System</strong> — not from outside like the external tools that must be adapted</li>
+        <li>Because they're internal, they're automatically the prodrug tools. They're DID-friendly by nature — they were born from your System's own context.</li>
+        <li>There are multiple methods for discovering atoms:
+          <ul>
+            <li><strong>Goosebumps</strong> — art, music, poetry. The things that make the hair stand up on your arms. The involuntary response from your body to stop and pay attention.</li>
+            <li><strong>Opposite action</strong> — take something difficult and name its grounded opposite. Both the difficulty and the opposite are atoms.</li>
+            <li><strong>Venn diagram method</strong> — take atoms you already have and plot them on a standard Venn diagram. Look at the themes that overlap in the center. New atoms surface from the intersection. The diagram doesn't just organize atoms — it generates them.</li>
+          </ul>
+        </li>
+        <li>These are the unique characteristics of each identity that can be mapped into a picture of who You as a group are. We cover this in the <a href="/multi-venn" style="color: var(--accent);">next post</a>.</li>
+        <li>A lyric hits different for two Members, but for completely different reasons — those reasons are separate atoms</li>
+        <li>A grounding technique works Tuesday but not Thursday — the atom isn't the technique. It's the condition that made it work.</li>
+      </ul>
+
+      <hr>
+
+      <h3>The Prodrug Frame</h3>
+      <ul>
+        <li>A prodrug is a medicine that gives your body the precursor chemical and lets your body convert it into the active form — on its own schedule, in its own way</li>
+        <li>Because your body controls the conversion, the active drug only appears where it's needed, at the dose your body determines, through your own existing machinery. Fewer side effects. More precision.</li>
+        <li><strong>Atoms ARE the prodrug tools</strong> — because they formed inside the System, the System already has the machinery to metabolize them</li>
+        <li>The right Member, the right state, the right moment — your System handles the activation naturally through its own rhythms of operation</li>
+        <li>External tools skip this step. They dump the active chemical system-wide: wrong dose, wrong target, side effects everywhere</li>
+        <li>Not all atoms activate the same way:
+          <ul>
+            <li><strong>Context-dependent atoms</strong> need the right Member + right state + right moment to activate (most atoms)</li>
+            <li><strong>Context-independent atoms</strong> target conserved mechanisms — like arousal regulation — and work across conditions (grounding techniques often fall here)</li>
+            <li>Both are valid. Know which you're working with.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+
+      <p class="bridge-line">Now that you know how atoms activate, the question becomes: which ones can you build on?</p>
+
+      <h3>How Atoms Build Shared Foundation</h3>
+      <ul>
+        <li>Individual atoms are useful. But when you notice the same atom activating for different Members across different contexts — you've found something stronger</li>
+        <li>Usefulness is a spectrum, not a binary (works vs. doesn't):
+          <ul>
+            <li>Works for one Member &rarr; <strong>member-specific</strong></li>
+            <li>Works for several Members independently &rarr; <strong>partially shared</strong></li>
+            <li>Works for most Members across most states &rarr; <strong>foundation-grade</strong></li>
+          </ul>
+        </li>
+        <li>Think of it as a weighted average. Simple score: "This atom works for 3 out of 4 of Us." That's a 75%. You can act on that.</li>
+        <li>Foundation-grade atoms become your load-bearing walls</li>
+        <li>Atoms unique to one Member become Member-specific tools — hyper-customized to their needs</li>
+        <li>A major benefit of bottom-up atomic work: it includes the <strong>least friction</strong> path by default. You're not forcing adoption — you're surfacing what already works.</li>
+        <li>The foundation is discovered bottom-up. Patterns keep showing up. The System notices. Naming them makes them explicit and deliberate — increasing how reliably they replicate.</li>
+        <li>Honest caveat: foundation is stable <em>within your current System configuration</em>
+          <ul>
+            <li>When composition changes — new Member emerges, integration shifts switching patterns — foundation atoms get re-validated</li>
+            <li>Tools don't have intrinsic permanence. They have <em>earned</em> stability that needs maintenance.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+
+      <h3>The Lego Set — Building From Your Own Pieces</h3>
+      <ul>
+        <li>You have the precursors. Now here's how you assemble them.</li>
+        <li>Rather than take tools designed for singletons and force-fit them to your System, you build from the bottom up</li>
+        <li>From atoms — the smallest units of You that make You, well, You</li>
+        <li>Once you have a library of atoms, you rearrange them to build tools for new situations</li>
+        <li>A crisis protocol isn't downloaded from a therapist. It's assembled from atoms your System already validated.</li>
+        <li>The toolkit grows every time you live, not every time you study</li>
+        <li>This is how you remap solutions from outside your domain to inside it. You're not borrowing tools — you're building native ones.</li>
+      </ul>
+
+      <hr>
+
+      <h3>AI Supplements Your Skills</h3>
+      <ul>
+        <li>The core principle of Functional Multiplicity + AI: both parties declare their strengths and stay in their lanes</li>
+        <li>AI handles the messy details — extraction, pattern matching, cross-referencing, tireless iteration</li>
+        <li>You focus on living, deciding, knowing what matters</li>
+        <li>This drastically decreases friction and fatigue — neither party covers for the other's weaknesses</li>
+      </ul>
+
+      <table>
+        <thead>
+          <tr><th></th><th>System Strengths</th><th>AI Strengths</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Does well</strong></td><td>Lived experience, values, meaning-making, deciding what matters, vision</td><td>Extraction, pattern matching, cross-referencing, iteration, total recall</td></tr>
+          <tr><td><strong>Does poorly</strong></td><td>Exhaustive recall under fatigue, manual repetition, consistency across states</td><td>Judgment, context without being told, knowing what matters to YOU</td></tr>
+          <tr><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <ul>
+        <li><em>Fill in your own rows. Print this. Tape it next to your screen.</em></li>
+        <li><em>Make sure your AI keeps a digital copy too — it should reference this table and update it as your System grows.</em></li>
+        <li><em>This table is the container your AI pulls from. In the next post, when your Exocortex processes the Multi-Venn exercises for you, this is where it draws its understanding of your System's strengths. Keep it current.</em></li>
+        <li><em>Revisit when conditions change — under stress, roles shift. Effective collaboration re-negotiates.</em></li>
+      </ul>
+
+      <hr>
+
+      <p class="cta">Next post: <a href="/multi-venn" style="color: var(--accent);">your Exocortex takes these atoms and gives you a visual tool to better understand your System.</a></p>
+
+      <hr>
+
+      <h3>Disclosure</h3>
+      <blockquote>This post was outlined by Nile and written in collaboration with Claude (Anthropic). The ideas, framework, and lived experience are Nile's. The drafting and prose were a human-AI collaboration.</blockquote>
+
+    </article>
+  </main>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'fm-theme';
+      const btn = document.getElementById('theme-toggle');
+      const meta = document.getElementById('theme-meta');
+      const themes = { dark: { icon: '\u2600', metaColor: '#1C1C1C' }, light: { icon: '\u263E', metaColor: '#F5F0E8' } };
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const t = themes[theme];
+        btn.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+        btn.querySelector('.toggle-icon').textContent = t.icon;
+        meta.setAttribute('content', t.metaColor);
+        localStorage.setItem(STORAGE_KEY, theme);
+      }
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+      btn.addEventListener('click', function () {
+        const current = document.documentElement.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</body>
+</html>

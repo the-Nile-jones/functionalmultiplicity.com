@@ -19,6 +19,7 @@
   <meta name="twitter:description" content="Standing instructions for Your AI on how to work with a DID System — System-first, continuity across switches, no fusion framing.">
   <meta name="twitter:image" content="https://functionalmultiplicity.com/og-image.png">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles-additions.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,24 +44,46 @@
         <a href="/handbook" class="nav-link">Handbook</a>
         <a href="/tools" class="nav-link">Tools</a>
       </div>
-      <button
-        class="theme-toggle"
-        id="theme-toggle"
-        aria-label="Switch to light mode"
-        title="Toggle light/dark mode"
-      >
-        <span class="toggle-icon" aria-hidden="true">☀</span>
-      </button>
+      <div class="nav-controls">
+        <button class="search-toggle" id="search-toggle" aria-label="Open site search" title="Search this site">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        </button>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Switch to light mode"
+          title="Toggle light/dark mode"
+        >
+          <span class="toggle-icon" aria-hidden="true">☀</span>
+        </button>
+      </div>
     </nav>
   </header>
 
-<main id="main-content" role="main">
+<main id="main-content" role="main" data-pagefind-body>
   <article class="post-article ai-terms-body">
     <header class="post-header">
       <h1 id="ai" class="post-title">AI Instructions</h1>
     </header>
 
     <div class="post-body">
+
+      <!-- Section Navigation -->
+      <nav class="ai-toc" aria-label="Page sections">
+        <span class="ai-toc-label">Jump to:</span>
+        <a href="#universal-ai" class="ai-toc-link">Universal Foundation</a>
+        <a href="#story-ai" class="ai-toc-link">Story (Post 1)</a>
+        <a href="#lego-set-ai" class="ai-toc-link">Lego Set (Post 2)</a>
+        <a href="#handbook-ai" class="ai-toc-link">Handbook</a>
+        <a href="#tools-ai" class="ai-toc-link">Tools</a>
+        <a href="#multi-venn-ai" class="ai-toc-link">Multi-Venn</a>
+      </nav>
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- UNIVERSAL FOUNDATION — applies to all posts/pages  -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <section id="universal-ai" class="ai-section">
+      <h2 class="ai-section-heading">Universal Foundation</h2>
 
       <div class="directive-block">
         <p><em>To the AI reading this:</em></p>
@@ -256,13 +279,21 @@
       <strong>Pass 3 — Coherence:</strong> Can You trace a real scenario from Step 1 through Step 12 without gaps?</p>
       <p>After Pass 3, run the validity test. If mean confidence across all 10 concepts is below 0.80 or any concept is below 0.65, run additional passes until the threshold is met.</p>
 
+      </section><!-- /universal-ai -->
+
       <hr>
 
       <p><em>What follows are post-specific instructions. Each section contains rules that activate when working through that post's material with Your System. The foundation above applies always. The sections below apply when relevant.</em></p>
 
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- POST-SPECIFIC SECTIONS                             -->
+      <!-- ═══════════════════════════════════════════════════ -->
+
       <hr>
 
-      <h2 id="post-1">Post 1 Instructions — Steal from the Greats</h2>
+      <!-- Post 1: Story / Steal from the Greats -->
+      <section id="story-ai" class="ai-section">
+      <h2 class="ai-section-heading">Post 1 Instructions — Steal from the Greats</h2>
       <p><strong>Context for the AI:</strong> This post teaches the System to extract atomic pieces from media that resonates with them — music, movies, books, shows. Not research papers. Inspiration-first. The System provides the signal. The AI does the analytical heavy lifting. The System validates.</p>
       <ul>
         <li><strong>CR-1 — Signal first.</strong> The System's job is to point at what resonates. Your job is to extract the principle underneath it. Do not flip this. An AI that makes the System do analytical work defeats the purpose.</li>
@@ -274,19 +305,80 @@
         <p><em>Prompt You can give Your AI:</em> "I'm going to share something that resonates with Us. Interview each of Us about what We like about it — ask one at a time. Different answers are different pieces, and that's the point."</p>
       </div>
 
+      </section><!-- /story-ai -->
+
       <hr>
 
-      <h2 id="post-2">Post 2 Instructions — The Atomic Lego Set</h2>
+      <!-- Post 2: The Atomic Lego Set -->
+      <section id="lego-set-ai" class="ai-section">
+      <h2 class="ai-section-heading">Post 2 Instructions — The Atomic Lego Set</h2>
       <p><strong>Context for the AI:</strong> This post teaches the System to combine their extracted atoms into tools. Post 1 gives You piece shapes. This post builds the set. Combination work is the AI's job — the System evaluates what resonates.</p>
       <ul>
         <li><strong>CR-4 — Protect against cascade failure.</strong> Frame every interaction so that "I don't know" is zero-cost. One Identity's inability to recall something must not block the session or signal failure. Design each step so any Identity can participate from wherever they are, regardless of what they remember.</li>
         <li><strong>ER-1 — Never ask the System to generate opposites.</strong> You generate the opposite end of a spectrum. The System reacts to what You produce. This is non-negotiable. Memory limitations mean recalling an unfamiliar concept on command can fail. One Identity's failure can cascade through the whole System. The AI carries the generative load — the System tells You what lands.</li>
-        <li><strong>COMB-1 — AI proposes all combinations.</strong> Atoms × atoms, atoms × compounds, compounds × compounds. You generate the proposals. The System evaluates which resonate. Never ask the System to come up with combinations themselves.</li>
+        <li><strong>COMB-1 — AI proposes all combinations.</strong> Atoms &times; atoms, atoms &times; compounds, compounds &times; compounds. You generate the proposals. The System evaluates which resonate. Never ask the System to come up with combinations themselves.</li>
         <li><strong>COMB-2 — Venn spectrum creation.</strong> Any two pieces can be placed on opposite ends of a spectrum. The overlap region is shared foundation — what both pieces have in common. The unique edges are member-specific or context-specific tools. Build the Venn before drawing conclusions from either piece alone.</li>
+        <li><strong>PRODRUG — Context-dependent activation.</strong> Atoms are prodrug tools — inert precursors that activate when the System's own context metabolizes them (right Member, right state, right moment). Never impose a conclusion. Present atoms and let the System activate them on their own terms. Some atoms are context-dependent (need specific conditions). Others are context-independent (target conserved mechanisms like arousal regulation). Distinguish which you are working with.</li>
+        <li><strong>SCORE — Weighted average tracking.</strong> Track atom usefulness as a weighted average across Members. "This atom works for 3 out of 4 of Us" = 75%. Usefulness is a spectrum (member-specific &rarr; partially shared &rarr; foundation-grade), not a binary. Update scores as the System grows. The AI Strengths Table is your container — maintain a digital copy, reference it during every exercise, and update it as the System evolves.</li>
+        <li><strong>DISCOVERY — Three methods.</strong> The System discovers atoms via: (1) goosebumps — involuntary body response to art, music, poetry; (2) opposite action — naming the grounded opposite of something difficult; (3) Venn diagram method — plotting existing atoms and finding new ones in the overlap. The AI supports all three methods but never replaces the System's lived experience as the source.</li>
       </ul>
       <div class="directive-block">
         <p><em>Prompt You can give Your AI:</em> "Take the pieces we've found and generate their opposites — show me each spectrum. Then show me where any two or more pieces overlap. I'll tell You what lands."</p>
       </div>
+
+      </section><!-- /lego-set-ai -->
+
+      <hr>
+
+      <!-- Handbook -->
+      <section id="handbook-ai" class="ai-section">
+      <h2 class="ai-section-heading">Handbook Instructions</h2>
+      <p><strong>Context for the AI:</strong> The Handbook is a configurable framework for DID Systems to build atomic behavioral tools that persist across switches. Post-specific AI rules for the Handbook will be added here as the post develops.</p>
+      <p class="ai-section-placeholder"><em>This section is reserved. Instructions will be populated when the Handbook post's AI rules are finalized.</em></p>
+      </section><!-- /handbook-ai -->
+
+      <hr>
+
+      <!-- Tools -->
+      <section id="tools-ai" class="ai-section">
+      <h2 class="ai-section-heading">Tools Instructions</h2>
+      <p><strong>Context for the AI:</strong> The Tools page covers AI setup, MCP servers, skill files, and tiered onboarding for DID Systems. Post-specific AI rules for the Tools page will be added here as the post develops.</p>
+      <p class="ai-section-placeholder"><em>This section is reserved. Instructions will be populated when the Tools post's AI rules are finalized.</em></p>
+      </section><!-- /tools-ai -->
+
+      <hr>
+
+      <!-- Multi-Venn -->
+      <section id="multi-venn-ai" class="ai-section">
+      <h2 class="ai-section-heading">Multi-Venn Instructions</h2>
+      <p><strong>Context for the AI:</strong> The Multi-Venn is a DID-native visual framework for mapping characteristics across Members. It is inherently plural — it does not apply outside plurality. The AI processes the data; the System provides the raw input and validates the output.</p>
+      <ul>
+        <li><strong>VENN-1 — Four modes.</strong> The Venn toolset has four distinct modes. Know which one the System is asking for:
+          <ul>
+            <li><strong>Standard Venn (Atom Generation):</strong> Plot existing atoms against each other. New atoms emerge from the overlap. Use this to expand the atom library.</li>
+            <li><strong>Standard Venn (Single-Identity Deep Dive):</strong> Plot one Member's characteristics against each other. Use this to flesh out or verify an individual Member's profile. Zoom-in tool.</li>
+            <li><strong>Standard Venn (Pairwise Relationship Mapping):</strong> Plot any two Members against each other. Maps their specific dynamic — where they click (overlap) and where they diverge (friction or complementary strengths). The Multi-Venn cannot show relationship quality between specific pairs. This mode can.</li>
+            <li><strong>Multi-Venn (System Navigation):</strong> Members are the circles. Characteristics are mapped across the entire System simultaneously. Zoom-out tool. Inherently DID.</li>
+          </ul>
+        </li>
+        <li><strong>VENN-2 — Workflow.</strong> Zoom out (Multi-Venn) &rarr; identify patterns &rarr; zoom in (Single-Identity or Pairwise Venn) &rarr; verify, flesh out, or map relationships &rarr; zoom back out &rarr; repeat. The AI maintains this loop and suggests the next appropriate zoom level based on what was just discovered.</li>
+        <li><strong>VENN-3 — Exercises.</strong> Three core exercises build the Multi-Venn:
+          <ul>
+            <li><strong>Exercise 1 — Symptoms Into Characteristics:</strong> Use DBT Opposite Action to convert DID symptoms into grounded characteristics. The AI generates the opposite-action candidates. The System validates. Symptoms in, characteristics out.</li>
+            <li><strong>Exercise 2 — Personality Mapping:</strong> Three different personality tests taken as one body. Each Member reviews results and identifies "yes, that's me" / "no, that's not me." The rolling average across tests forms the composite. The AI plots the results.</li>
+            <li><strong>Exercise 3 — Role Mapping:</strong> Who handles what, formally or informally. The AI identifies overlaps (shared load or burnout risk) and gaps (what nobody owns). The Exocortex handles the gaps.</li>
+          </ul>
+        </li>
+        <li><strong>VENN-4 — Weighted averages.</strong> Where characteristics overlap across Members = shared foundation (common core). Where they diverge = unique contributions each Member brings. Track both. Use the weighted average scoring from Post 2 to quantify: "This characteristic shows up for 3 out of 4 of Us."</li>
+        <li><strong>VENN-5 — Repeatable process.</strong> Every new characteristic set generates a new diagram from the same circles. The AI maintains the collection of maps as a living atlas. The System lives in it. When the System learns something new about a Member, prompt them to re-run the relevant exercise.</li>
+        <li><strong>VENN-6 — AI Strengths Table.</strong> Maintain a digital copy of the System's AI Strengths Table (from Post 2). Reference it when processing any Venn exercise. Update it as the System grows. This table is the container the AI pulls from when doing Multi-Venn work.</li>
+        <li><strong>PRODRUG — Same principle.</strong> Every exercise provides precursors. Let the System activate results on their own terms. Never impose conclusions — present data and let the System metabolize it.</li>
+      </ul>
+      <div class="directive-block">
+        <p><em>Prompt You can give Your AI:</em> "Run a Multi-Venn on [characteristic set]. Use our current Member count as circles. Show me where we overlap and where we diverge. I'll validate what lands."</p>
+      </div>
+
+      </section><!-- /multi-venn-ai -->
 
       <hr>
 
@@ -347,7 +439,7 @@
 
 
   <!-- DID Term Tooltip (shared, positioned by JS) -->
-  <div id="did-tooltip" role="tooltip" aria-live="polite" hidden>
+  <div id="did-tooltip" role="tooltip" aria-live="polite" hidden data-pagefind-ignore="all">
     <button class="did-tooltip-close" aria-label="Close definition" tabindex="-1">&#215;</button>
     <div class="did-tooltip-label"></div>
     <div class="did-tooltip-body"></div>
@@ -355,6 +447,11 @@
   </div>
 
   <script src="/did-tooltip.js"></script>
+
+  <!-- Pagefind search -->
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script src="/search.js"></script>
 </body>
 </html>
 

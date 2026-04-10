@@ -634,3 +634,72 @@
     align-self: flex-end;
   }
 }
+
+/* ── AI Instructions — Section TOC ───────────────────── */
+.ai-toc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+}
+
+.ai-toc-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ai-toc-link {
+  font-size: 0.875rem;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.25rem 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.ai-toc-link:hover,
+.ai-toc-link:focus {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ── AI Instructions — Section blocks ────────────────── */
+.ai-section {
+  scroll-margin-top: 5rem;
+}
+
+.ai-section-heading {
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.ai-section-placeholder {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 600px) {
+  .ai-toc {
+    padding: 0.75rem 1rem;
+    gap: 0.35rem 0.5rem;
+  }
+
+  .ai-toc-link {
+    font-size: 0.8125rem;
+    padding: 0.2rem 0.45rem;
+  }
+}

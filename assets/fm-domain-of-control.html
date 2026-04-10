@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FM Domain of Control</title>
+<style>
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/atkinson-normal-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/atkinson-normal-700.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/atkinson-italic-400.woff2') format('woff2');
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1C1C1C;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  .container {
+    max-width: 800px;
+    width: 100%;
+  }
+  svg { width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+<svg viewBox="0 0 800 640" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Background -->
+  <rect width="800" height="640" fill="#1C1C1C" rx="8"/>
+
+  <!-- Title -->
+  <text x="400" y="38" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="22" font-weight="700" fill="#F0F0F0" letter-spacing="0.5">FM Domain of Control</text>
+
+  <!-- Outer ring — External Reality -->
+  <circle cx="400" cy="340" r="260" fill="none" stroke="#444444" stroke-width="2"/>
+  <circle cx="400" cy="340" r="260" fill="#2A2A2A"/>
+
+  <!-- Middle ring — Your Influence -->
+  <circle cx="400" cy="340" r="175" fill="#1E3328"/>
+  <circle cx="400" cy="340" r="175" fill="none" stroke="#3DAF62" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Inner ring — Your Domain -->
+  <circle cx="400" cy="340" r="95" fill="#264D35"/>
+  <circle cx="400" cy="340" r="95" fill="none" stroke="#50C878" stroke-width="2"/>
+
+  <!-- Inner ring label -->
+  <text x="400" y="316" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="16" font-weight="700" fill="#50C878">Your Domain</text>
+  <text x="400" y="338" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">Atoms, Member-specific tools,</text>
+  <text x="400" y="354" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">internal communication,</text>
+  <text x="400" y="370" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">your Exocortex</text>
+
+  <!-- Middle ring labels -->
+  <text x="400" y="192" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="#50C878" fill-opacity="0.85">Your Influence</text>
+  <text x="400" y="211" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">Therapy relationship, support humans,</text>
+  <text x="400" y="226" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">how you present to the world,</text>
+  <text x="400" y="241" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">which external tools you modulate</text>
+
+  <!-- Outer ring labels -->
+  <text x="400" y="100" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="#888888">External Reality</text>
+  <text x="400" y="119" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#777777">Tools built for singletons, diagnostic timelines,</text>
+  <text x="400" y="134" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#777777">other people's understanding of DID,</text>
+  <text x="400" y="149" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#777777">societal expectations</text>
+
+  <!-- Left annotation: "Atoms form here" -->
+  <line x1="185" y1="395" x2="300" y2="355" stroke="#50C878" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <polygon points="298,351 308,355 300,361" fill="#50C878"/>
+  <text x="178" y="395" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="#50C878" font-style="italic">Atoms form here</text>
+
+  <!-- Right annotation: "External tools start here" -->
+  <line x1="690" y1="258" x2="620" y2="298" stroke="#888888" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <polygon points="622,294 614,302 626,302" fill="#888888"/>
+  <text x="697" y="248" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="#888888" font-style="italic">External tools</text>
+  <text x="697" y="264" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="#888888" font-style="italic">start here</text>
+
+  <!-- Bottom: remapping arrow (outer to inner) -->
+  <path d="M 550 545 C 510 525, 330 525, 290 510" fill="none" stroke="#50C878" stroke-width="1.5" stroke-dasharray="6,3" stroke-opacity="0.6"/>
+  <polygon points="292,506 284,514 296,514" fill="#50C878" fill-opacity="0.6"/>
+  <text x="565" y="550" text-anchor="start" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="#888888">outer → inner</text>
+
+  <!-- Bottom tagline -->
+  <text x="400" y="595" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="#888888">Remap inward: build from your own atoms, not borrowed tools</text>
+
+</svg>
+</div>
+</body>
+</html>

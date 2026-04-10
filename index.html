@@ -55,18 +55,28 @@
         <a href="/handbook" class="nav-link">Handbook</a>
         <a href="/tools" class="nav-link">Tools</a>
       </div>
-      <button
-        class="theme-toggle"
-        id="theme-toggle"
-        aria-label="Switch to light mode"
-        title="Toggle light/dark mode"
-      >
-        <span class="toggle-icon" aria-hidden="true">☀</span>
-      </button>
+      <div class="nav-controls">
+        <button
+          class="search-toggle"
+          id="search-toggle"
+          aria-label="Open site search"
+          title="Search this site"
+        >
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        </button>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Switch to light mode"
+          title="Toggle light/dark mode"
+        >
+          <span class="toggle-icon" aria-hidden="true">☀</span>
+        </button>
+      </div>
     </nav>
   </header>
 
-  <main id="main" role="main">
+  <main id="main" role="main" data-pagefind-body>
 
     <section id="intro" role="region" aria-label="Introduction">
       <div class="card">
@@ -80,7 +90,7 @@
       </div>
     </section>
 
-    <section id="void" role="presentation" aria-hidden="true"></section>
+    <section id="void" role="presentation" aria-hidden="true" data-pagefind-ignore></section>
 
     <section id="approach" role="region" aria-label="An Approach to Living with DID">
       <div class="card">
@@ -325,7 +335,7 @@
   </footer>
 
   <!-- DID Term Tooltip (shared, positioned by JS) -->
-  <div id="did-tooltip" role="tooltip" aria-live="polite" hidden>
+  <div id="did-tooltip" role="tooltip" aria-live="polite" hidden data-pagefind-ignore="all">
     <button class="did-tooltip-close" aria-label="Close definition" tabindex="-1">×</button>
     <div class="did-tooltip-label"></div>
     <div class="did-tooltip-body"></div>
@@ -333,6 +343,11 @@
   </div>
 
   <script src="/did-tooltip.js"></script>
+
+  <!-- Pagefind search -->
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script src="/search.js"></script>
 
 </body>
 </html>

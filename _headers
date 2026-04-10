@@ -26,6 +26,10 @@
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
+# Pagefind index — cache 1 year (regenerated each deploy)
+/pagefind/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # HTML pages — always revalidate
 /*
   Cache-Control: no-cache, must-revalidate

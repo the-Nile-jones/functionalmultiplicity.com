@@ -497,3 +497,169 @@ footer {
     white-space: nowrap;
   }
 }
+
+/* ── Nav controls (search + theme toggle) ───────────── */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* ── Search toggle button ───────────────────────────── */
+.search-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.search-toggle:hover {
+  background: var(--accent);
+  color: var(--accent-on);
+}
+
+/* ── Search overlay ─────────────────────────────────── */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+}
+.search-overlay[hidden] { display: none !important; }
+
+.search-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+}
+[data-theme="light"] .search-overlay-backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.search-container {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 90vw;
+  max-width: 40rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.search-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+  z-index: 2;
+}
+.search-close:hover { color: var(--text); }
+
+/* ── Pagefind UI overrides (match FM design) ────────── */
+.pagefind-ui__search-input {
+  font-family: 'Atkinson Hyperlegible', sans-serif !important;
+  background: var(--bg-card) !important;
+  color: var(--text) !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: 4px !important;
+  padding: 0.6rem 0.75rem !important;
+  font-size: 1rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+}
+.pagefind-ui__search-input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent) !important;
+}
+.pagefind-ui__search-input::placeholder {
+  color: var(--text-muted) !important;
+}
+
+.pagefind-ui__search-clear {
+  color: var(--text-muted) !important;
+  background: none !important;
+}
+.pagefind-ui__search-clear:hover {
+  color: var(--text) !important;
+}
+
+.pagefind-ui__result-link {
+  color: var(--accent) !important;
+  font-family: 'Atkinson Hyperlegible', sans-serif !important;
+  font-weight: 700 !important;
+}
+.pagefind-ui__result-link:hover {
+  text-decoration: underline !important;
+}
+
+.pagefind-ui__result-excerpt {
+  color: var(--text) !important;
+  font-family: 'Atkinson Hyperlegible', sans-serif !important;
+}
+
+.pagefind-ui__result-title {
+  font-family: 'Atkinson Hyperlegible', sans-serif !important;
+}
+
+.pagefind-ui__message {
+  color: var(--text-muted) !important;
+  font-family: 'Atkinson Hyperlegible', sans-serif !important;
+}
+
+mark.pagefind-ui__result-mark,
+.pagefind-ui__result-excerpt mark {
+  background: color-mix(in srgb, var(--accent) 25%, transparent) !important;
+  color: var(--text) !important;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.pagefind-ui__button {
+  background: transparent !important;
+  border: 1.5px solid var(--accent) !important;
+  color: var(--accent) !important;
+  font-family: 'Atkinson Hyperlegible', sans-serif !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+}
+.pagefind-ui__button:hover {
+  background: var(--accent) !important;
+  color: var(--accent-on) !important;
+}
+
+.pagefind-ui__result {
+  border-top: 1px solid var(--border) !important;
+  padding: 1rem 0 !important;
+}
+
+.pagefind-ui__result-nested {
+  border-left: 2px solid var(--accent) !important;
+  padding-left: 0.75rem !important;
+  margin-left: 0.5rem !important;
+}
+
+/* Hide the Pagefind logo/branding area */
+.pagefind-ui__suppressed { display: none !important; }

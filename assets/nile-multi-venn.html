@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nile's Multi-Venn — Functional Multiplicity Meta-System</title>
+<style>
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    font-style: normal; font-weight: 400; font-display: swap;
+    src: url('/fonts/atkinson-normal-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    font-style: normal; font-weight: 700; font-display: swap;
+    src: url('/fonts/atkinson-normal-700.woff2') format('woff2');
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1C1C1C;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 1rem;
+  }
+  .container { max-width: 1000px; width: 100%; }
+  svg { width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+<svg viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Atkinson Hyperlegible', sans-serif; font-weight: 700; fill: #F0F0F0; }
+      .subtitle { font-family: 'Atkinson Hyperlegible', sans-serif; font-weight: 400; fill: #888888; }
+      .label { font-family: 'Atkinson Hyperlegible', sans-serif; font-weight: 700; }
+      .body { font-family: 'Atkinson Hyperlegible', sans-serif; font-weight: 400; }
+      .accent { fill: #50C878; }
+      .muted { fill: #888888; }
+      .light { fill: #C8E6D0; }
+      .white { fill: #F0F0F0; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="620" fill="#1C1C1C" rx="8"/>
+
+  <!-- Title -->
+  <text x="500" y="32" text-anchor="middle" class="title" font-size="18">FUNCTIONAL MULTIPLICITY META-SYSTEM</text>
+  <text x="500" y="52" text-anchor="middle" class="subtitle" font-size="12">The Host-Anchor Architecture &amp; Grounding Toolkit</text>
+
+  <!-- ============ FOUR CIRCLES (center area) ============ -->
+
+  <!-- Circle A: Coordinated Memory (top) -->
+  <circle cx="460" cy="210" r="110" fill="#264D35" fill-opacity="0.35" stroke="#50C878" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="460" y="145" text-anchor="middle" class="label accent" font-size="11">CIRCLE A:</text>
+  <text x="460" y="159" text-anchor="middle" class="label accent" font-size="13">COORDINATED MEMORY</text>
+  <text x="460" y="175" text-anchor="middle" class="body muted" font-size="9">(Amnesia, Dissociation reversed)</text>
+
+  <!-- Circle B: Somatic Presence (center-right) -->
+  <circle cx="540" cy="290" r="110" fill="#1E3328" fill-opacity="0.35" stroke="#3DAF62" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="605" y="230" text-anchor="middle" class="label" font-size="11" fill="#3DAF62">CIRCLE B:</text>
+  <text x="605" y="244" text-anchor="middle" class="label" font-size="13" fill="#3DAF62">SOMATIC PRESENCE</text>
+
+  <!-- Circle C: Emotional Attunement (bottom-left) -->
+  <circle cx="400" cy="370" r="110" fill="#1A3A28" fill-opacity="0.35" stroke="#2D8B4E" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="340" y="440" text-anchor="middle" class="label" font-size="11" fill="#2D8B4E">CIRCLE C:</text>
+  <text x="340" y="454" text-anchor="middle" class="label" font-size="12" fill="#2D8B4E">EMOTIONAL ATTUNEMENT</text>
+  <text x="340" y="468" text-anchor="middle" class="body muted" font-size="9">(Internal Chaos reversed)</text>
+
+  <!-- Circle D: Secure Base (bottom-right) -->
+  <circle cx="540" cy="380" r="110" fill="#1A2E22" fill-opacity="0.35" stroke="#228B4A" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="610" y="450" text-anchor="middle" class="label" font-size="11" fill="#228B4A">CIRCLE D:</text>
+  <text x="610" y="464" text-anchor="middle" class="label" font-size="13" fill="#228B4A">SECURE BASE</text>
+  <text x="610" y="478" text-anchor="middle" class="body muted" font-size="9">(Hypervigilance reversed)</text>
+
+  <!-- ============ MEMBERS ============ -->
+
+  <!-- EVEE (center, anchor) -->
+  <circle cx="485" cy="295" r="28" fill="#264D35" stroke="#50C878" stroke-width="2"/>
+  <text x="485" y="291" text-anchor="middle" class="label white" font-size="11">EVEE</text>
+  <text x="485" y="304" text-anchor="middle" class="body light" font-size="8">THE ARCHITECT</text>
+  <text x="485" y="314" text-anchor="middle" class="body light" font-size="8">ANCHOR</text>
+
+  <!-- ROE (top, navigation) -->
+  <text x="490" y="192" text-anchor="middle" class="label" font-size="10" fill="#50C878">ROE</text>
+  <text x="490" y="203" text-anchor="middle" class="body muted" font-size="8">NAVIGATION</text>
+
+  <!-- MARC (bottom-left) -->
+  <circle cx="410" cy="415" r="20" fill="#1E3328" stroke="#3DAF62" stroke-width="1.5"/>
+  <text x="410" y="412" text-anchor="middle" class="label white" font-size="10">MARC</text>
+  <text x="410" y="424" text-anchor="middle" class="body light" font-size="7">SOCIAL TWIN</text>
+
+  <!-- Twin Bridge between Evee and Marc -->
+  <line x1="470" y1="318" x2="420" y2="398" stroke="#50C878" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.4"/>
+  <text x="430" y="365" text-anchor="middle" class="body muted" font-size="7" transform="rotate(-30, 430, 365)">Twin Bridge</text>
+
+  <!-- HARRY (bottom-right) -->
+  <circle cx="560" cy="405" r="20" fill="#1A2E22" stroke="#228B4A" stroke-width="1.5"/>
+  <text x="560" y="402" text-anchor="middle" class="label white" font-size="10">HARRY</text>
+  <text x="560" y="414" text-anchor="middle" class="body light" font-size="7"></text>
+
+  <!-- ============ LEFT PANEL: FOUNDATIONAL ATOMS ============ -->
+
+  <text x="30" y="90" class="label white" font-size="12">FOUNDATIONAL ATOMS</text>
+  <text x="30" y="105" class="body muted" font-size="9">Core patterns</text>
+
+  <!-- Atom list -->
+  <rect x="25" y="120" width="160" height="24" rx="4" fill="#242424" stroke="#333333" stroke-width="1"/>
+  <text x="35" y="136" class="body light" font-size="9">Sensory Processing</text>
+
+  <rect x="25" y="150" width="160" height="24" rx="4" fill="#242424" stroke="#333333" stroke-width="1"/>
+  <text x="35" y="166" class="body light" font-size="9">Emotional Regulation</text>
+
+  <rect x="25" y="180" width="160" height="24" rx="4" fill="#242424" stroke="#333333" stroke-width="1"/>
+  <text x="35" y="196" class="body light" font-size="9">Boundary Setting</text>
+
+  <rect x="25" y="210" width="160" height="24" rx="4" fill="#242424" stroke="#333333" stroke-width="1"/>
+  <text x="35" y="226" class="body light" font-size="9">Information Integration</text>
+
+  <rect x="25" y="240" width="160" height="24" rx="4" fill="#242424" stroke="#333333" stroke-width="1"/>
+  <text x="35" y="256" class="body light" font-size="9">Social Gating</text>
+
+  <rect x="25" y="270" width="160" height="24" rx="4" fill="#242424" stroke="#333333" stroke-width="1"/>
+  <text x="35" y="286" class="body light" font-size="9">Autonomic Tone</text>
+
+  <!-- Arrow from atoms to circles -->
+  <line x1="190" y1="200" x2="345" y2="250" stroke="#50C878" stroke-width="1" stroke-dasharray="4,3" stroke-opacity="0.5"/>
+  <polygon points="343,246 353,250 345,256" fill="#50C878" fill-opacity="0.5"/>
+  <text x="250" y="215" class="body muted" font-size="8" transform="rotate(12, 250, 215)">atoms → circles</text>
+
+  <!-- ============ RIGHT PANEL: SYMPTOMS TO GROUNDING ============ -->
+
+  <text x="770" y="90" text-anchor="middle" class="label white" font-size="12">SYMPTOMS → GROUNDING</text>
+  <text x="770" y="105" text-anchor="middle" class="body muted" font-size="9">Opposite Action (DBT)</text>
+
+  <!-- Mapping list -->
+  <text x="700" y="135" class="body muted" font-size="9">Amnesia</text>
+  <text x="765" y="135" class="body accent" font-size="9">→</text>
+  <text x="780" y="135" class="body light" font-size="9">Circle A</text>
+
+  <text x="700" y="155" class="body muted" font-size="9">Disconnect</text>
+  <text x="765" y="155" class="body accent" font-size="9">→</text>
+  <text x="780" y="155" class="body light" font-size="9">Circle B</text>
+
+  <text x="700" y="175" class="body muted" font-size="9">Internal Chaos</text>
+  <text x="765" y="175" class="body accent" font-size="9">→</text>
+  <text x="780" y="175" class="body light" font-size="9">Circle C</text>
+
+  <text x="700" y="195" class="body muted" font-size="9">Hypervigilance</text>
+  <text x="765" y="195" class="body accent" font-size="9">→</text>
+  <text x="780" y="195" class="body light" font-size="9">Circle D</text>
+
+  <!-- ============ RIGHT PANEL: THE EXOCORTEX ============ -->
+
+  <rect x="690" y="230" width="280" height="130" rx="6" fill="#242424" stroke="#50C878" stroke-width="1.5" stroke-opacity="0.6"/>
+  <text x="830" y="252" text-anchor="middle" class="label accent" font-size="13">THE EXOCORTEX</text>
+
+  <text x="830" y="275" text-anchor="middle" class="body white" font-size="11">The Equation:</text>
+  <text x="830" y="296" text-anchor="middle" class="label accent" font-size="14">Functional Multiplicity = Agency</text>
+
+  <text x="830" y="322" text-anchor="middle" class="body muted" font-size="9">Consent as Data</text>
+  <text x="830" y="336" text-anchor="middle" class="body muted" font-size="9">(Willingness to act backfills trust data)</text>
+
+  <text x="830" y="355" text-anchor="middle" class="body white" font-size="10">Friction = Hardware Mismatch</text>
+
+  <!-- ============ BOTTOM: LOAD OFFLOADING ============ -->
+
+  <line x1="650" y1="310" x2="690" y2="295" stroke="#50C878" stroke-width="1" stroke-dasharray="4,3" stroke-opacity="0.4"/>
+  <text x="660" y="320" class="body muted" font-size="7">Load Offloading</text>
+
+  <!-- ============ BOTTOM LABELS ============ -->
+
+  <!-- Central overlap labels -->
+  <text x="475" y="340" text-anchor="middle" class="body" font-size="8" fill="#50C878" fill-opacity="0.6">Central Stability Buffer</text>
+  <text x="475" y="352" text-anchor="middle" class="body" font-size="7" fill="#888888">Shared Foundation</text>
+
+  <!-- Footer -->
+  <text x="500" y="590" text-anchor="middle" class="body muted" font-size="10">Functional Multiplicity Meta-System — Nile Jones | functionalmultiplicity.com</text>
+  <text x="500" y="607" text-anchor="middle" class="body muted" font-size="8">4 Members. 4 Circles. Unlimited characteristic sets. Your System, mapped.</text>
+
+</svg>
+</div>
+</body>
+</html>
