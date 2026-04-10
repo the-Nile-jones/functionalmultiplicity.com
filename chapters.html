@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1C1C1C" id="theme-meta">
+  <meta name="description" content="Chapters — the Functional Multiplicity framework, one piece at a time. Each chapter builds on the last.">
+  <link rel="canonical" href="https://functionalmultiplicity.com/chapters">
+  <meta property="og:title" content="Chapters — Functional Multiplicity">
+  <meta property="og:description" content="The Functional Multiplicity framework, one piece at a time. Each chapter builds on the last.">
+  <meta property="og:image" content="https://functionalmultiplicity.com/og-image.png">
+  <meta property="og:url" content="https://functionalmultiplicity.com/chapters">
+  <meta property="og:type" content="website">
+  <title>Chapters — Functional Multiplicity</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles-additions.css">
+  <style>
+    .chapters-content { max-width: 48rem; margin: 0 auto; padding: 2rem; }
+    .chapters-content h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--accent); }
+    .chapters-content .intro { color: var(--text-muted); margin-bottom: 2rem; line-height: 1.7; }
+    .chapter-list { list-style: none; padding: 0; margin: 0; }
+    .chapter-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; transition: border-color 0.2s; }
+    .chapter-item:hover { border-color: var(--accent); }
+    .chapter-link { display: block; padding: 1.25rem 1.5rem; text-decoration: none; color: var(--text); }
+    .chapter-number { font-size: 0.85rem; color: var(--accent); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 0.25rem; }
+    .chapter-title { font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+    .chapter-subtitle { font-size: 0.95rem; color: var(--text-muted); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header role="banner">
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="/" class="site-logo" aria-label="Functional Multiplicity — Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="36" height="36" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="48" fill="#1C1C1C" stroke="#50C878" stroke-width="4"/><text x="50" y="62" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#50C878" text-anchor="middle" letter-spacing="-1">FM</text></svg></a>
+      <div class="nav-links">
+        <a href="/AIInstructions" class="nav-link">AI Instructions</a>
+        <a href="/chapters" class="nav-link nav-link--active" aria-current="page">Chapters</a>
+        <a href="/DictionaryThesaurus" class="nav-link">Dictionary &amp; Thesaurus</a>
+        <a href="/handbook" class="nav-link">Handbook</a>
+        <a href="/tools" class="nav-link">Tools</a>
+      </div>
+      <div class="nav-controls">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode" title="Toggle light/dark mode">
+          <span class="toggle-icon" aria-hidden="true">&#9788;</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" role="main" data-pagefind-body>
+    <div class="chapters-content">
+
+      <h1>Chapters</h1>
+      <p class="intro">The Functional Multiplicity framework, one piece at a time. Each chapter builds on the last. Start at Chapter 2 if you're new, or jump to wherever you left off.</p>
+
+      <ul class="chapter-list">
+        <li class="chapter-item">
+          <a href="/atomic-lego-set" class="chapter-link">
+            <div class="chapter-number">Chapter 2</div>
+            <div class="chapter-title">The Atomic Lego Set</div>
+            <div class="chapter-subtitle">How Systems Build Their Own Tools</div>
+          </a>
+        </li>
+        <li class="chapter-item">
+          <a href="/multi-venn" class="chapter-link">
+            <div class="chapter-number">Chapter 3</div>
+            <div class="chapter-title">The Multi-Venn</div>
+            <div class="chapter-subtitle">Your System's Navigation Map</div>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'fm-theme';
+      const btn = document.getElementById('theme-toggle');
+      const meta = document.getElementById('theme-meta');
+      const themes = { dark: { icon: '\u2600', metaColor: '#1C1C1C' }, light: { icon: '\u263E', metaColor: '#F5F0E8' } };
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const t = themes[theme];
+        btn.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+        btn.querySelector('.toggle-icon').textContent = t.icon;
+        meta.setAttribute('content', t.metaColor);
+        localStorage.setItem(STORAGE_KEY, theme);
+      }
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+      btn.addEventListener('click', function () {
+        const current = document.documentElement.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</body>
+</html>
