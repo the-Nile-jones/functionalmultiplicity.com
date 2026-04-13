@@ -188,6 +188,7 @@
 
   /* ── Setup ───────────────────────────────────────── */
   const tip  = document.getElementById('did-tooltip');
+  if (!tip) return;
   const lbl  = tip.querySelector('.did-tooltip-label');
   const body = tip.querySelector('.did-tooltip-body');
   const src  = tip.querySelector('.did-tooltip-source');

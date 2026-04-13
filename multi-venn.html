@@ -72,7 +72,7 @@
         <li>Now: how do you see the whole picture? How do you map who You are as a group?</li>
         <li>Continuing our example of visual tools being beneficial for Systems — remember, visuals are parallel-accessible. Multiple Members can look at the same diagram simultaneously and each pull what's relevant to them. That's not a nice-to-have. That's the whole point.</li>
         <li>The <strong>Multi-Venn</strong> is different from the standard Venn. Instead of plotting atoms against each other, you're plotting <em>Members</em> as the circles and mapping characteristics across the System. Same visual framework, different input, different output.</li>
-        <li>The Multi-Venn is inherently and inseparably DID. You can't do this without multiple identities. It doesn't exist outside plurality. That's what makes it ours.</li>
+        <li>The Multi-Venn is inherently and inseparably DID. You can't do this without multiple identities. It doesn't exist outside <span class="did-term" data-did="plurality">plurality</span>. That's what makes it ours.</li>
         <li>To build a Multi-Venn, you need one thing: a current headcount. How many Members does your System have right now? That's your number of circles.</li>
         <li>Don't worry if the number changes. The framework adapts.</li>
         <li>The Multi-Venn is not a single diagram. It's a framework that generates unlimited diagrams. Same circles (your Members), different characteristic sets each time. Run it once, run it a hundred times.</li>
@@ -255,7 +255,7 @@
       <ul>
         <li>We took Our most difficult DID symptoms and opposite-actioned them:
           <ul>
-            <li>Amnesia / Dissociation &rarr; <strong>Coordinated Memory</strong> (Circle A)</li>
+            <li><span class="did-term" data-did="amnesia">Amnesia</span> / <span class="did-term" data-did="dissociation">Dissociation</span> &rarr; <strong>Coordinated Memory</strong> (Circle A)</li>
             <li>Somatic disconnect &rarr; <strong>Somatic Presence</strong> (Circle B)</li>
             <li>Internal Chaos / emotional overwhelm &rarr; <strong>Emotional Attunement</strong> (Circle C)</li>
             <li>Hypervigilance / insecurity &rarr; <strong>Secure Base</strong> (Circle D)</li>
@@ -319,6 +319,16 @@
     <p>Our website is designed with accessibility as a foundation, not an afterthought. We aim to meet or exceed the recognized standards for web accessibility. To ensure this site is usable by Everyone, regardless of ability or the tools They use to browse, Universal Design is used as the foundation for Our site.</p>
     <p>If you encounter any barriers or have a specific accommodation request, please contact us at <a href="mailto:&#105;&#110;&#102;&#111;&#64;&#102;&#117;&#110;&#99;&#116;&#105;&#111;&#110;&#97;&#108;&#109;&#117;&#108;&#116;&#105;&#112;&#108;&#105;&#99;&#105;&#116;&#121;&#46;&#99;&#111;&#109;">&#105;&#110;&#102;&#111;&#64;&#102;&#117;&#110;&#99;&#116;&#105;&#111;&#110;&#97;&#108;&#109;&#117;&#108;&#116;&#105;&#112;&#108;&#105;&#99;&#105;&#116;&#121;&#46;&#99;&#111;&#109;</a>.</p>
   </footer>
+
+  <!-- DID Term Tooltip (shared, positioned by JS) -->
+  <div id="did-tooltip" role="tooltip" aria-live="polite" hidden data-pagefind-ignore="all">
+    <button class="did-tooltip-close" aria-label="Close definition" tabindex="-1">×</button>
+    <div class="did-tooltip-label"></div>
+    <div class="did-tooltip-body"></div>
+    <div class="did-tooltip-source"></div>
+  </div>
+
+  <script src="/did-tooltip.js"></script>
 
   <script>
     (function () {

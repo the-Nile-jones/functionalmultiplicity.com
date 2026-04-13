@@ -175,7 +175,7 @@
         <li>The foundation is discovered bottom-up. Patterns keep showing up. The System notices. Naming them makes them explicit and deliberate — increasing how reliably they replicate.</li>
         <li>Honest caveat: foundation is stable <em>within your current System configuration</em>
           <ul>
-            <li>When composition changes — new Member emerges, integration shifts switching patterns — foundation atoms get re-validated</li>
+            <li>When composition changes — new Member emerges, <span class="did-term" data-did="integration">integration</span> shifts switching patterns — foundation atoms get re-validated</li>
             <li>Tools don't have intrinsic permanence. They have <em>earned</em> stability that needs maintenance.</li>
           </ul>
         </li>
@@ -249,6 +249,16 @@
     <p>Our website is designed with accessibility as a foundation, not an afterthought. We aim to meet or exceed the recognized standards for web accessibility. To ensure this site is usable by Everyone, regardless of ability or the tools They use to browse, Universal Design is used as the foundation for Our site.</p>
     <p>If you encounter any barriers or have a specific accommodation request, please contact us at <a href="mailto:&#105;&#110;&#102;&#111;&#64;&#102;&#117;&#110;&#99;&#116;&#105;&#111;&#110;&#97;&#108;&#109;&#117;&#108;&#116;&#105;&#112;&#108;&#105;&#99;&#105;&#116;&#121;&#46;&#99;&#111;&#109;">&#105;&#110;&#102;&#111;&#64;&#102;&#117;&#110;&#99;&#116;&#105;&#111;&#110;&#97;&#108;&#109;&#117;&#108;&#116;&#105;&#112;&#108;&#105;&#99;&#105;&#116;&#121;&#46;&#99;&#111;&#109;</a>.</p>
   </footer>
+
+  <!-- DID Term Tooltip (shared, positioned by JS) -->
+  <div id="did-tooltip" role="tooltip" aria-live="polite" hidden data-pagefind-ignore="all">
+    <button class="did-tooltip-close" aria-label="Close definition" tabindex="-1">×</button>
+    <div class="did-tooltip-label"></div>
+    <div class="did-tooltip-body"></div>
+    <div class="did-tooltip-source"></div>
+  </div>
+
+  <script src="/did-tooltip.js"></script>
 
   <script>
     (function () {

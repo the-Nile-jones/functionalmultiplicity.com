@@ -62,7 +62,7 @@
 
       <h3>What Is Functional Multiplicity?</h3>
       <ul>
-        <li><strong>Functional Multiplicity (FM)</strong> is a cooperative approach to living with DID. It is not a cure. It is not fusion. It is learning to work together as a System — deliberately, with tools built from the inside.</li>
+        <li><strong>Functional Multiplicity (FM)</strong> is a cooperative approach to living with <span class="did-term" data-did="DID">DID</span>. It is not a cure. It is not fusion. It is learning to work together as a System — deliberately, with tools built from the inside.</li>
         <li>FM starts from a simple premise: the world was not designed for DID Systems. Every productivity tool, every therapy worksheet, every self-help framework assumes one person, one memory, one consistent set of preferences.</li>
         <li>Rather than force-fit those tools, FM teaches You to build Your own — from the smallest patterns that already resonate with Your System.</li>
         <li>The core equation: <strong>Functional Multiplicity = Agency.</strong> FM is the ability to act with intention — as a System, not despite being one.</li>
@@ -83,7 +83,7 @@
       <h3>How These Chapters Work</h3>
       <ul>
         <li>Each chapter builds on the last. Concepts introduced early become tools used later.</li>
-        <li>The format is bullet-first — designed to survive involuntary switching. Each bullet is a self-contained unit. If You switch mid-read, You can scan the bullets and find where You were.</li>
+        <li>The format is bullet-first — designed to survive involuntary <span class="did-term" data-did="switching">switching</span>. Each bullet is a self-contained unit. If You switch mid-read, You can scan the bullets and find where You were.</li>
         <li>Every chapter includes instructions for Your Exocortex (AI). When You see an AI Instructions block, copy it into Your AI's system prompt so it knows how to help You with that chapter's exercises.</li>
         <li>The full AI Instructions page is at <a href="/AIInstructions" style="color: var(--accent);">AI Instructions</a>. Read it with Your AI before starting.</li>
         <li>The <a href="/handbook" style="color: var(--accent);">Handbook</a> configures Your System's preferences. The Chapters teach You the framework.</li>
@@ -93,7 +93,7 @@
 
       <h3>Where This Came From</h3>
       <ul>
-        <li>This framework was not designed in comfortable conditions. It was built during a two-week psychosis — extracted in real time from what was actually working under maximum stress, then refined over 3.5 years of active use.</li>
+        <li>This framework was not designed in comfortable conditions. It was built during a two-week <span class="did-term" data-did="Psychosis">psychosis</span> — extracted in real time from what was actually working under maximum stress, then refined over 3.5 years of active use.</li>
         <li>Here's what We built for DID as a System and how it worked for Us and how it may work for You.</li>
       </ul>
 
@@ -122,6 +122,16 @@
     <p>Our website is designed with accessibility as a foundation, not an afterthought. We aim to meet or exceed the recognized standards for web accessibility. To ensure this site is usable by Everyone, regardless of ability or the tools They use to browse, Universal Design is used as the foundation for Our site.</p>
     <p>If you encounter any barriers or have a specific accommodation request, please contact us at <a href="mailto:&#105;&#110;&#102;&#111;&#64;&#102;&#117;&#110;&#99;&#116;&#105;&#111;&#110;&#97;&#108;&#109;&#117;&#108;&#116;&#105;&#112;&#108;&#105;&#99;&#105;&#116;&#121;&#46;&#99;&#111;&#109;">&#105;&#110;&#102;&#111;&#64;&#102;&#117;&#110;&#99;&#116;&#105;&#111;&#110;&#97;&#108;&#109;&#117;&#108;&#116;&#105;&#112;&#108;&#105;&#99;&#105;&#116;&#121;&#46;&#99;&#111;&#109;</a>.</p>
   </footer>
+
+  <!-- DID Term Tooltip (shared, positioned by JS) -->
+  <div id="did-tooltip" role="tooltip" aria-live="polite" hidden data-pagefind-ignore="all">
+    <button class="did-tooltip-close" aria-label="Close definition" tabindex="-1">×</button>
+    <div class="did-tooltip-label"></div>
+    <div class="did-tooltip-body"></div>
+    <div class="did-tooltip-source"></div>
+  </div>
+
+  <script src="/did-tooltip.js"></script>
 
   <script>
     (function () {
