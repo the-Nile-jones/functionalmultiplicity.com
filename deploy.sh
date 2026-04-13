@@ -1,6 +1,6 @@
 #!/bin/bash
 # deploy.sh — deploy functionalmultiplicity.com + backup live copy to ClickUp
-# Usage: bash /home/nile/nile-protocol-pages/deploy.sh
+# Usage: bash /home/nile/functionalmultiplicity.com/deploy.sh
 
 set -e
 
@@ -40,12 +40,12 @@ fi
 echo "✓ ClickUp API key loaded"
 echo ""
 
-# ── 3. Wrangler deploy ────────────────────────────────────────────────────────
-echo "Deploying to Cloudflare Workers..."
+# ── 3. Wrangler deploy (Cloudflare Pages) ─────────────────────────────────────
+echo "Deploying to Cloudflare Pages..."
 cd "$SCRIPT_DIR"
-DEPLOY_OUTPUT=$(CLOUDFLARE_API_TOKEN="$CLOUDFLARE_API_TOKEN" npx wrangler deploy 2>&1)
+DEPLOY_OUTPUT=$(CLOUDFLARE_API_TOKEN="$CLOUDFLARE_API_TOKEN" npx wrangler pages deploy . --project-name=functionalmultiplicity --commit-dirty=true 2>&1)
 echo "$DEPLOY_OUTPUT"
-VERSION_ID=$(echo "$DEPLOY_OUTPUT" | grep -oP '(?<=Current Version ID: )\S+' || echo "unknown")
+VERSION_ID=$(echo "$DEPLOY_OUTPUT" | grep -oP '(?<=deployment-)[a-z0-9]+' | head -1 || echo "unknown")
 echo ""
 
 # ── 4. Fetch live site + convert to markdown ──────────────────────────────────
