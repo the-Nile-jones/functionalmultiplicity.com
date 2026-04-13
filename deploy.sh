@@ -30,10 +30,10 @@ echo "✓ Cloudflare token loaded"
 # ── 2. ClickUp API key from GSM ───────────────────────────────────────────────
 echo "Fetching ClickUp API key from GSM..."
 CLICKUP_API_KEY=$(gcloud secrets versions access latest \
-  --secret=CLICK_UP_API \
+  --secret=CLICKUP_API_KEY \
   --project="$GCP_PROJECT" 2>/dev/null || true)
 if [ -z "$CLICKUP_API_KEY" ]; then
-  echo "ERROR: Could not fetch CLICK_UP_API from GSM"
+  echo "ERROR: Could not fetch CLICKUP_API_KEY from GSM"
   echo "       Run: gcloud auth login  (on aiserver)"
   exit 1
 fi
