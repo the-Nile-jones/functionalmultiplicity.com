@@ -15,11 +15,14 @@ echo "=== FM Deploy Pipeline ==="
 echo "$(date '+%Y-%m-%d %H:%M:%S')"
 echo ""
 
-# ── 1. Cloudflare token ───────────────────────────────────────────────────────
-# grep bypasses the interactive-shell guard in /root/.bashrc
-CLOUDFLARE_API_TOKEN=$(grep -oP '(?<=CLOUDFLARE_API_TOKEN=)\S+' /root/.bashrc 2>/dev/null || true)
+# ── 1. Cloudflare token (from GSM) ────────────────────────────────────────────
+echo "Fetching Cloudflare token from GSM..."
+CLOUDFLARE_API_TOKEN=$(gcloud secrets versions access latest \
+  --secret=CLOUDFLARE_GLOBAL_API \
+  --project="$GCP_PROJECT" 2>/dev/null || true)
 if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-  echo "ERROR: CLOUDFLARE_API_TOKEN not found in /root/.bashrc"
+  echo "ERROR: Could not fetch CLOUDFLARE_GLOBAL_API from GSM"
+  echo "       Run: gcloud auth login"
   exit 1
 fi
 echo "✓ Cloudflare token loaded"
