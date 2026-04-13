@@ -37,6 +37,17 @@
     .diagram-container svg { width: 100%; height: auto; }
     .diagram-caption { text-align: center; color: var(--text-muted); font-size: 0.85rem; font-style: italic; margin-top: 0.5rem; }
     hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content h4 { font-size: 1.05rem; color: var(--accent); margin: 1.5rem 0 0.5rem; }
+    .dctrl-zoom-trigger { display: block; width: 100%; padding: 0; margin: 2rem 0 0.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: zoom-in; text-align: left; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+    .dctrl-zoom-trigger:hover, .dctrl-zoom-trigger:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent); outline: none; }
+    .dctrl-zoom-trigger svg { display: block; width: 100%; height: auto; padding: 0.75rem; box-sizing: border-box; }
+    .dctrl-zoom-hint { display: block; text-align: center; padding: 0.5rem 0 0.75rem; font-size: 0.875rem; color: var(--accent); font-weight: 600; }
+    .dctrl-modal { width: 96vw; max-width: 1400px; height: 92vh; max-height: 92vh; padding: 0; border: 2px solid var(--accent); border-radius: 12px; background: var(--bg); color: var(--text); }
+    .dctrl-modal::backdrop { background: rgba(0,0,0,0.85); }
+    .dctrl-modal-content { width: 100%; height: 100%; padding: 1.5rem 1rem 1rem; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+    .dctrl-modal-content svg { width: 100%; height: 100%; max-height: 100%; }
+    .dctrl-modal-close { position: absolute; top: 0.5rem; right: 0.75rem; background: var(--bg-card); border: 1.5px solid var(--accent); color: var(--accent); width: 2.5rem; height: 2.5rem; border-radius: 50%; font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 0; }
+    .dctrl-modal-close:hover, .dctrl-modal-close:focus-visible { background: var(--accent); color: var(--accent-on); outline: none; }
   </style>
 </head>
 <body>
@@ -66,43 +77,66 @@
       <h1>The Atomic Lego Set</h1>
       <p style="color: var(--text-muted); margin-bottom: 2rem;">How Systems Build Their Own Tools</p>
 
-      <!-- Domain of Control Diagram -->
-      <div class="diagram-container" role="img" aria-label="FM Domain of Control — three concentric rings showing Your Domain, Your Influence, and External Reality">
-        <svg viewBox="0 0 800 640" xmlns="http://www.w3.org/2000/svg">
-          <rect width="800" height="640" fill="var(--bg)" rx="8"/>
-          <text x="400" y="38" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="22" font-weight="700" fill="var(--text)" letter-spacing="0.5">FM Domain of Control</text>
+      <!-- Domain of Control Diagram (clickable to enlarge) -->
+      <button class="dctrl-zoom-trigger" type="button" aria-label="FM Domain of Control diagram — tap to enlarge">
+        <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" class="dctrl-svg" aria-hidden="true">
+          <rect width="800" height="600" fill="var(--bg)" rx="8"/>
+          <text x="400" y="42" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="24" font-weight="700" fill="var(--text)" letter-spacing="0.5">FM Domain of Control</text>
+          <!-- Outer ring: External Reality -->
           <circle cx="400" cy="340" r="260" fill="var(--bg-card)"/>
           <circle cx="400" cy="340" r="260" fill="none" stroke="var(--border)" stroke-width="2"/>
+          <!-- Middle ring: Your Influence -->
           <circle cx="400" cy="340" r="175" fill="#1E3328"/>
           <circle cx="400" cy="340" r="175" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-opacity="0.4"/>
+          <!-- Inner ring: Your Domain -->
           <circle cx="400" cy="340" r="95" fill="#264D35"/>
           <circle cx="400" cy="340" r="95" fill="none" stroke="var(--accent)" stroke-width="2"/>
-          <text x="400" y="316" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="16" font-weight="700" fill="var(--accent)">Your Domain</text>
-          <text x="400" y="338" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">Atoms, Member-specific tools,</text>
-          <text x="400" y="354" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">internal communication,</text>
-          <text x="400" y="370" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="#C8E6D0">your Exocortex</text>
-          <text x="400" y="192" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="var(--accent)" fill-opacity="0.85">Your Influence</text>
-          <text x="400" y="211" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">Therapy relationship, support humans,</text>
-          <text x="400" y="226" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">how you present to the world,</text>
-          <text x="400" y="241" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="#A0C0A8">which external tools you modulate</text>
-          <text x="400" y="100" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="var(--text-muted)">External Reality</text>
-          <text x="400" y="119" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="var(--text-muted)">Tools built for singletons, diagnostic timelines,</text>
-          <text x="400" y="134" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="var(--text-muted)">other people's understanding of DID,</text>
-          <text x="400" y="149" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="10.5" fill="var(--text-muted)">societal expectations</text>
+          <!-- Ring labels -->
+          <text x="400" y="350" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="22" font-weight="700" fill="var(--accent)">Your Domain</text>
+          <text x="400" y="210" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="18" font-weight="700" fill="var(--accent)">Your Influence</text>
+          <text x="400" y="120" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="18" font-weight="700" fill="var(--text-muted)">External Reality</text>
+          <!-- "Atoms form here" annotation -->
           <line x1="185" y1="395" x2="300" y2="355" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5,3"/>
           <polygon points="298,351 308,355 300,361" fill="var(--accent)"/>
-          <text x="178" y="395" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="var(--accent)" font-style="italic">Atoms form here</text>
+          <text x="178" y="398" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="400" fill="var(--accent)" font-style="italic">Atoms form here</text>
+          <!-- "External tools start here" annotation -->
           <line x1="690" y1="258" x2="620" y2="298" stroke="var(--text-muted)" stroke-width="1.2" stroke-dasharray="5,3"/>
           <polygon points="622,294 614,302 626,302" fill="var(--text-muted)"/>
-          <text x="697" y="248" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="var(--text-muted)" font-style="italic">External tools</text>
-          <text x="697" y="264" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="var(--text-muted)" font-style="italic">start here</text>
-          <path d="M 550 545 C 510 525, 330 525, 290 510" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6,3" stroke-opacity="0.6"/>
-          <polygon points="292,506 284,514 296,514" fill="var(--accent)" fill-opacity="0.6"/>
-          <text x="565" y="550" text-anchor="start" font-family="Atkinson Hyperlegible, sans-serif" font-size="10" fill="var(--text-muted)">outer &#8594; inner</text>
-          <text x="400" y="595" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="12" font-weight="400" fill="var(--text-muted)">Remap inward: build from your own atoms, not borrowed tools</text>
+          <text x="697" y="245" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="400" fill="var(--text-muted)" font-style="italic">External tools</text>
+          <text x="697" y="263" text-anchor="end" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="400" fill="var(--text-muted)" font-style="italic">start here</text>
+          <!-- Direction arrow + label -->
+          <path d="M 550 555 C 510 535, 330 535, 290 520" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6,3" stroke-opacity="0.6"/>
+          <polygon points="292,516 284,524 296,524" fill="var(--accent)" fill-opacity="0.6"/>
+          <text x="565" y="560" text-anchor="start" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" fill="var(--text)">outer &#8594; inner</text>
         </svg>
-        <p class="diagram-caption">Non-DID tools sit outside the System's domain. This post shows how to remap them inward. If multiple Members are reading this right now — good. This image works for all of you simultaneously.</p>
-      </div>
+        <span class="dctrl-zoom-hint" aria-hidden="true">Tap to enlarge</span>
+      </button>
+
+      <p class="diagram-caption">Remap inward: build from your own atoms, not borrowed tools. Non-DID tools sit outside the System's domain. If multiple Members are reading this right now — good. This image works for all of you simultaneously.</p>
+
+      <h4>Your Domain (innermost — what You control)</h4>
+      <ul>
+        <li>Atoms</li>
+        <li>Member-specific tools</li>
+        <li>Internal communication</li>
+        <li>Your Exocortex</li>
+      </ul>
+
+      <h4>Your Influence (middle — what You shape)</h4>
+      <ul>
+        <li>Therapy relationship</li>
+        <li>Support humans around You</li>
+        <li>How You present to the world</li>
+        <li>Which external tools You modulate</li>
+      </ul>
+
+      <h4>External Reality (outermost — what exists regardless)</h4>
+      <ul>
+        <li>Tools built for singletons</li>
+        <li>Diagnostic timelines</li>
+        <li>Other people's understanding of DID</li>
+        <li>Societal expectations</li>
+      </ul>
 
       <hr>
 
@@ -249,6 +283,32 @@
     <p>Our website is designed with accessibility as a foundation, not an afterthought. We aim to meet or exceed the recognized standards for web accessibility. To ensure this site is usable by Everyone, regardless of ability or the tools They use to browse, Universal Design is used as the foundation for Our site.</p>
     <p>If you encounter any barriers or have a specific accommodation request, please contact us at <a href="mailto:&#105;&#110;&#102;&#111;&#64;&#102;&#117;&#110;&#99;&#116;&#105;&#111;&#110;&#97;&#108;&#109;&#117;&#108;&#116;&#105;&#112;&#108;&#105;&#99;&#105;&#116;&#121;&#46;&#99;&#111;&#109;">&#105;&#110;&#102;&#111;&#64;&#102;&#117;&#110;&#99;&#116;&#105;&#111;&#110;&#97;&#108;&#109;&#117;&#108;&#116;&#105;&#112;&#108;&#105;&#99;&#105;&#116;&#121;&#46;&#99;&#111;&#109;</a>.</p>
   </footer>
+
+  <!-- Domain of Control enlarge modal -->
+  <dialog id="dctrl-modal" class="dctrl-modal" aria-label="Domain of Control diagram, enlarged view">
+    <button class="dctrl-modal-close" type="button" aria-label="Close enlarged view">&times;</button>
+    <div class="dctrl-modal-content"></div>
+  </dialog>
+
+  <script>
+    (function () {
+      const trigger = document.querySelector('.dctrl-zoom-trigger');
+      const dialog  = document.getElementById('dctrl-modal');
+      if (!trigger || !dialog || typeof dialog.showModal !== 'function') return;
+      const content  = dialog.querySelector('.dctrl-modal-content');
+      const closeBtn = dialog.querySelector('.dctrl-modal-close');
+      const sourceSvg = trigger.querySelector('svg');
+      trigger.addEventListener('click', function () {
+        content.innerHTML = '';
+        content.appendChild(sourceSvg.cloneNode(true));
+        dialog.showModal();
+      });
+      closeBtn.addEventListener('click', function () { dialog.close(); });
+      dialog.addEventListener('click', function (e) {
+        if (e.target === dialog) dialog.close();
+      });
+    })();
+  </script>
 
   <!-- DID Term Tooltip (shared, positioned by JS) -->
   <div id="did-tooltip" role="tooltip" aria-live="polite" hidden data-pagefind-ignore="all">
