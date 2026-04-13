@@ -13,7 +13,7 @@
   <meta property="og:description" content="Standing instructions for Your AI on how to work with a DID System — System-first, continuity across switches, no fusion framing.">
   <meta property="og:image" content="https://functionalmultiplicity.com/og-image.png">
   <meta property="og:url" content="https://functionalmultiplicity.com/AIInstructions">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI Instructions — Functional Multiplicity">
   <meta name="twitter:description" content="Standing instructions for Your AI on how to work with a DID System — System-first, continuity across switches, no fusion framing.">
@@ -34,6 +34,7 @@
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header role="banner">
     <nav role="navigation" aria-label="Main navigation">
@@ -439,7 +440,7 @@
       // Determine initial theme: localStorage → prefers-color-scheme → dark
       const saved = localStorage.getItem(STORAGE_KEY);
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initial = saved || (prefersDark ? 'dark' : 'dark');
+      const initial = saved || (prefersDark ? 'dark' : 'light');
       applyTheme(initial);
 
       btn.addEventListener('click', function () {
