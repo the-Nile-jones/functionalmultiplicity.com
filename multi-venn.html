@@ -35,6 +35,10 @@
     .diagram-caption { text-align: center; color: var(--text-muted); font-size: 0.85rem; font-style: italic; margin-top: 0.5rem; }
     hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
     .post-content h4 { font-size: 1.05rem; color: var(--accent); margin: 1.5rem 0 0.5rem; }
+    .info-card { background: var(--bg-card); border: 1.5px solid var(--accent); border-radius: 8px; padding: 0.25rem 1.25rem 1rem; margin: 1.5rem 0; }
+    .info-card h4 { margin-top: 1rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .info-card table { margin: 0; }
+    .info-card tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--accent) 5%, transparent); }
     .venn-zoom-trigger { display: block; width: 100%; padding: 0; margin: 2rem 0 0.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: zoom-in; text-align: left; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
     .venn-zoom-trigger:hover, .venn-zoom-trigger:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent); outline: none; }
     .venn-zoom-trigger svg { display: block; width: 100%; height: auto; padding: 0.75rem; box-sizing: border-box; }
@@ -108,20 +112,22 @@
         <p class="diagram-caption"><strong>Hypothesis</strong> based on roles + Roe's pre-/post-split typing — not actual test results. Letters in each region show MBTI traits shared by Members whose circles overlap there. Center <strong>N</strong> = all four are iNtuitive.</p>
       </div>
 
-      <h4>What Each Region Means</h4>
-      <table>
-        <thead>
-          <tr><th>Region</th><th>Members</th><th>Letters</th><th>Trait</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Center (all 4)</td><td>Evee, Marc, Harry, Roe</td><td><strong>N</strong></td><td>iNtuition — abstract pattern thinking. The System's foundational cognitive style.</td></tr>
-          <tr><td>Evee + Roe</td><td>Architect + Navigation</td><td><strong>I, J</strong></td><td>Introverted + Judging — internal focus, structured.</td></tr>
-          <tr><td>Evee + Harry</td><td>Architect + Strong pair</td><td><strong>T</strong></td><td>Thinking — analytical decision-making.</td></tr>
-          <tr><td>Marc + Roe</td><td>Twin + Navigation</td><td><strong>F</strong></td><td>Feeling — values-based decision-making.</td></tr>
-          <tr><td>Marc + Harry</td><td>Twin + Strong pair</td><td><strong>E, P</strong></td><td>Extroverted + Perceiving — external focus, flexible.</td></tr>
-          <tr><td>Unique to any single Member</td><td>—</td><td>—</td><td>None. Every letter each Member carries is shared with at least one other Member — the System is <em>coverage-optimized</em>: no single point of failure.</td></tr>
-        </tbody>
-      </table>
+      <div class="info-card">
+        <h4>What Each Region Means</h4>
+        <table>
+          <thead>
+            <tr><th>Region</th><th>Members</th><th>Letters</th><th>Trait</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Center (all 4)</td><td>Evee, Marc, Harry, Roe</td><td><strong>N</strong></td><td>iNtuition — abstract pattern thinking. The System's foundational cognitive style.</td></tr>
+            <tr><td>Evee + Roe</td><td>Architect + Navigation</td><td><strong>I, J</strong></td><td>Introverted + Judging — internal focus, structured.</td></tr>
+            <tr><td>Evee + Harry</td><td>Architect + Strong pair</td><td><strong>T</strong></td><td>Thinking — analytical decision-making.</td></tr>
+            <tr><td>Marc + Roe</td><td>Twin + Navigation</td><td><strong>F</strong></td><td>Feeling — values-based decision-making.</td></tr>
+            <tr><td>Marc + Harry</td><td>Twin + Strong pair</td><td><strong>E, P</strong></td><td>Extroverted + Perceiving — external focus, flexible.</td></tr>
+            <tr><td>Unique to any single Member</td><td>—</td><td>—</td><td>None. Every letter each Member carries is shared with at least one other Member — the System is <em>coverage-optimized</em>: no single point of failure.</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <hr>
 
