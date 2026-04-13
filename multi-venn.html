@@ -79,29 +79,49 @@
       <h1>The Multi-Venn</h1>
       <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Your System's Navigation Map</p>
 
-      <!-- Generic 3-Member Multi-Venn (concept demo) -->
-      <div class="diagram-container" style="max-width: 480px; margin-left: auto; margin-right: auto;" role="img" aria-label="Generic 3-circle Multi-Venn demonstrating the concept: regions labeled A, B, C, AB, AC, BC, ABC">
-        <svg viewBox="0 0 500 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="500" height="440" fill="var(--bg)" rx="8"/>
-          <!-- Circles (equilateral arrangement) -->
-          <circle cx="250" cy="182" r="110" fill="#50C878" fill-opacity="0.22" stroke="#50C878" stroke-width="2"/>
-          <circle cx="200" cy="269" r="110" fill="#3DAF62" fill-opacity="0.22" stroke="#3DAF62" stroke-width="2"/>
-          <circle cx="300" cy="269" r="110" fill="#2D8B4E" fill-opacity="0.22" stroke="#2D8B4E" stroke-width="2"/>
-          <!-- Circle name labels (outside) -->
-          <text x="250" y="50" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="18" font-weight="700" fill="#50C878">Circle A</text>
-          <text x="100" y="400" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="18" font-weight="700" fill="#3DAF62">Circle B</text>
-          <text x="400" y="400" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="18" font-weight="700" fill="#2D8B4E">Circle C</text>
-          <!-- Region labels (letter combos) -->
-          <text x="250" y="120" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="22" font-weight="700" fill="var(--text)">A</text>
-          <text x="155" y="335" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="22" font-weight="700" fill="var(--text)">B</text>
-          <text x="345" y="335" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="22" font-weight="700" fill="var(--text)">C</text>
-          <text x="180" y="245" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="18" font-weight="700" fill="var(--text)">AB</text>
-          <text x="320" y="245" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="18" font-weight="700" fill="var(--text)">AC</text>
-          <text x="250" y="305" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="18" font-weight="700" fill="var(--text)">BC</text>
-          <text x="250" y="255" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="var(--accent)">ABC</text>
+      <!-- System MBTI Multi-Venn (4-Member hypothesis) -->
+      <div class="diagram-container" role="img" aria-label="Our System's MBTI Multi-Venn: Evee INTJ, Marc ENFP, Harry ENTP, Roe INFJ — letters in overlapping regions show shared traits">
+        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="500" height="500" fill="var(--bg)" rx="8"/>
+          <!-- Circles in cross arrangement -->
+          <circle cx="250" cy="170" r="110" fill="#50C878" fill-opacity="0.20" stroke="#50C878" stroke-width="2"/>
+          <circle cx="250" cy="330" r="110" fill="#2D8B4E" fill-opacity="0.20" stroke="#2D8B4E" stroke-width="2"/>
+          <circle cx="330" cy="250" r="110" fill="#3DAF62" fill-opacity="0.20" stroke="#3DAF62" stroke-width="2"/>
+          <circle cx="170" cy="250" r="110" fill="#228B4A" fill-opacity="0.20" stroke="#228B4A" stroke-width="2"/>
+          <!-- Member name + type labels in unique area of each circle -->
+          <text x="250" y="95" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="#50C878">EVEE</text>
+          <text x="250" y="118" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="600" fill="var(--text)">INTJ</text>
+          <text x="250" y="395" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="#2D8B4E">MARC</text>
+          <text x="250" y="418" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="600" fill="var(--text)">ENFP</text>
+          <text x="400" y="245" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="#3DAF62">HARRY</text>
+          <text x="400" y="268" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="600" fill="var(--text)">ENTP</text>
+          <text x="100" y="245" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="#228B4A">ROE</text>
+          <text x="100" y="268" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="600" fill="var(--text)">INFJ</text>
+          <!-- Pairwise letter labels in corner regions -->
+          <text x="200" y="220" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="var(--text)">I, J</text>
+          <text x="300" y="220" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="var(--text)">T</text>
+          <text x="200" y="295" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="var(--text)">F</text>
+          <text x="300" y="295" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="20" font-weight="700" fill="var(--text)">E, P</text>
+          <!-- Center: shared by all 4 -->
+          <text x="250" y="260" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="32" font-weight="700" fill="var(--accent)">N</text>
         </svg>
-        <p class="diagram-caption">A 3-Member example. Each region's letters show which Members share that characteristic. <strong>ABC</strong> at the center is the shared foundation — what every Member has in common.</p>
+        <p class="diagram-caption"><strong>Hypothesis</strong> based on roles + Roe's pre-/post-split typing — not actual test results. Letters in each region show MBTI traits shared by Members whose circles overlap there. Center <strong>N</strong> = all four are iNtuitive.</p>
       </div>
+
+      <h4>What Each Region Means</h4>
+      <table>
+        <thead>
+          <tr><th>Region</th><th>Members</th><th>Letters</th><th>Trait</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Center (all 4)</td><td>Evee, Marc, Harry, Roe</td><td><strong>N</strong></td><td>iNtuition — abstract pattern thinking. The System's foundational cognitive style.</td></tr>
+          <tr><td>Evee + Roe</td><td>Architect + Navigation</td><td><strong>I, J</strong></td><td>Introverted + Judging — internal focus, structured.</td></tr>
+          <tr><td>Evee + Harry</td><td>Architect + Strong pair</td><td><strong>T</strong></td><td>Thinking — analytical decision-making.</td></tr>
+          <tr><td>Marc + Roe</td><td>Twin + Navigation</td><td><strong>F</strong></td><td>Feeling — values-based decision-making.</td></tr>
+          <tr><td>Marc + Harry</td><td>Twin + Strong pair</td><td><strong>E, P</strong></td><td>Extroverted + Perceiving — external focus, flexible.</td></tr>
+          <tr><td>Unique to any single Member</td><td>—</td><td>—</td><td>None. Every letter each Member carries is shared with at least one other Member — the System is <em>coverage-optimized</em>: no single point of failure.</td></tr>
+        </tbody>
+      </table>
 
       <hr>
 
