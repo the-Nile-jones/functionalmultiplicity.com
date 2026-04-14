@@ -66,15 +66,22 @@
 
     <div class="post-body">
 
+      <!-- Copy All button -->
+      <button type="button" class="ai-copy-all" id="ai-copy-all" aria-label="Copy all AI instructions to clipboard">
+        <span class="ai-copy-all-icon" aria-hidden="true">📋</span>
+        <span class="ai-copy-all-label">Copy All Instructions</span>
+      </button>
+
       <!-- Section Navigation -->
       <nav class="ai-toc" aria-label="Page sections">
         <span class="ai-toc-label">Jump to:</span>
-        <a href="#universal-ai" class="ai-toc-link">Universal Foundation</a>
-        <a href="#story-ai" class="ai-toc-link">Story (Post 1)</a>
-        <a href="#lego-set-ai" class="ai-toc-link">Lego Set (Post 2)</a>
-        <a href="#handbook-ai" class="ai-toc-link">Your Field Guide</a>
-        <a href="#tools-ai" class="ai-toc-link">Tools</a>
-        <a href="#multi-venn-ai" class="ai-toc-link">Multi-Venn</a>
+        <div class="ai-toc-links">
+          <a href="#universal-ai" class="ai-toc-link">Universal Foundation</a>
+          <a href="#lego-set-ai" class="ai-toc-link">Lego Set (Post 2)</a>
+          <a href="#handbook-ai" class="ai-toc-link">Your Field Guide</a>
+          <a href="#tools-ai" class="ai-toc-link">Tools</a>
+          <a href="#multi-venn-ai" class="ai-toc-link">Multi-Venn</a>
+        </div>
       </nav>
 
       <!-- ═══════════════════════════════════════════════════ -->
@@ -456,6 +463,70 @@
   </div>
 
   <script src="/did-tooltip.js?v=3"></script>
+
+  <!-- Copy All AI Instructions to clipboard -->
+  <script>
+    (function () {
+      const btn = document.getElementById('ai-copy-all');
+      if (!btn) return;
+      const labelEl = btn.querySelector('.ai-copy-all-label');
+      const iconEl = btn.querySelector('.ai-copy-all-icon');
+      const originalLabel = labelEl ? labelEl.textContent : btn.textContent;
+      const originalIcon = iconEl ? iconEl.textContent : '';
+
+      function gatherText() {
+        const sections = document.querySelectorAll('.ai-section');
+        const out = [];
+        sections.forEach(function (sec) {
+          const heading = sec.querySelector('.ai-section-heading');
+          if (heading) {
+            out.push('# ' + heading.textContent.trim());
+            out.push('');
+          }
+          const clone = sec.cloneNode(true);
+          const h = clone.querySelector('.ai-section-heading');
+          if (h) h.remove();
+          // Normalize whitespace per block
+          const text = clone.textContent.replace(/\s+\n/g, '\n').replace(/\n{3,}/g, '\n\n').replace(/[ \t]+/g, ' ').trim();
+          out.push(text);
+          out.push('');
+        });
+        return out.join('\n').trim();
+      }
+
+      function flash(success) {
+        if (labelEl) labelEl.textContent = success ? 'Copied to clipboard' : 'Copy failed';
+        if (iconEl) iconEl.textContent = success ? '✓' : '✕';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          if (labelEl) labelEl.textContent = originalLabel;
+          if (iconEl) iconEl.textContent = originalIcon;
+          btn.classList.remove('copied');
+        }, 2200);
+      }
+
+      btn.addEventListener('click', async function () {
+        const text = gatherText();
+        try {
+          await navigator.clipboard.writeText(text);
+          flash(true);
+        } catch (e) {
+          // Fallback for browsers without clipboard API
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'absolute';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          let ok = false;
+          try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
+          document.body.removeChild(ta);
+          flash(ok);
+        }
+      });
+    })();
+  </script>
 
   <!-- Pagefind search -->
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
