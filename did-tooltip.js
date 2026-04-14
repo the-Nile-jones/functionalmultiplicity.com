@@ -188,6 +188,11 @@
       label: "Lexicon",
       definition: "The vocabulary a particular person, community, or System uses for their lived experience. In FM, every System builds its own lexicon — terms They've found that fit Their internal reality. The site's terms are a starting point; Yours, named from the inside, take precedence.",
       source: "Community"
+    },
+    "Member": {
+      label: "Member",
+      definition: "An individual person within a System — with Their own name, characteristics, skills, and sense of self. 'Member' is the Plural Association's preferred community term; You may also hear Headmate, Part, Alter, or Identity depending on the System's language. Each Member is a full person, not a fragment.",
+      source: "Community (The Plural Association)"
     }
   };
 
