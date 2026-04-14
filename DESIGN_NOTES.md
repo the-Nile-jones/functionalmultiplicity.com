@@ -89,6 +89,8 @@ The `Our` / `Your` pronoun pairing is pedagogical: it enacts the site's Plural-i
 
 **Active-state convention:** each page marks its own nav item with `class="nav-link nav-link--active" aria-current="page"`. The homepage `/` has NO active nav item — the FM logo is the home link, and the page itself isn't represented in the 3-item nav.
 
+**Heading convention:** exactly one `<h1>` per page. The page's canonical title lives in the H1 — homepage = "Functional Multiplicity", /our-story = "Our Story" (accent-styled via `.our-story-title`), /our-field-guide tiles page = "Our Field Guide", /your-field-guide = "Your Field Guide", chapter pages = chapter title. Subsection titles use `<h2>` and below, never `<h1>`. Enforced by the audit script (`scripts/audit.py`).
+
 ## 9. Cache Headers — `_headers` File Pattern
 
 **Critical gotcha:** CF Pages `_headers` rules **accumulate** when multiple paths match the same file — they do NOT override. Multiple matching rules result in multiple `Cache-Control` headers stacking in the response, and browsers consolidate using the **most restrictive** directive (smallest `max-age`, plus `must-revalidate`, etc.). This silently defeats long-cache strategies.
@@ -190,3 +192,16 @@ Two button styles, used for distinct roles:
 - **Outlined button** (transparent bg + `--accent` 1.5px border + `--accent` text, hover = 12% accent tint). **Use for: auxiliary actions** on a page that don't navigate. Live example: `.ai-copy-all` (Copy All Instructions button on `/our-field-guide/ai-instructions`).
 
 **Decision rule (resolved 2026-04-14):** if the button's action is "go somewhere else," use `.btn` (solid). If the action is in-page (copy, toggle, trigger, reveal), use the outlined variant. Create a new CSS class per auxiliary-action context (`.ai-copy-all` for that specific button) rather than a generic shared outlined `.btn-outline` — keeps button purpose visible in the class name.
+
+## 16. Audit Script
+
+`scripts/audit.py` runs the structural audit used to verify the site before/after changes:
+
+```bash
+python3 scripts/audit.py          # static checks only (fast, local)
+python3 scripts/audit.py --live   # + HTTP + cache-header live checks
+```
+
+Checks: internal link + anchor integrity, tooltip/DICT coverage, cache-bust consistency, stale "Handbook" naming, metadata sanity (canonical/og:url match, H1 count per page), skip-link targets.
+
+Report-only — no changes made. Re-run after any batch of HTML/CSS/DICT edits. See also the full audit report procedure documented in the conversation log from 2026-04-14 (ClickUp doc `8cr51kc-3317` Corrections section #2).
