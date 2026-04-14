@@ -88,9 +88,14 @@
 }
 
 /* ── Handbook layout (sidebar + main) ────────────────── */
+/* Grid with mirrored sidebar-width columns so .handbook-main is
+   visually centered in the viewport regardless of sidebar presence.
+   Column 1 = TOC sidebar (200px). Column 2 = main content (fluid).
+   Column 3 = empty 200px spacer mirroring the sidebar. */
 .handbook-layout {
-  display: flex;
-  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 200px;
+  max-width: 80rem;
   margin: 0 auto;
   padding: 0 1.5rem;
   gap: 3rem;
@@ -151,9 +156,9 @@
 }
 
 .handbook-main {
-  flex: 1;
   min-width: 0;
   max-width: 48rem;
+  margin: 0 auto;  /* center within the fluid middle column */
   padding: 2.5rem 0 4rem;
 }
 
@@ -244,7 +249,7 @@
 /* ── Handbook mobile ─────────────────────────────────── */
 @media (max-width: 800px) {
   .handbook-layout {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     padding: 0 1rem;
     gap: 0;
   }
