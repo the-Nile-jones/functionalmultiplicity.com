@@ -125,3 +125,17 @@ Because `/` is now the cold-start landing (intro card only), it is the canonical
 Currently wrapped on `/` (verified 2026-04-14): Functional Multiplicity, DID, OSDD, Plurality, System (`data-did="system"`), Plural (`data-did="plural"`).
 
 Words deliberately left unwrapped on `/`: "Multiplicity" (no exact dict entry; close to "plurality" but distinct concept), "fused" / "confluence" (the closest dict entry "integration" carries a meaning FM explicitly rejects, would mislead). When/if these gain dict entries, revisit the wrap decision.
+
+## 13. Dictionary Page Conventions (`/our-field-guide/dictionary-thesaurus`)
+
+The page has two `<dl>` blocks: **DIDictionary** (FM-specific terms, system mechanics) and **Theysaurus** (community synonyms). Both alphabetized **A-Z by `<dt>` term, case-insensitive**.
+
+When adding new entries:
+- Insert in alphabetical position; do NOT append to the end.
+- Capitalize the term in title case for `<dt>` (e.g. "Co-Hosting", "System Mechanics").
+- Definition in `<dd>` ends with a period.
+- Use Plural-language convention inside definitions ("Members", "Their", "You" capitalized when referring to people).
+
+**No subtitle paragraphs above the `<dl>` block.** If a description belongs on the page, convert it to a proper `<dt>`/`<dd>` entry and place it in alphabetical order (the original "System mechanics — how plurality works from the inside" subtitle was converted to a System Mechanics entry between Stasis and System Mapping). Theysaurus retains its `<p>Synonyms and overlapping terms...</p>` subtitle for now — pending a similar conversion if/when desired.
+
+Cross-link relationships in definitions use prose (e.g. Co-Consciousness's definition references Co-Hosting), not anchor links — keeps the dictionary scannable.
