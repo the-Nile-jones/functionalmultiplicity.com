@@ -1,11 +1,15 @@
-# Static assets — cache 1 year (content-addressed by deploy)
+# CF Pages _headers
+# IMPORTANT: rules ACCUMULATE when multiple paths match, they do NOT override.
+# So no `/*` catch-all — list HTML routes explicitly + use wildcards only for asset extensions.
+
+# === Static assets — cache 1 year, content stable across deploys ===
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-/styles.css
+/pagefind/*
   Cache-Control: public, max-age=31536000, immutable
 
-/favicon.svg
+/*.css
   Cache-Control: public, max-age=31536000, immutable
 
 /*.js
@@ -26,10 +30,33 @@
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
-# Pagefind index — cache 1 year (regenerated each deploy)
-/pagefind/*
-  Cache-Control: public, max-age=31536000, immutable
+# === HTML pages — 1 hour browser cache ===
+/
+  Cache-Control: public, max-age=3600, must-revalidate
 
-# HTML pages — 1 hour browser cache, must revalidate after
-/*
+/our-field-guide
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/our-field-guide/ai-instructions
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/our-field-guide/chapters
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/our-field-guide/chapters/introduction
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/our-field-guide/chapters/atomic-lego-set
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/our-field-guide/chapters/multi-venn
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/our-field-guide/dictionary-thesaurus
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/our-field-guide/tools
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/your-field-guide
   Cache-Control: public, max-age=3600, must-revalidate
