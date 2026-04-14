@@ -147,7 +147,9 @@
       meta.setAttribute('content', themes[theme].metaColor);
       localStorage.setItem(STORAGE_KEY, theme);
     }
-    applyTheme(localStorage.getItem(STORAGE_KEY) || 'dark');
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(saved || (prefersDark ? 'dark' : 'light'));
     btn.addEventListener('click', function () {
       applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });

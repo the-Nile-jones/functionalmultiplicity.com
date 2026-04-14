@@ -78,7 +78,7 @@
     <p class="config-note">Not sure? Start with <strong>One at a time</strong> — You can switch any time.</p>
   </div>
 
-  <div class="handbook-layout" id="main">
+  <main id="main" role="main" class="handbook-layout" data-pagefind-body>
 
     <!-- Sidebar TOC -->
     <nav class="toc-sidebar" aria-label="Handbook sections">
@@ -98,7 +98,7 @@
     </nav>
 
     <!-- Main content -->
-    <main role="main" class="handbook-main" data-pagefind-body>
+    <div class="handbook-main">
 
       <!-- System Profile section -->
       <section id="system-profile" class="handbook-section" aria-labelledby="system-profile-heading">
@@ -391,8 +391,8 @@ Don't ask anyone to generate opposites — do that yourself and let us react.</d
         </div>
       </section>
 
-    </main>
-  </div>
+    </div>
+  </main>
 
   <footer role="contentinfo">
     <nav class="footer-nav" aria-label="Footer navigation">
@@ -488,7 +488,8 @@ If anything feels uncomfortable or unsafe to explore, I'll say so — that's a s
       localStorage.setItem(STORAGE_KEY, theme);
     }
     const saved = localStorage.getItem(STORAGE_KEY);
-    applyTheme(saved || 'dark');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(saved || (prefersDark ? 'dark' : 'light'));
     btn.addEventListener('click', function () {
       applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });
