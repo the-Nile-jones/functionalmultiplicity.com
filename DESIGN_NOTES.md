@@ -124,7 +124,9 @@ Applied to FM site (verified 2026-04-14):
 - **Reading-time meta** (`<p class="page-meta">~X min read</p>`) under H1 on every long-form page. Computed at ~200 wpm, rounded. CSS `.page-meta` in `styles-additions.css` (subtle muted line, matches `.fg-tile-meta`). Pages stamped: introduction (~3 min), atomic-lego-set (~6), multi-venn (~12), dictionary-thesaurus (~5), your-field-guide (~15), ai-instructions (~24).
 - **Bold-density audit:** all pages well under the 30% NN/g ceiling. Highest is ai-instructions at 4.2%. Compliant.
 - **Bullet-first style** (FM Style Guide rule 4b) and informational-only imagery: already aligned.
-- **Pending (Fibery #10, #11, #12, due 2026-04-18):** TL;DR top block on AI Instructions; accordions for AI Instructions deep config sections; section-end summaries on Your Field Guide + Multi-Venn.
+- **AI Instructions page — separate concern:** this page is primarily consumed by AI (copy-paste or URL fetch), not read by humans top-to-bottom. NN/g conventions soften here. Specifically: a Copy All button (outlined `.ai-copy-all`) sits above section content for the copy-paste workflow; Jump-to TOC removed as it had zero value for AI readers; opening directive block simplified to two sentences (italic framing + direct "scan this entire website" instruction). Anchor IDs on each section retained for deep-linking.
+- **Closed (previously pending):** Fibery #10 (TL;DR on AI Instructions) and #11 (accordions on AI Instructions) both closed — the page is for AI consumption; human-scannability formatting adds friction to the primary workflow of copy-paste-into-AI.
+- **Pending (Fibery #12, due 2026-04-18):** section-end summaries on Your Field Guide + Multi-Venn (both have human readers; still valid work).
 
 **`/our-story` is intentionally excluded from these conventions.** No reading-time, no top summary, no section-end closers. Per Nile's directive: visitors "earn" the content; the immersive narrative is the entry point and must not be pre-graded.
 
@@ -149,3 +151,42 @@ When adding new entries:
 **No subtitle paragraphs above the `<dl>` block.** If a description belongs on the page, convert it to a proper `<dt>`/`<dd>` entry and place it in alphabetical order (the original "System mechanics — how plurality works from the inside" subtitle was converted to a System Mechanics entry between Stasis and System Mapping). Theysaurus retains its `<p>Synonyms and overlapping terms...</p>` subtitle for now — pending a similar conversion if/when desired.
 
 Cross-link relationships in definitions use prose (e.g. Co-Consciousness's definition references Co-Hosting), not anchor links — keeps the dictionary scannable.
+
+## 14. Centered-Main-Content with Sidebar Layout
+
+Pages with a sidebar TOC (currently: `/your-field-guide`) use a 3-column CSS grid so the main content is visually centered in the viewport regardless of sidebar presence. Pattern:
+
+```css
+.handbook-layout {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 200px;  /* sidebar | main | mirror spacer */
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  gap: 3rem;
+  align-items: flex-start;
+}
+.handbook-main {
+  max-width: 48rem;
+  margin: 0 auto;  /* center within the fluid middle column */
+}
+```
+
+The third column is an empty 200px spacer that mirrors the sidebar's width. Main content's `margin: 0 auto` centers it inside its fluid middle column → visually centered in the viewport.
+
+Mobile breakpoint (≤800px): `grid-template-columns: 1fr` collapses to single-column stack. Sidebar flows above main.
+
+**Why not flex:** flexbox pushes main content right-of-center when sidebar occupies the left flex child. Symmetric grid spacers are the simplest fix that doesn't require absolute positioning (which would break the sidebar's `position: sticky`).
+
+**Why not just widen the container:** widening without a mirror spacer still leaves main right-of-center — widening changes the offset magnitude but not direction.
+
+This pattern is portable to any future page with a left sidebar + centered main. If sidebar width changes, keep left and right columns symmetric.
+
+## 15. Button Convention (current state, 2026-04-14)
+
+Two button styles coexist on the site:
+
+- **`.btn`** (solid green fill, `--accent` bg + `--accent-on` text) — used on homepage next-steps section ("Open Our Field Guide →", "Open Your Field Guide →"). Established pattern; visitors already associate with primary navigation action.
+- **`.ai-copy-all`** (outlined: transparent bg + `--accent` border + `--accent` text) — used on `/our-field-guide/ai-instructions` Copy All button. Deliberately outlined to read as a secondary/opt-in action without competing with `<strong>` for emphasis green.
+
+The tension between `<strong>` using green for emphasis and `.btn` using solid green for action fills is unresolved. Current informal convention: primary navigation CTAs can use solid `.btn` (accepted), but auxiliary action buttons should use outlined variants (`.ai-copy-all` pattern). Full style-guide discipline would pick one and propagate; the current compromise is pragmatic.
