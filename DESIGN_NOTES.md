@@ -59,17 +59,23 @@ Every chapter ends with a Disclosure blockquote. `Claude` links to https://claud
 - Page-specific styles inside `<head><style>` blocks are isolated to that page. When you remove a feature from one page, audit any `min-width`, `max-width`, or specificity-fragile rules left behind — they can attack later additions on the same page (e.g. an orphaned `min-width: 600px` on `.diagram-container svg` once forced a 480px wrapper to overflow).
 - Global `box-sizing: border-box` is set in `styles.css`. Padding does not add to width.
 
-## 8. Information Architecture (Our Field Guide / Your Field Guide)
+## 8. Information Architecture (Our Story / Our Field Guide / Your Field Guide)
 
-Site collapses into 3 top-nav items: **Story** (homepage `/`), **Our Field Guide** (`/our-field-guide/`), **Your Field Guide** (`/your-field-guide`).
+**Top nav** (3 items, every page): **Our Story** (`/our-story`), **Our Field Guide** (`/our-field-guide/`), **Your Field Guide** (`/your-field-guide`). The FM logo links to `/`.
 
-- *Story* is Nile's personal narrative + HOPE notes. The cold-start entry point.
-- *Our Field Guide* is the case-study / proof-of-concept — what Nile built using FM in his own System. Contains: Index landing (4 SVG-icon tiles), AI Instructions, Chapters (3 chapters), Dictionary & Thesaurus, Tools.
-- *Your Field Guide* is the configurable framework / generator (formerly `/handbook`). Body text was rebranded from "Handbook" to "Your Field Guide" / "field guide" in visible copy. CSS class names (`.handbook-main`, `.handbook-section`, `.handbook-layout`) and HTML IDs (`id="handbook-ai"`, etc.) preserved as structural scaffolding — do NOT rename without parallel CSS file edits.
+**Homepage `/`** is an intro hub — single intro card with H1, tagline, plural-voice framing paragraphs (covering what FM is, why this site exists, the fusion disclosure, and a closing recommendation line that points to `/our-story`). No long-form content, no scroll transition. Awaiting further direction on what else lives here.
+
+**`/our-story`** carries the long narrative: Functional Multiplicity approach, Characteristics-not-Symptoms, the Exocortex section, Steal from the Greats / NF HOPE album notes, and a two-path next-steps closer (Our Field Guide for case-study depth / Your Field Guide for active practice). 5K+ words.
+
+**`/our-field-guide`** is the case-study / proof-of-concept — what Nile built using FM in his own System. Contains: Index landing (4 SVG-icon tiles), AI Instructions, Chapters (3 chapters), Dictionary & Thesaurus, Tools.
+
+**`/your-field-guide`** is the configurable framework / generator (formerly `/handbook`). Body text rebranded from "Handbook" to "Your Field Guide" / "field guide" in visible copy. CSS class names (`.handbook-main`, `.handbook-section`, `.handbook-layout`) and HTML IDs (`id="handbook-ai"`, etc.) preserved as structural scaffolding — do NOT rename without parallel CSS file edits.
 
 Old URLs (`/handbook`, `/AIInstructions`, `/chapters`, `/DictionaryThesaurus`, `/tools`, `/introduction`, `/atomic-lego-set`, `/multi-venn`) intentionally 404 — explicit decision to skip 301 redirects. Site was early/low-traffic enough to absorb the change.
 
-The `Our` / `Your` pronoun pairing is pedagogical: it enacts the site's Plural-immersive convention in the navigation itself (read what we did → build your own).
+The `Our` / `Your` pronoun pairing is pedagogical: it enacts the site's Plural-immersive convention in the navigation itself (Our Story → see what we did → Our Field Guide → see what we built → Your Field Guide → build your own).
+
+**Active-state convention:** each page marks its own nav item with `class="nav-link nav-link--active" aria-current="page"`. The homepage `/` has NO active nav item — the FM logo is the home link, and the page itself isn't represented in the 3-item nav.
 
 ## 9. Cache Headers — `_headers` File Pattern
 
@@ -96,3 +102,24 @@ Defenses (use both):
 - Set `color: var(--text)` on the tile's `:hover` state (specificity `(0,2,0)` beats `a:hover`'s `(0,1,1)`).
 
 Live example: `.fg-tile-desc` and `.fg-tile:hover` in `our-field-guide/index.html`.
+
+## 11. Long-Form Formatting Conventions (NN/g-derived)
+
+Nielsen Norman Group research on formatting long-form content (https://www.nngroup.com/articles/formatting-long-form-content/) sets the threshold at ~1,000 words. Pages above that get formatting techniques to reduce reader fatigue and enable scanning. Full distillation lives in Anytype "Long-Form Content Formatting — NN/g" (object `bafyreig2gzxq7gsgm7fje4rwhwxguv6r46nzbwo3yktrdzznh2hbh3o7xa`) and Drive `/PARA/Resources/long_form_formatting_nng/`.
+
+Applied to FM site (verified 2026-04-14):
+
+- **Reading-time meta** (`<p class="page-meta">~X min read</p>`) under H1 on every long-form page. Computed at ~200 wpm, rounded. CSS `.page-meta` in `styles-additions.css` (subtle muted line, matches `.fg-tile-meta`). Pages stamped: introduction (~3 min), atomic-lego-set (~6), multi-venn (~12), dictionary-thesaurus (~5), your-field-guide (~15), ai-instructions (~24).
+- **Bold-density audit:** all pages well under the 30% NN/g ceiling. Highest is ai-instructions at 4.2%. Compliant.
+- **Bullet-first style** (FM Style Guide rule 4b) and informational-only imagery: already aligned.
+- **Pending (Fibery #10, #11, #12, due 2026-04-18):** TL;DR top block on AI Instructions; accordions for AI Instructions deep config sections; section-end summaries on Your Field Guide + Multi-Venn.
+
+**`/our-story` is intentionally excluded from these conventions.** No reading-time, no top summary, no section-end closers. Per Nile's directive: visitors "earn" the content; the immersive narrative is the entry point and must not be pre-graded.
+
+## 12. Homepage `/` — DID-Term Tooltip First-Appearance Anchor
+
+Because `/` is now the cold-start landing (intro card only), it is the canonical first-appearance page for site-wide DID terms. Per the wrap density rule (Section 3, "first appearance only in chronological reader sequence"), terms wrapped on `/` should NOT be re-wrapped on subsequent pages a typical reader visits next (Our Story, Our Field Guide, etc.).
+
+Currently wrapped on `/` (verified 2026-04-14): Functional Multiplicity, DID, OSDD, Plurality, System (`data-did="system"`), Plural (`data-did="plural"`).
+
+Words deliberately left unwrapped on `/`: "Multiplicity" (no exact dict entry; close to "plurality" but distinct concept), "fused" / "confluence" (the closest dict entry "integration" carries a meaning FM explicitly rejects, would mislead). When/if these gain dict entries, revisit the wrap decision.
