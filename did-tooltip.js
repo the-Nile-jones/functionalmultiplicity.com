@@ -183,6 +183,11 @@
       label: "Proprioception",
       definition: "The body's internal sense of its own position, movement, and spatial orientation — felt without looking. In FM: turning inward to sense who is present, where tension lives, and what the body is telling You right now. Not dissociation — the opposite. Grounding through awareness of the body You all share.",
       source: "FM / Clinical"
+    },
+    "lexicon": {
+      label: "Lexicon",
+      definition: "The vocabulary a particular person, community, or System uses for their lived experience. In FM, every System builds its own lexicon — terms They've found that fit Their internal reality. The site's terms are a starting point; Yours, named from the inside, take precedence.",
+      source: "Community"
     }
   };
 
