@@ -328,6 +328,15 @@
   margin-top: 1.5rem;
 }
 
+/* Our Story page title */
+.our-story-title {
+  max-width: 48rem;
+  margin: 2rem auto 0;
+  padding: 0 1.5rem;
+  font-size: 2rem;
+  color: var(--accent);
+}
+
 /* Reading-time / page-meta line — sits under H1 on long pages */
 .page-meta {
   margin: -0.25rem 0 1.5rem;

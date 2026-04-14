@@ -182,11 +182,11 @@ Mobile breakpoint (≤800px): `grid-template-columns: 1fr` collapses to single-c
 
 This pattern is portable to any future page with a left sidebar + centered main. If sidebar width changes, keep left and right columns symmetric.
 
-## 15. Button Convention (current state, 2026-04-14)
+## 15. Button Convention
 
-Two button styles coexist on the site:
+Two button styles, used for distinct roles:
 
-- **`.btn`** (solid green fill, `--accent` bg + `--accent-on` text) — used on homepage next-steps section ("Open Our Field Guide →", "Open Your Field Guide →"). Established pattern; visitors already associate with primary navigation action.
-- **`.ai-copy-all`** (outlined: transparent bg + `--accent` border + `--accent` text) — used on `/our-field-guide/ai-instructions` Copy All button. Deliberately outlined to read as a secondary/opt-in action without competing with `<strong>` for emphasis green.
+- **`.btn`** — solid green fill (`--accent` bg + `--accent-on` text). **Use for: primary navigation CTAs** that move visitors to another page. Live examples: "Open Our Field Guide →", "Open Your Field Guide →" on `/our-story`. The solid fill is visually distinct enough from inline `<strong>` green that they don't compete in practice (different weight, different chrome).
+- **Outlined button** (transparent bg + `--accent` 1.5px border + `--accent` text, hover = 12% accent tint). **Use for: auxiliary actions** on a page that don't navigate. Live example: `.ai-copy-all` (Copy All Instructions button on `/our-field-guide/ai-instructions`).
 
-The tension between `<strong>` using green for emphasis and `.btn` using solid green for action fills is unresolved. Current informal convention: primary navigation CTAs can use solid `.btn` (accepted), but auxiliary action buttons should use outlined variants (`.ai-copy-all` pattern). Full style-guide discipline would pick one and propagate; the current compromise is pragmatic.
+**Decision rule (resolved 2026-04-14):** if the button's action is "go somewhere else," use `.btn` (solid). If the action is in-page (copy, toggle, trigger, reveal), use the outlined variant. Create a new CSS class per auxiliary-action context (`.ai-copy-all` for that specific button) rather than a generic shared outlined `.btn-outline` — keeps button purpose visible in the class name.
