@@ -36,6 +36,16 @@ Last updated: 2026-04-14
 - **⚠️ Silent-failure gotcha:** the script bails on `if (!tip) return;` if the `<div id="did-tooltip">` is missing — meaning a page can have `did-term` wrappers AND load the script, and tooltips just never fire (no console error, no visible failure). When adding a page that uses DID terms, ALWAYS include both the script tag AND the tooltip div block. Sweep with `grep -L 'id="did-tooltip"' $(grep -l 'src="/did-tooltip\.js' *.html **/*.html)` to catch any pages that load the script without the div.
 - **Cache-bust convention:** the script is cached 1yr immutable per `_headers`. To force browsers to pick up a new DICT entry, bump the `?v=N` query string on every page's script tag (`/did-tooltip.js?v=2` → `?v=3`, etc.). Site-wide find/replace via sed across all `*.html` files.
 
+### Cache-bust applies to CSS too
+
+Same principle applies to `/styles.css` and `/styles-additions.css` — both are `max-age=31536000, immutable` per `_headers`, so any edit needs a `?v=N` bump on every `<link href="...?v=N">` tag site-wide. Starting version: `?v=1`. Bump in lockstep across both files (or per file — either works) when styles change.
+
+**Gotcha that bit us 2026-04-14:** I added `.ai-copy-all` to `styles-additions.css` and pushed, but didn't bump the `?v=N` query. Browsers with cached copies served the button with zero styling (user-agent default: white bg + dark text). Hard-refresh (Ctrl+Shift+R) works as a workaround for the editor; for all visitors, the cache-bust is the real fix.
+
+### Any asset in `_headers` marked `immutable` needs the same treatment
+
+Currently: `/fonts/*`, `/*.woff2`, `/*.svg`, `/*.png`, `/*.jpg`, `/*.ico`, `/*.js`, `/*.css`, `/pagefind/*`, `/favicon.svg`. Only `did-tooltip.js`, `styles.css`, and `styles-additions.css` currently have `?v=N` query strings. Others don't change often but will need the same treatment if they do.
+
 ## 4. Member Relationships (multi-venn — System-specific)
 
 Documented as canonical for the personal Multi-Venn:
