@@ -322,12 +322,20 @@
 }
 .footer-nav a {
   color: var(--accent);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease;
 }
 .footer-nav a:hover,
 .footer-nav a:focus {
   text-decoration: underline;
+}
+@media (max-width: 600px) {
+  .footer-nav a {
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 480px) {
