@@ -69,3 +69,6 @@
 
 /your-field-guide
   Cache-Control: public, max-age=3600, must-revalidate
+
+/our-story
+  Cache-Control: public, max-age=3600, must-revalidate
