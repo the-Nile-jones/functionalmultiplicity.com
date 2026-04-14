@@ -659,40 +659,48 @@
   }
 }
 
-/* ── AI Instructions — Copy All button ───────────────── */
+/* ── AI Instructions — Copy All button ─────────────────
+   Outlined style matches site discipline (DESIGN_NOTES §1):
+   green is for emphasis, not for solid CTA fills. Border-only
+   button reads as a deliberate opt-in action without competing
+   with <strong> or inline links. Brief filled state ONLY on
+   the .copied success flash. */
 .ai-copy-all {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.1rem;
+  padding: 0.55rem 1rem;
   margin-bottom: 1.25rem;
-  background: var(--accent);
-  color: var(--accent-on);
-  border: none;
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
   border-radius: 4px;
   font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, transform 0.1s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
 }
 
 .ai-copy-all:hover,
 .ai-copy-all:focus-visible {
-  background: var(--accent-dark);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
   outline: none;
   transform: translateY(-1px);
 }
 
 .ai-copy-all:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .ai-copy-all.copied {
-  background: var(--accent-dark);
+  background: var(--accent);
+  color: var(--accent-on);
+  border-color: var(--accent);
 }
 
 .ai-copy-all-icon {
   font-size: 1rem;
+  line-height: 1;
 }
 
 /* ── AI Instructions — Section TOC ───────────────────── */
