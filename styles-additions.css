@@ -314,6 +314,14 @@
 }
 
 /* ── Footer nav ──────────────────────────────────────── */
+/* Side-by-side CTA buttons (e.g. /index.html next-steps section) */
+.next-step-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: 1.5rem;
+}
+
 /* Reading-time / page-meta line — sits under H1 on long pages */
 .page-meta {
   margin: -0.25rem 0 1.5rem;
