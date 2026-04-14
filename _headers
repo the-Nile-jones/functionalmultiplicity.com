@@ -30,6 +30,6 @@
 /pagefind/*
   Cache-Control: public, max-age=31536000, immutable
 
-# HTML pages — always revalidate
+# HTML pages — 1 hour browser cache, must revalidate after
 /*
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: public, max-age=3600, must-revalidate
