@@ -37,6 +37,15 @@
 /our-field-guide
   Cache-Control: public, max-age=3600, must-revalidate
 
+/our-field-guide/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/our-field-guide/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
 /our-field-guide/ai-instructions
   Cache-Control: public, max-age=3600, must-revalidate
 
