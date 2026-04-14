@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1C1C1C" id="theme-meta">
+  <meta name="description" content="Our Field Guide — what We built using Functional Multiplicity in Our own System. Chapters, AI Instructions, Dictionary & Thesaurus, and Tools.">
+  <link rel="canonical" href="https://functionalmultiplicity.com/our-field-guide">
+  <meta property="og:title" content="Our Field Guide — Functional Multiplicity">
+  <meta property="og:description" content="What We built using Functional Multiplicity in Our own System. Read it as proof of concept; build Your own with Your Field Guide.">
+  <meta property="og:image" content="https://functionalmultiplicity.com/og-image.png">
+  <meta property="og:url" content="https://functionalmultiplicity.com/our-field-guide">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Our Field Guide — Functional Multiplicity">
+  <meta name="twitter:description" content="What We built using Functional Multiplicity in Our own System. Read it as proof of concept; build Your own with Your Field Guide.">
+  <meta name="twitter:image" content="https://functionalmultiplicity.com/og-image.png">
+  <title>Our Field Guide — Functional Multiplicity</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles-additions.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://functionalmultiplicity.com/our-field-guide#webpage",
+    "url": "https://functionalmultiplicity.com/our-field-guide",
+    "name": "Our Field Guide — Functional Multiplicity",
+    "isPartOf": { "@id": "https://functionalmultiplicity.com/#website" },
+    "description": "What We built using Functional Multiplicity in Our own System. Read it as proof of concept; build Your own with Your Field Guide.",
+    "inLanguage": "en-US"
+  }
+  </script>
+  <style>
+    .field-guide-intro {
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+    .field-guide-tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      max-width: 960px;
+      margin: 0 auto 2.5rem;
+    }
+    .fg-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1.5rem;
+      background: var(--bg-card, rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(80, 200, 120, 0.25);
+      border-radius: 10px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color 0.2s ease, transform 0.15s ease, background 0.2s ease;
+    }
+    .fg-tile:hover, .fg-tile:focus-visible {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      background: rgba(80, 200, 120, 0.06);
+      outline: none;
+    }
+    .fg-tile:focus-visible {
+      box-shadow: 0 0 0 3px rgba(80, 200, 120, 0.4);
+    }
+    .fg-tile-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+    .fg-tile-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .fg-tile-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+      color: var(--accent);
+    }
+    .fg-tile-desc {
+      margin: 0;
+      line-height: 1.45;
+    }
+    .fg-tile-meta {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .fg-tile-arrow {
+      align-self: flex-end;
+      margin-top: auto;
+      font-size: 1.5rem;
+      color: var(--accent);
+      opacity: 0.7;
+    }
+    .fg-tile:hover .fg-tile-arrow,
+    .fg-tile:focus-visible .fg-tile-arrow {
+      opacity: 1;
+    }
+    .field-guide-callout {
+      max-width: 720px;
+      margin: 2rem auto 0;
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--accent);
+      background: rgba(80, 200, 120, 0.04);
+    }
+    .field-guide-callout p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header role="banner">
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="/" class="site-logo" aria-label="Functional Multiplicity — Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="36" height="36" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="48" fill="#1C1C1C" stroke="#50C878" stroke-width="4"/><text x="50" y="62" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#50C878" text-anchor="middle" letter-spacing="-1">FM</text></svg></a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Story</a>
+        <a href="/our-field-guide" class="nav-link nav-link--active" aria-current="page">Our Field Guide</a>
+        <a href="/your-field-guide" class="nav-link">Your Field Guide</a>
+      </div>
+      <div class="nav-controls">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode" title="Toggle light/dark mode">
+          <span class="toggle-icon" aria-hidden="true">&#9788;</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" role="main" data-pagefind-body>
+
+    <section id="intro" role="region" aria-label="Introduction">
+      <div class="card field-guide-intro">
+        <h1>Our Field Guide</h1>
+        <p class="tagline">What We built — proof, not template.</p>
+        <p>This is what We made for Ourselves using Functional Multiplicity. It is the field record from inside one System learning the practice. Read it for grounding, for examples, for the texture of what FM looks like when actually applied.</p>
+        <p>It is not a curriculum. It is not a class. It was built in the field of DID — in the long stretch of figuring out what works and what doesn't. When You are ready to build Your own, see <a href="/your-field-guide">Your Field Guide</a>.</p>
+      </div>
+    </section>
+
+    <section id="sections" role="region" aria-label="Field Guide sections">
+      <div class="field-guide-tiles">
+
+        <a class="fg-tile" href="/our-field-guide/chapters">
+          <span class="fg-tile-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path d="M20 25 L80 25 M20 45 L80 45 M20 65 L80 65 M20 85 L80 85"/>
+            </svg>
+          </span>
+          <h2 class="fg-tile-title">Chapters</h2>
+          <p class="fg-tile-desc">The Functional Multiplicity framework, one piece at a time. Three chapters that build on each other.</p>
+          <p class="fg-tile-meta">3 chapters · ~22 min total</p>
+          <span class="fg-tile-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a class="fg-tile" href="/our-field-guide/ai-instructions">
+          <span class="fg-tile-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path d="M25 30 L50 55 L25 80"/>
+              <path d="M55 80 L80 80"/>
+            </svg>
+          </span>
+          <h2 class="fg-tile-title">AI Instructions</h2>
+          <p class="fg-tile-desc">The trained-foundation prompts Your AI needs to be useful for FM work. Copy-paste ready.</p>
+          <p class="fg-tile-meta">~24 min</p>
+          <span class="fg-tile-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a class="fg-tile" href="/our-field-guide/dictionary-thesaurus">
+          <span class="fg-tile-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path d="M30 80 L50 20 L70 80"/>
+              <path d="M38 60 L62 60"/>
+            </svg>
+          </span>
+          <h2 class="fg-tile-title">Dictionary &amp; Thesaurus</h2>
+          <p class="fg-tile-desc">Plain-language and Plural-language vocabulary used across the framework.</p>
+          <p class="fg-tile-meta">~5 min</p>
+          <span class="fg-tile-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a class="fg-tile" href="/our-field-guide/tools">
+          <span class="fg-tile-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path d="M50 20 L50 80 M20 50 L80 50"/>
+              <circle cx="50" cy="50" r="8"/>
+            </svg>
+          </span>
+          <h2 class="fg-tile-title">Tools</h2>
+          <p class="fg-tile-desc">What's coming next — utilities for turning the framework into daily practice.</p>
+          <p class="fg-tile-meta">~2 min</p>
+          <span class="fg-tile-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+      </div>
+
+      <aside class="field-guide-callout" role="note">
+        <p>New to Functional Multiplicity? Start with the <a href="/">Story</a> first — it explains what We're doing and why this exists. Then come back here.</p>
+      </aside>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/">Story</a>
+      <a href="/our-field-guide">Our Field Guide</a>
+      <a href="/your-field-guide">Your Field Guide</a>
+    </nav>
+    <p class="you-are-not-alone">You are not alone.</p>
+    <p>Our website is designed with accessibility as a foundation, not an afterthought. We aim to meet or exceed the recognized standards for web accessibility. To ensure this site is usable by Everyone, regardless of ability or the tools They use to browse, Universal Design is used as the foundation for Our site.</p>
+    <p>If you encounter any barriers or have a specific accommodation request, please contact us at <a href="mailto:info@functionalmultiplicity.com">info@functionalmultiplicity.com</a>.</p>
+  </footer>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'fm-theme';
+      const btn = document.getElementById('theme-toggle');
+      const meta = document.getElementById('theme-meta');
+      const themes = {
+        dark:  { icon: '\u2600', metaColor: '#1C1C1C' },
+        light: { icon: '\u263E', metaColor: '#F5F0E8' }
+      };
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const t = themes[theme];
+        btn.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+        btn.querySelector('.toggle-icon').textContent = t.icon;
+        meta.setAttribute('content', t.metaColor);
+        localStorage.setItem(STORAGE_KEY, theme);
+      }
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+      btn.addEventListener('click', function () {
+        applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -7,6 +7,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://functionalmultiplicity.com/our-field-guide</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://functionalmultiplicity.com/your-field-guide</loc>
     <lastmod>2026-04-13</lastmod>
     <changefreq>monthly</changefreq>
