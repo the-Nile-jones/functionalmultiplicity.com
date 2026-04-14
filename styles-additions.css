@@ -27,10 +27,11 @@
 
 .config-label {
   display: block;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.03em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.02em;
 }
 
 .config-options {
