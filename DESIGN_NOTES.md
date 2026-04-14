@@ -32,7 +32,9 @@ Last updated: 2026-04-14
 - Visible text can differ from `data-did` (case, plural, etc.); tooltip looks up by `data-did`.
 - **Wrap density rule (chronological reader assumed):** wrap a term on its **first appearance only** in the chapter sequence. Don't re-wrap terms already introduced in earlier chapters.
 - **Pause-test:** wrap clinical / community jargon a reader might pause on. Skip terms that are the page's central concept and explained inline.
-- Each page using the dictionary must include the `<div id="did-tooltip">` element + `<script src="/did-tooltip.js">`. The script no-ops gracefully if the tooltip element is missing.
+- Each page using the dictionary must include the `<div id="did-tooltip">` element + `<script src="/did-tooltip.js">`.
+- **⚠️ Silent-failure gotcha:** the script bails on `if (!tip) return;` if the `<div id="did-tooltip">` is missing — meaning a page can have `did-term` wrappers AND load the script, and tooltips just never fire (no console error, no visible failure). When adding a page that uses DID terms, ALWAYS include both the script tag AND the tooltip div block. Sweep with `grep -L 'id="did-tooltip"' $(grep -l 'src="/did-tooltip\.js' *.html **/*.html)` to catch any pages that load the script without the div.
+- **Cache-bust convention:** the script is cached 1yr immutable per `_headers`. To force browsers to pick up a new DICT entry, bump the `?v=N` query string on every page's script tag (`/did-tooltip.js?v=2` → `?v=3`, etc.). Site-wide find/replace via sed across all `*.html` files.
 
 ## 4. Member Relationships (multi-venn — System-specific)
 
