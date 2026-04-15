@@ -1,0 +1,80 @@
+# Claude Code Review + Security Scan
+# -----------------------------------
+# Fires on every PR targeting `main` (NOT on direct push — deploy.yml handles that).
+# Two jobs run in parallel:
+#   1. claude-review    — Anthropic's official Claude Code Action, inline review comments
+#   2. security-scan    — Anthropic's Claude Code Security Review Action, vulnerability scan
+#
+# Both jobs are required status checks (configure in branch protection — see ClickUp Doc).
+# Failure blocks merge once protection is set up.
+#
+# Secret required (repo secret, NOT hardcoded):
+#   ANTHROPIC_API_KEY — sourced from GSM `CLAUDE_API_KEY`. See rollout doc for gh CLI command.
+#
+# Rollback: delete this file in a follow-up commit. Nothing else touched.
+#
+# Refs:
+#   - https://github.com/anthropics/claude-code-action           (v1)
+#   - https://github.com/anthropics/claude-code-security-review  (main)
+
+name: Code Review + Security
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+# Top-level permissions intentionally minimal; each job narrows further.
+permissions:
+  contents: read
+
+jobs:
+  claude-review:
+    name: Claude Code Review
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Review this pull request for:
+            - Bugs and logic errors
+            - Security issues (XSS, injection, secrets, unsafe deserialization)
+            - Accessibility regressions (this is a static site — WCAG 2.1 matters)
+            - Performance concerns (bundle bloat, blocking scripts)
+            - Coding-convention drift vs. the rest of the repo
+            Leave inline comments on specific lines. Be concise. Skip nitpicks.
+          claude_args: |
+            --max-turns 10
+
+  security-scan:
+    name: Claude Code Security Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 2
+
+      - name: Run Claude Code Security Review
+        uses: anthropics/claude-code-security-review@main
+        with:
+          claude-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          comment-pr: true
+          upload-results: true
