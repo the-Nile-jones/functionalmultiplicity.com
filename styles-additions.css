@@ -211,6 +211,48 @@
 
 .callout p:last-child { margin-bottom: 0; }
 
+/* ── Section-end summary (NN/g long-form pattern) ────── */
+/* Non-heading aside placed at the end of major sections   */
+/* on long-form pages. No h-tag → no TOC entry pollution.  */
+.section-summary {
+  margin: 1.75rem 0 0.5rem;
+  padding: 0.85rem 1.1rem;
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9375rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.section-summary p { margin: 0; }
+.section-summary p + p { margin-top: 0.5rem; }
+
+.section-summary ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.section-summary ul li {
+  font-style: italic;
+  padding: 0.15rem 0 0.15rem 0;
+  line-height: 1.55;
+  position: static;
+}
+
+/* Reset multi-venn .post-content ul li::before bullet inside summaries */
+.section-summary ul li::before { content: none; }
+
+.section-summary .ss-label {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-right: 0.35em;
+}
+
 /* ── Tier list (Tools page) ──────────────────────────── */
 .tier-list {
   display: flex;
