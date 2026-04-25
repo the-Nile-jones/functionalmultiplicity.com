@@ -193,6 +193,48 @@
       label: "Member",
       definition: "An individual person within a System — with Their own name, characteristics, skills, and sense of self. 'Member' is the Plural Association's preferred community term; You may also hear Headmate, Part, Alter, or Identity depending on the System's language. Each Member is a full person, not a fragment.",
       source: "Community (The Plural Association)"
+    },
+
+    // Ch 4 — Modulation
+    "RMA": {
+      label: "RMA (Recursive Meta-Analysis)",
+      definition: "A method for breaking a tool into its smallest working pieces — atoms — and asking what each atom does for whoever uses it. RMA surfaces the mechanisms that make a technique actually work.",
+      source: "FM"
+    },
+    "DMA": {
+      label: "DMA (Destructive Meta-Analysis)",
+      definition: "The companion to RMA. After atoms are surfaced, DMA asks what each atom assumes about the user — and which assumptions don't hold for everyone. DMA is how singularity assumptions get caught.",
+      source: "FM"
+    },
+    "Modulation": {
+      label: "Modulation",
+      definition: "The general concept comes from music and signal processing — adjusting a signal's properties without losing what carries it. In FM: a method for taking a singlet-assuming tool, breaking it down, and rebuilding it so it explicitly works for plural identity.",
+      source: "FM"
+    },
+    "interoceptive": {
+      label: "Interoception",
+      definition: "Sensing inside the body — heartbeat, breath, temperature, hunger, tension. Interoceptive techniques use the body's internal signals as the anchor.",
+      source: "Clinical"
+    },
+    "vagal": {
+      label: "Vagal",
+      definition: "Related to the vagus nerve — the main nerve of the parasympathetic nervous system. Vagal tone influences heart rate, digestion, mood, and the body's ability to shift out of stress states. Many somatic grounding techniques work through vagal pathways.",
+      source: "Clinical"
+    },
+    "meta-atom": {
+      label: "Meta-atom",
+      definition: "A distilled principle that emerges from running RMA/DMA across multiple atoms. Where atoms are the smallest working pieces of a tool, meta-atoms are higher-order patterns that hold across atoms — and become reusable Library entries for future builds.",
+      source: "FM"
+    },
+    "meta-pattern": {
+      label: "Meta-pattern",
+      definition: "An observation stage in the Modulation pipeline: noticing patterns across atoms after RMA decomposes a tool. Meta-patterns are the precursors that, once distilled, become meta-atoms entering the Library.",
+      source: "FM"
+    },
+    "singlet": {
+      label: "Singlet",
+      definition: "A person with one continuous identity — not part of a System. FM uses 'singlet' as a neutral descriptor, parallel to how 'plural' describes multiple-identity Systems. Not 'singleton,' not 'non-DID' — those framings center DID as the deviation. 'Singlet' centers no one.",
+      source: "FM / Community"
     }
   };
 
