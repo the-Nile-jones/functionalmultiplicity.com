@@ -2,7 +2,7 @@
 
 Living reference for design + accessibility principles. Future Claude sessions read this before changing visual or content patterns.
 
-Last updated: 2026-04-14
+Last updated: 2026-04-25
 
 ---
 
@@ -193,7 +193,23 @@ Two button styles, used for distinct roles:
 
 **Decision rule (resolved 2026-04-14):** if the button's action is "go somewhere else," use `.btn` (solid). If the action is in-page (copy, toggle, trigger, reveal), use the outlined variant. Create a new CSS class per auxiliary-action context (`.ai-copy-all` for that specific button) rather than a generic shared outlined `.btn-outline` — keeps button purpose visible in the class name.
 
-## 16. Audit Script
+## 16. Chapter Section Numbering — `§N — Title` H3 Convention
+
+Chapter pages number their major body sections in the H3 heading text:
+
+```html
+<h3>§1 — The Moment You Know</h3>
+<h3>§2 — The Deliverable: Somatic Grounding for Systems</h3>
+<h3>§3 — Why Singlet Grounding Tools Fail for Systems</h3>
+```
+
+- Section symbol `§` (U+00A7), space, number, space, em-dash `—` (U+2014), space, then the section title.
+- Numbering applies only to **body** sections. **Skip** Disclosure (closing block) and any unnumbered scaffolding like a TL;DR sub-heading. Chapter 4 is the canonical example: `§1`–`§8` numbered, `Disclosure` left bare.
+- The convention mirrors the `§N` shorthand used in our drafting (review sheets, decision logs, notes) so the published page and the editorial trail line up.
+- Retrofit applied 2026-04-25 to introduction (§1–§4), atomic-lego-set (§1–§6), multi-venn (§1–§8).
+- Use literal `§` and `—` (Unicode), not `&sect;` / `&mdash;` entities — both render identically but the existing chapters are already in literal Unicode, so prefer that for diff-noise minimization.
+
+## 17. Audit Script
 
 `scripts/audit.py` runs the structural audit used to verify the site before/after changes:
 
