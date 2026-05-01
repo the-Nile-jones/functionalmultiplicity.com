@@ -46,7 +46,7 @@
 /index.html
   Cache-Control: public, max-age=3600, must-revalidate
 
-/your-exocortex-field-guide
+/our-field-guide/exocortex-instructions
   Cache-Control: public, max-age=3600, must-revalidate
 
 /our-field-guide/chapters
