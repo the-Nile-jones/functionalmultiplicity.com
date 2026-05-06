@@ -23,13 +23,39 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://functionalmultiplicity.com/our-field-guide#webpage",
-    "url": "https://functionalmultiplicity.com/our-field-guide",
-    "name": "Our Field Guide — Functional Multiplicity",
-    "isPartOf": { "@id": "https://functionalmultiplicity.com/#website" },
-    "description": "What We built using Functional Multiplicity in Our own System. Read it as proof of concept; build Your own with Your Field Guide.",
-    "inLanguage": "en"
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://functionalmultiplicity.com/our-field-guide#webpage",
+        "url": "https://functionalmultiplicity.com/our-field-guide",
+        "name": "Our Field Guide — Functional Multiplicity",
+        "isPartOf": {
+          "@id": "https://functionalmultiplicity.com/#website"
+        },
+        "description": "What We built using Functional Multiplicity in Our own System. Read it as proof of concept; build Your own with Your Field Guide.",
+        "inLanguage": "en",
+        "breadcrumb": {
+          "@id": "https://functionalmultiplicity.com/our-field-guide#breadcrumb"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://functionalmultiplicity.com/our-field-guide#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://functionalmultiplicity.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Our Field Guide"
+          }
+        ]
+      }
+    ]
   }
   </script>
   <style>

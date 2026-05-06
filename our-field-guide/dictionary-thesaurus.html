@@ -22,13 +22,45 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://functionalmultiplicity.com/our-field-guide/dictionary-thesaurus#webpage",
-    "url": "https://functionalmultiplicity.com/our-field-guide/dictionary-thesaurus",
-    "name": "Dictionary & Thesaurus — Functional Multiplicity",
-    "isPartOf": { "@id": "https://functionalmultiplicity.com/#website" },
-    "description": "DID and plural terminology from a System-first perspective. The language of living with DID, not diagnosing it.",
-    "inLanguage": "en"
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://functionalmultiplicity.com/our-field-guide/dictionary-thesaurus#webpage",
+        "url": "https://functionalmultiplicity.com/our-field-guide/dictionary-thesaurus",
+        "name": "Dictionary & Thesaurus — Functional Multiplicity",
+        "isPartOf": {
+          "@id": "https://functionalmultiplicity.com/#website"
+        },
+        "description": "DID and plural terminology from a System-first perspective. The language of living with DID, not diagnosing it.",
+        "inLanguage": "en",
+        "breadcrumb": {
+          "@id": "https://functionalmultiplicity.com/our-field-guide/dictionary-thesaurus#breadcrumb"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://functionalmultiplicity.com/our-field-guide/dictionary-thesaurus#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://functionalmultiplicity.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Our Field Guide",
+            "item": "https://functionalmultiplicity.com/our-field-guide/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Dictionary & Thesaurus"
+          }
+        ]
+      }
+    ]
   }
   </script>
 </head>
