@@ -1,6 +1,12 @@
 # CF Pages _headers
 # IMPORTANT: rules ACCUMULATE when multiple paths match, they do NOT override.
-# So no `/*` catch-all — list HTML routes explicitly + use wildcards only for asset extensions.
+# Cache-Control: no `/*` catch-all — list HTML routes explicitly + use wildcards only for asset extensions
+# (otherwise responses end up with multiple Cache-Control headers).
+# Security headers below DO use `/*` because they're set in only one place — accumulation is harmless.
+
+# === Security headers — applied to every response ===
+/*
+  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()
 
 # === Static assets — cache 1 year, content stable across deploys ===
 /fonts/*
