@@ -1,2 +1,7 @@
 /our-field-guide/ai-instructions  /our-field-guide/exocortex-instructions  301
 /your-exocortex-field-guide       /our-field-guide/exocortex-instructions  301
+
+# Catch-all 404 — must be the LAST rule. Any path not matched above and not
+# a real file gets /404.html with a real 404 status (kills CF Pages' soft-404
+# fallback to /index.html).
+/*  /404.html  404

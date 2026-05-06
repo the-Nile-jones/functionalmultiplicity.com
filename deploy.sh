@@ -15,17 +15,20 @@ echo "=== FM Deploy Pipeline ==="
 echo "$(date '+%Y-%m-%d %H:%M:%S')"
 echo ""
 
-# ── 1. Cloudflare token (from GSM) ────────────────────────────────────────────
-echo "Fetching Cloudflare token from GSM..."
+# ── 1. Cloudflare API token (from GSM) ────────────────────────────────────────
+# Use CLOUDFLARE_API_KEY (scoped API token, Bearer-auth) — wrangler v4 rejects
+# the legacy Global API Key (cfk_ prefix). Token expires 2026-12-31; rotate
+# before then. ID 20baee2c2239fc4a89f08c8ac63892c9.
+echo "Fetching Cloudflare API token from GSM..."
 CLOUDFLARE_API_TOKEN=$(gcloud secrets versions access latest \
-  --secret=CLOUDFLARE_GLOBAL_API \
+  --secret=CLOUDFLARE_API_KEY \
   --project="$GCP_PROJECT" 2>/dev/null || true)
 if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-  echo "ERROR: Could not fetch CLOUDFLARE_GLOBAL_API from GSM"
+  echo "ERROR: Could not fetch CLOUDFLARE_API_KEY from GSM"
   echo "       Run: gcloud auth login"
   exit 1
 fi
-echo "✓ Cloudflare token loaded"
+echo "✓ Cloudflare API token loaded"
 
 # ── 2. ClickUp API key from GSM ───────────────────────────────────────────────
 echo "Fetching ClickUp API key from GSM..."
