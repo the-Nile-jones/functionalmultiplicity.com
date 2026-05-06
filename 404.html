@@ -23,22 +23,30 @@
         <a href="/our-field-guide/" class="nav-link">Our Field Guide</a>
         <a href="/your-field-guide" class="nav-link">Your Field Guide</a>
       </div>
+      <div class="nav-controls">
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Switch to light mode"
+          title="Toggle light/dark mode"
+        >
+          <span class="toggle-icon" aria-hidden="true">☀</span>
+        </button>
+      </div>
     </nav>
   </header>
 
   <main id="main" role="main">
-    <section role="region" aria-label="Page not found">
-      <div class="card" style="text-align: center; max-width: 36rem; margin: 4rem auto;">
-        <h1 style="font-size: 4rem; margin-bottom: 0.5rem;">404</h1>
+
+    <section id="not-found" role="region" aria-label="Page not found">
+      <div class="card">
+        <h1>404</h1>
         <p class="tagline">This page is not where We thought it was.</p>
         <p>The URL You followed doesn&#8217;t match anything on functionalmultiplicity.com. It may have been moved, renamed, or never existed.</p>
-        <p style="margin-top: 2rem;">
-          <a href="/">Return Home</a> &nbsp;&middot;&nbsp;
-          <a href="/our-field-guide/">Our Field Guide</a> &nbsp;&middot;&nbsp;
-          <a href="/your-field-guide">Your Field Guide</a>
-        </p>
+        <p>From here, You can return to the <a href="/">homepage</a>, browse <a href="/our-field-guide/">Our Field Guide</a>, or build <a href="/your-field-guide">Your own Field Guide</a>.</p>
       </div>
     </section>
+
   </main>
 
   <footer role="contentinfo">
@@ -49,5 +57,35 @@
     </nav>
     <p class="you-are-not-alone">You are not alone.</p>
   </footer>
+
+  <script src="/did-tooltip.js?v=5"></script>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'fm-theme';
+      const btn = document.getElementById('theme-toggle');
+      const meta = document.getElementById('theme-meta');
+      const themes = {
+        dark:  { icon: '☀', metaColor: '#1C1C1C' },
+        light: { icon: '☾', metaColor: '#F5F0E8' }
+      };
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const t = themes[theme];
+        btn.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+        btn.querySelector('.toggle-icon').textContent = t.icon;
+        meta.setAttribute('content', t.metaColor);
+        localStorage.setItem(STORAGE_KEY, theme);
+      }
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+      btn.addEventListener('click', function () {
+        applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      });
+    })();
+  </script>
+
+  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "60b9f24b19fe45b19997a8e46069926b"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
