@@ -1,7 +1,8 @@
 /our-field-guide/ai-instructions  /our-field-guide/exocortex-instructions  301
 /your-exocortex-field-guide       /our-field-guide/exocortex-instructions  301
 
-# Catch-all 404 — must be the LAST rule. Any path not matched above and not
-# a real file gets /404.html with a real 404 status (kills CF Pages' soft-404
-# fallback to /index.html).
-/*  /404.html  404
+# Note: previously had `/*  /404.html  404` here, but CF Pages does NOT support
+# rewrites with custom status codes in _redirects (only 301/302/303/307/308).
+# Instead: /404.html exists at the project root, and CF Pages serves it with
+# HTTP 404 for unmatched paths automatically — provided the project isn't in
+# SPA mode (no `/* /index.html 200` rule + 404.html file present).
