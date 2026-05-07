@@ -1,0 +1,28 @@
+# Functional Multiplicity
+
+> A handbook for DID Systems written from inside the experience. Documents Our journey toward functional multiplicity — life with parts that works. Free, non-commercial, voice is clinical-warm rather than clinical-cold.
+
+Functional Multiplicity (FM) is a long-form field guide by Nile, a self-aware DID System. The site shares the infrastructure that makes living as a System workable: a typed cognitive vocabulary (Atoms / Compounds / Emergents), a chapter walkthrough of internal architecture, a glossary of System-coined terms, and concrete tooling other Systems can adopt. Voice rules: System pronouns (You / Your / We / Us / Member / Fronter / System) are capitalized; "singlet" is the noun for a non-multiple person; no clinical-pathology framing.
+
+## Field guide chapters
+
+- [Introduction](https://functionalmultiplicity.com/our-field-guide/chapters/introduction.html): Why this guide exists, what "functional multiplicity" means, and a primer on DID for new readers.
+- [Atomic Lego Set](https://functionalmultiplicity.com/our-field-guide/chapters/atomic-lego-set.html): The Atom-Compound-Emergent model — building a System's operating substrate from named, recombinant cognitive units.
+- [Multi-Venn Diagram](https://functionalmultiplicity.com/our-field-guide/chapters/multi-venn.html): Mapping how Members overlap, route work, and collaborate on shared concerns.
+- [Modulation](https://functionalmultiplicity.com/our-field-guide/chapters/modulation.html): How a System modulates internal state — switching, arrival, dissociation, integration as design surfaces, not pathology.
+
+## Dictionary and infrastructure
+
+- [DIDictionary + Theysaurus](https://functionalmultiplicity.com/our-field-guide/dictionary-thesaurus.html): Glossary of System-coined terms with cross-references; the same definitions power the site's hover-tooltips.
+- [Exocortex Instructions](https://functionalmultiplicity.com/our-field-guide/exocortex-instructions.html): Walkthrough of the cognitive infrastructure pattern — atoms, compounds, memory layers — that the author uses daily.
+- [Tools](https://functionalmultiplicity.com/our-field-guide/tools.html): Concrete software, frameworks, and rituals other Systems can adopt.
+
+## About
+
+- [Our Story](https://functionalmultiplicity.com/our-story.html): The author's path from singlet identity through DID realization to operational multiplicity.
+- [Your Field Guide](https://functionalmultiplicity.com/your-field-guide.html): How to start using this material — for Systems and the singlets who love Them.
+
+## Optional
+
+- [Field guide index](https://functionalmultiplicity.com/our-field-guide/index.html): Top-level landing page for the field-guide section.
+- [Chapters list](https://functionalmultiplicity.com/our-field-guide/chapters.html): Index of all chapters with publication status.
