@@ -15,35 +15,9 @@
     },
 
 
-    "Strategic Architecture": {
-      label: "Strategic Architecture",
-      definition: "The intentional design of how a system operates: which alters hold which roles, how handoffs occur, how decisions are made, and how the system's structure supports its goals.",
-      source: "FM Functional Language"
-    },
-    "Identity-as-Role": {
-      label: "Identity-as-Role",
-      definition: "Each alter is understood as a functional role within the system rather than a fragmented sub-personality. Roles have defined responsibilities, competencies, and boundaries—like positions in an organization.",
-      source: "FM Functional Language"
-    },
-    "Sovereign Handoff": {
-      label: "Sovereign Handoff",
-      definition: "A deliberate, consensual transition of fronting responsibilities from one alter to another. Sovereign Handoffs are planned and intentional, as opposed to involuntary switches.",
-      source: "FM Functional Language"
-    },
-
     "Sovereignty": {
       label: "Sovereignty",
       definition: "The FM principle that every Identity in a System has the right to exist, to hold a role, and to participate in decisions that affect the collective. Not independence from the System — authority within it.",
-      source: "FM Functional Language"
-    },
-    "Systemic Cooperation": {
-      label: "Systemic Cooperation",
-      definition: "The coordinated collaboration between alters toward shared goals—a core FM value. Prioritized over internal competition, suppression, or forced integration.",
-      source: "FM Functional Language"
-    },
-    "Executive Excellence": {
-      label: "Executive Excellence",
-      definition: "The FM goal of optimized executive function across the system—consistent output, reliable memory, clear communication, and effective decision-making regardless of who is fronting.",
       source: "FM Functional Language"
     },
 
