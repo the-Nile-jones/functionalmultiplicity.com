@@ -105,6 +105,16 @@ Current state (verified 2026-04-14): HTML pages = `max-age=3600, must-revalidate
 
 **Zone-level overrides:** CF zone Cache Rules in `http_request_cache_settings` ruleset can force `override_origin` mode and clamp all responses to a fixed TTL regardless of `_headers`. The `functionalmultiplicity.com` zone had two such template rules — both deleted 2026-04-14 (`72c9f10e376949278af19582e71ab658` for edge_ttl, `4149fc8bdc394fc99390d8eb1520136e` for browser_ttl). Don't recreate without intent. Browser Cache TTL zone setting is also 0 (= Respect Existing Headers).
 
+> **🔺 2026-07-16 — the warning above was ignored, and it cost a deploy.**
+> A **third** override rule was created **2026-05-05** (ruleset `0f9a0f26b7b041bfbe3f209c1abbd8df`, rule `b3ac11d713aa404eb0c775b951cab948`, described *"Cache HTML at edge (override origin, 1h TTL)"*): `expression: (http.request.method eq "GET")` → `cache: true, edge_ttl {default: 3600, mode: override_origin}, browser_ttl {mode: respect_origin}`.
+> **The next day (2026-05-06) the "Audit batch: SEO/perf" commit added `s-maxage=86400` to `_headers`.** The two contradict: `override_origin` clamps the edge to 1h, so **that 24h `s-maxage` was dead letter from the day it was written**.
+> **What it cost:** on 2026-07-16 a deploy of the JSON-LD fix uploaded fine (`wrangler: ✨ Success!`) while **production served the OLD HTML for 25 minutes**. Compounded by **Tiered Cache being ON** — a by-URL `purge_cache` was a **no-op**; only `purge_everything` cleared it.
+> **DELETED 2026-07-16** (Nile's call; ruleset now version 7, 0 rules). Rollback JSON: `scratchpad/cf-cache-ruleset.bak.json` — re-POST it to `/zones/{zone}/rulesets/{id}/rules` to restore.
+> ⚠️ **Honest limit on the verification:** `cf-cache-status` read **`DYNAMIC` both before and after** the deletion — i.e. **no observable change**. Either the rule wasn't doing what its description claimed, or `cf-cache-status` is not trustworthy on this zone. **It demonstrably lies here** — it read `DYNAMIC` throughout the 25 minutes a cache was serving stale HTML. **Do not use `cf-cache-status` as evidence on this zone.** If HTML edge-caching turns out to be wanted, prefer fixing it via `_headers` (in git, reviewable) over a dashboard rule (invisible, no history — which is exactly how this ambushed the deploy).
+> **Now enforced in code:** `deploy.sh` purges (`purge_everything`, via the least-privilege `CLOUDFLARE_PURGE_TOKEN`) and then **proves the public URL serves the deployed bytes, exiting 1 if not**. A deploy that isn't visible is not a deploy.
+
+**⚠ Known cosmetic accumulation (spotted 2026-07-16):** `/fonts/atkinson-normal-400.woff2` returns **two identical `Cache-Control: public, max-age=31536000, immutable` headers** — two `_headers` rules match it (`/fonts/*` and the `/*.woff2`-class wildcard). Harmless (browsers consolidate; identical directives), but it's the exact accumulation trap described above. Fix by dropping one of the two matching rules if ever tidying.
+
 ## 10. Anchor Hover Specificity Trap
 
 The global `a:hover` rule sets `background: var(--accent)` + `color: var(--accent-on)` — designed for inline text links that get a solid green pill on hover. Specificity `(0,1,1)`.
