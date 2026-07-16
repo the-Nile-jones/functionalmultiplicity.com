@@ -2,3 +2,9 @@
 .gitignore
 .wrangler
 *.toml
+*.bak
+*.bak-*
+*.bak.*
+*~
+*.orig
+*.rej
