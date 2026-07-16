@@ -94,49 +94,70 @@ fi
 
 # ── 4. VERIFY the new bytes are actually live ────────────────────────────────
 # The point of the rewrite. wrangler's "Success!" describes an upload, not a live site.
-# Compare the canary page at the deployment URL (origin truth) vs the public URL.
 #
-# ⚠️ DO NOT sha256 the whole page — learned the hard way 2026-07-16. Cloudflare
-# injects things on the custom domain that pages.dev never sees:
-#   • email obfuscation  (mailto: -> /cdn-cgi/l/email-protection#...)
-#   • /cdn-cgi/scripts/.../email-decode.min.js
-#   • a bot-challenge block (__CF$cv$params) containing a PER-REQUEST NONCE
-# The nonce alone means two fetches of the SAME url never match. A whole-page hash
-# can never succeed here — it reported "NOT LIVE" on a perfectly good deploy.
-# So: strip every CF-injected line, THEN hash what's left.
+# 2026-07-16, SECOND lesson, learned the same day as the first: v1 of this check
+# used a FIXED canary (/our-story) and compared the public URL against the
+# deployment URL. It passed on a deploy that had NOT shipped — because /our-story
+# had not changed, so the stale cached copy and the fresh copy were byte-identical.
+# It compared a file to itself. IT COULD NEVER FAIL. A check that cannot fail is
+# not a check.
+# Two fixes:
+#   1. CANARY = a page that actually changed in this deploy (from git), so the
+#      comparison has something to detect. Falls back to a bare-vs-fresh compare.
+#   2. The real test is BARE URL vs CACHE-BUSTED URL of the SAME page. The busted
+#      URL bypasses the edge cache and returns origin truth; the bare URL is what
+#      users get. If they differ, users are on stale bytes — no matter what
+#      cf-cache-status says (it says DYNAMIC while serving stale; it lies on this
+#      zone — see DESIGN_NOTES).
+#   3. Purge is EVENTUALLY consistent. The first purge_everything of the day
+#      reported success and did not take; a second one, ~2 min later, did. So:
+#      retry with backoff instead of a single 10s sleep, and re-purge once.
 echo "Verifying deploy is LIVE (not just uploaded)..."
-sleep 10
 UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-# Normalise BOTH sides: Cloudflare REWRITES lines in place on the custom domain
-# (it doesn't just add them), so line-stripping fails. Neutralise its 3 transforms:
-#   1. email obfuscation: href="mailto:.." -> href="/cdn-cgi/l/email-protection#hex"
-#   2. an injected <script src="/cdn-cgi/scripts/../email-decode.min.js">
-#   3. a bot-challenge <script> appended to </body>, containing a PER-REQUEST NONCE
 norm() {
   sed -E -e 's#href="(mailto:|/cdn-cgi/l/email-protection)[^"]*"#href="EMAIL"#g' \
          -e 's#<script[^>]*/cdn-cgi/[^<]*</script>##g' \
          -e 's#<script>\(function\(\)\{.*</script>##g'
 }
-LIVE_SUM=$(curl -sf -m 20 -A "$UA" "$SITE_URL$CANARY_PATH" 2>/dev/null | norm | sha256sum | cut -c1-16 || echo "FETCH_FAIL")
-if [ -n "$DEPLOY_URL" ]; then
-  ORIGIN_SUM=$(curl -sf -m 20 -A "$UA" "$DEPLOY_URL$CANARY_PATH" 2>/dev/null | norm | sha256sum | cut -c1-16 || echo "FETCH_FAIL")
+
+# Pick a canary that CHANGED in this deploy — otherwise there is nothing to detect.
+CANARY_FILE=$(git -C "$SCRIPT_DIR" diff --name-only HEAD~1 HEAD 2>/dev/null | grep '\.html$' | head -1 || true)
+if [ -n "$CANARY_FILE" ]; then
+  CANARY_PATH="/${CANARY_FILE%.html}"
+  CANARY_PATH="${CANARY_PATH%/index}"
+  echo "  canary  : $CANARY_PATH (changed in this deploy)"
 else
-  ORIGIN_SUM="$LIVE_SUM"   # couldn't parse the deployment URL — skip the comparison
-  echo "  (could not parse deployment URL; skipping origin comparison)"
+  CANARY_PATH="/our-story"
+  echo "  canary  : $CANARY_PATH (fallback — no HTML changed in HEAD; check is weak)"
 fi
 
-echo "  canary     : $CANARY_PATH"
-echo "  live sha   : $LIVE_SUM"
-echo "  origin sha : $ORIGIN_SUM"
-if [ "$LIVE_SUM" = "FETCH_FAIL" ] || [ "$ORIGIN_SUM" = "FETCH_FAIL" ]; then
-  echo "⚠ VERIFY INCONCLUSIVE — could not fetch. Check manually: $SITE_URL"
-elif [ "$LIVE_SUM" = "$ORIGIN_SUM" ]; then
-  echo "✓ VERIFIED: the public URL is serving the newly deployed bytes."
+live_sum()  { curl -sf -m 25 -A "$UA" "$SITE_URL$CANARY_PATH"            | norm | sha256sum | cut -c1-16; }
+fresh_sum() { curl -sf -m 25 -A "$UA" "$SITE_URL$CANARY_PATH?cb=$RANDOM$$" | norm | sha256sum | cut -c1-16; }
+
+OK=0
+for attempt in 1 2 3 4 5 6; do
+  L=$(live_sum || echo FETCH_FAIL); F=$(fresh_sum || echo FETCH_FAIL)
+  if [ "$L" = "FETCH_FAIL" ] || [ "$F" = "FETCH_FAIL" ]; then
+    echo "  attempt $attempt: fetch failed"; sleep 10; continue
+  fi
+  if [ "$L" = "$F" ]; then OK=1; echo "  attempt $attempt: live=$L fresh=$F  ✓ match"; break; fi
+  echo "  attempt $attempt: live=$L fresh=$F  ✗ STALE — users are on old bytes"
+  if [ "$attempt" = "2" ] && [ -n "$PURGE_TOKEN" ]; then
+    echo "  -> re-purging (purge is eventually consistent; the first one can silently no-op)"
+    curl -s -m 30 -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
+      -H "Authorization: Bearer $PURGE_TOKEN" -H "Content-Type: application/json" \
+      --data '{"purge_everything":true}' > /dev/null || true
+  fi
+  sleep 15
+done
+
+if [ "$OK" = "1" ]; then
+  echo "✓ VERIFIED: the public URL serves the same bytes as a cache-bypassing fetch."
 else
-  echo "❌ NOT LIVE: the public URL is serving DIFFERENT bytes than the deployment."
-  echo "   The upload succeeded but users are seeing old content."
-  echo "   Likely the edge cache. Re-run the purge, or wait out the 1h edge TTL."
-  exit 1   # fail loudly — a deploy that isn't visible is not a success
+  echo "❌ NOT LIVE: the public URL is serving STALE bytes after repeated purges."
+  echo "   The upload succeeded but users are seeing old content at $SITE_URL$CANARY_PATH"
+  echo "   Purge manually, or wait out the edge TTL, then re-check."
+  exit 1   # a deploy that isn't visible is not a success
 fi
 
 # ── Done ─────────────────────────────────────────────────────────────────────
