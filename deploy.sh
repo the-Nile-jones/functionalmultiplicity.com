@@ -93,57 +93,130 @@ if [ -n "$PURGE_TOKEN" ]; then
 fi
 
 # ── 4. VERIFY the new bytes are actually live ────────────────────────────────
-# The point of the rewrite. wrangler's "Success!" describes an upload, not a live site.
+# wrangler's "Success!" describes an upload, not a live site.
 #
-# 2026-07-16, SECOND lesson, learned the same day as the first: v1 of this check
-# used a FIXED canary (/our-story) and compared the public URL against the
-# deployment URL. It passed on a deploy that had NOT shipped — because /our-story
-# had not changed, so the stale cached copy and the fresh copy were byte-identical.
-# It compared a file to itself. IT COULD NEVER FAIL. A check that cannot fail is
-# not a check.
-# Two fixes:
-#   1. CANARY = a page that actually changed in this deploy (from git), so the
-#      comparison has something to detect. Falls back to a bare-vs-fresh compare.
-#   2. The real test is BARE URL vs CACHE-BUSTED URL of the SAME page. The busted
-#      URL bypasses the edge cache and returns origin truth; the bare URL is what
-#      users get. If they differ, users are on stale bytes — no matter what
-#      cf-cache-status says (it says DYNAMIC while serving stale; it lies on this
-#      zone — see DESIGN_NOTES).
-#   3. Purge is EVENTUALLY consistent. The first purge_everything of the day
-#      reported success and did not take; a second one, ~2 min later, did. So:
-#      retry with backoff instead of a single 10s sleep, and re-purge once.
+# THIRD version of this check. The first two both produced FALSE PASSES, for
+# opposite reasons, and the shape of the mistake is the same each time: the
+# check had no absolute reference, so it compared something to itself.
+#
+#   v1 (pre-2026-07-16): compared public URL vs deployment URL on a FIXED canary
+#       (/our-story). When that page hadn't changed, both sides were identical
+#       and it passed on a deploy that never shipped. It compared a file to itself.
+#
+#   v2 (2026-07-16): compared bare URL vs CACHE-BUSTED URL of a page that DID
+#       change. Better -- but it tests CONSISTENCY, not FRESHNESS. On 2026-07-20
+#       at 21:05 a purge had not yet propagated, so BOTH fetches returned the old
+#       page, they agreed, and it printed "✓ VERIFIED" while users were on stale
+#       bytes. The content only landed ~4 minutes later. Two stale fetches agreeing
+#       is not evidence of anything.
+#
+#   v3 (this one): assert against LOCAL TRUTH. Derive from `git diff HEAD~1 HEAD`
+#       two strings -- one that exists ONLY in the version just deployed, one that
+#       existed ONLY in the previous version -- then require the live page to
+#       CONTAIN the first and NOT CONTAIN the second. Stale bytes fail both by
+#       construction: they still carry the old string and still lack the new one.
+#       There is no pair of fetches that can agree its way past this.
+#
+# Design rule for anyone editing this again: a verification step must be able to
+# FAIL for the reason it exists. If you cannot state the input that makes it fail,
+# it is decoration. (Both prior versions passed their own author's eyeball test.)
+
 echo "Verifying deploy is LIVE (not just uploaded)..."
 UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-norm() {
-  sed -E -e 's#href="(mailto:|/cdn-cgi/l/email-protection)[^"]*"#href="EMAIL"#g' \
-         -e 's#<script[^>]*/cdn-cgi/[^<]*</script>##g' \
-         -e 's#<script>\(function\(\)\{.*</script>##g'
-}
 
-# Pick a canary that CHANGED in this deploy — otherwise there is nothing to detect.
+# Which HTML page changed in this commit? That page is the canary.
 CANARY_FILE=$(git -C "$SCRIPT_DIR" diff --name-only HEAD~1 HEAD 2>/dev/null | grep '\.html$' | head -1 || true)
+
+ASSERT_DIR=$(mktemp -d)
+trap 'rm -rf "$ASSERT_DIR"' EXIT
+
 if [ -n "$CANARY_FILE" ]; then
   CANARY_PATH="/${CANARY_FILE%.html}"
   CANARY_PATH="${CANARY_PATH%/index}"
-  echo "  canary  : $CANARY_PATH (changed in this deploy)"
+  # Extract the assertions. Text runs only -- never markup, never attributes,
+  # never anything containing an @ or mailto (Cloudflare rewrites those at the
+  # edge, which would make a correct deploy look broken).
+  git -C "$SCRIPT_DIR" diff HEAD~1 HEAD -- "$CANARY_FILE" > "$ASSERT_DIR/d.diff" 2>/dev/null || true
+  python3 - "$ASSERT_DIR" <<'PY'
+import re, sys, pathlib
+d = pathlib.Path(sys.argv[1])
+diff = (d / "d.diff").read_text(encoding="utf-8", errors="replace")
+
+def runs(prefix):
+    """Longest contiguous TEXT run (no tags) from lines added/removed by the diff."""
+    out = []
+    for ln in diff.split("\n"):
+        if not ln.startswith(prefix) or ln.startswith(prefix * 3):
+            continue
+        body = ln[1:]
+        for seg in re.split(r"<[^>]*>", body):
+            seg = seg.strip()
+            if len(seg) < 20:            # too short to be distinctive
+                continue
+            if "@" in seg or "mailto" in seg:   # CF rewrites these at the edge
+                continue
+            out.append(seg)
+    out.sort(key=len, reverse=True)
+    return out
+
+add, rem = runs("+"), runs("-")
+# A string only counts if it is unique to its side.
+appear = next((s for s in add if s not in rem), "")
+vanish = next((s for s in rem if s not in add), "")
+(d / "must_appear.txt").write_text(appear[:120], encoding="utf-8")
+(d / "must_vanish.txt").write_text(vanish[:120], encoding="utf-8")
+PY
+  MUST_APPEAR=$(cat "$ASSERT_DIR/must_appear.txt" 2>/dev/null || true)
+  MUST_VANISH=$(cat "$ASSERT_DIR/must_vanish.txt" 2>/dev/null || true)
+  echo "  canary  : $CANARY_PATH"
+  [ -n "$MUST_APPEAR" ] && echo "  expect PRESENT : ${MUST_APPEAR:0:70}"
+  [ -n "$MUST_VANISH" ] && echo "  expect ABSENT  : ${MUST_VANISH:0:70}"
 else
   CANARY_PATH="/our-story"
-  echo "  canary  : $CANARY_PATH (fallback — no HTML changed in HEAD; check is weak)"
+  MUST_APPEAR=""; MUST_VANISH=""
+  echo "  canary  : $CANARY_PATH (no HTML changed in HEAD)"
 fi
 
-live_sum()  { curl -sf -m 25 -A "$UA" "$SITE_URL$CANARY_PATH"            | norm | sha256sum | cut -c1-16; }
-fresh_sum() { curl -sf -m 25 -A "$UA" "$SITE_URL$CANARY_PATH?cb=$RANDOM$$" | norm | sha256sum | cut -c1-16; }
+if [ -z "$MUST_APPEAR" ] && [ -z "$MUST_VANISH" ]; then
+  # Be loud. A deploy we cannot verify must not print a success line that looks
+  # like one -- that is how the previous two versions did their damage.
+  echo "⚠ CANNOT VERIFY: no distinctive text change found in HEAD to assert on."
+  echo "  The upload succeeded. Whether users see it is UNPROVEN by this script."
+  echo "  Check by hand:  curl -A '<browser UA>' $SITE_URL$CANARY_PATH"
+  echo ""
+  echo "=== Done (deploy uploaded, liveness UNVERIFIED) ==="
+  echo "Deployment : ${DEPLOY_URL:-unknown}"
+  echo "Live       : $SITE_URL"
+  echo "Timestamp  : $(date '+%Y-%m-%d %H:%M:%S')"
+  exit 0
+fi
 
+# A control fetch of / guards the whole probe: this zone bot-blocks plain curl,
+# and a 403 block page has no content to match, which reads identically to
+# "the page is wrong". Absence of evidence is not evidence of absence.
 OK=0
 for attempt in 1 2 3 4 5 6; do
-  L=$(live_sum || echo FETCH_FAIL); F=$(fresh_sum || echo FETCH_FAIL)
-  if [ "$L" = "FETCH_FAIL" ] || [ "$F" = "FETCH_FAIL" ]; then
-    echo "  attempt $attempt: fetch failed"; sleep 10; continue
+  CONTROL=$(curl -s -o /dev/null -w '%{http_code}' -m 25 -A "$UA" "$SITE_URL/" || echo 000)
+  if [ "$CONTROL" != "200" ]; then
+    echo "  attempt $attempt: control fetch of / returned $CONTROL — probe is VOID, retrying"
+    sleep 10; continue
   fi
-  if [ "$L" = "$F" ]; then OK=1; echo "  attempt $attempt: live=$L fresh=$F  ✓ match"; break; fi
-  echo "  attempt $attempt: live=$L fresh=$F  ✗ STALE — users are on old bytes"
+
+  PAGE=$(curl -sf -m 25 -A "$UA" "$SITE_URL$CANARY_PATH" || true)
+  if [ -z "$PAGE" ]; then
+    echo "  attempt $attempt: canary fetch failed"; sleep 10; continue
+  fi
+
+  A_OK=1; V_OK=1
+  [ -n "$MUST_APPEAR" ] && { printf '%s' "$PAGE" | grep -qF -- "$MUST_APPEAR" || A_OK=0; }
+  [ -n "$MUST_VANISH" ] && { printf '%s' "$PAGE" | grep -qF -- "$MUST_VANISH" && V_OK=0; }
+
+  if [ "$A_OK" = "1" ] && [ "$V_OK" = "1" ]; then
+    OK=1; echo "  attempt $attempt: new text present, old text gone  ✓"; break
+  fi
+  echo "  attempt $attempt: STALE — new-text-present=$A_OK old-text-gone=$V_OK"
   if [ "$attempt" = "2" ] && [ -n "$PURGE_TOKEN" ]; then
-    echo "  -> re-purging (purge is eventually consistent; the first one can silently no-op)"
+    echo "  -> re-purging (purge is eventually consistent; the first can silently no-op)"
     curl -s -m 30 -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
       -H "Authorization: Bearer $PURGE_TOKEN" -H "Content-Type: application/json" \
       --data '{"purge_everything":true}' > /dev/null || true
@@ -152,10 +225,10 @@ for attempt in 1 2 3 4 5 6; do
 done
 
 if [ "$OK" = "1" ]; then
-  echo "✓ VERIFIED: the public URL serves the same bytes as a cache-bypassing fetch."
+  echo "✓ VERIFIED: the live page carries the text from this deploy and not the previous one."
 else
-  echo "❌ NOT LIVE: the public URL is serving STALE bytes after repeated purges."
-  echo "   The upload succeeded but users are seeing old content at $SITE_URL$CANARY_PATH"
+  echo "❌ NOT LIVE: $SITE_URL$CANARY_PATH is still serving the previous version."
+  echo "   The upload succeeded but users are on old content."
   echo "   Purge manually, or wait out the edge TTL, then re-check."
   exit 1   # a deploy that isn't visible is not a success
 fi
