@@ -117,9 +117,25 @@ fi
 #       construction: they still carry the old string and still lack the new one.
 #       There is no pair of fetches that can agree its way past this.
 #
+#   v3.1 (2026-07-20 23:31): v3's uniqueness test was bogus, so it produced a
+#       permanent FALSE FAILURE (the inverse of the earlier false passes) on any
+#       revert or in-place line edit. It asked `seg not in <segments from the
+#       other side>` -- Python list membership, i.e. exact element equality --
+#       and it asked BEFORE truncating the string to the 120 chars actually used
+#       for matching. An in-place sentence edit leaves two variants of one
+#       paragraph sharing a long prefix: the two lists hold no common element,
+#       so the check passed, and the 120-char prefix it then handed to grep was
+#       present in BOTH versions. MUST_VANISH could never vanish, so a correct
+#       deploy could never verify. v3.1 validates the exact truncated string
+#       against the actual files: the deployed one and the previous one.
+#
 # Design rule for anyone editing this again: a verification step must be able to
-# FAIL for the reason it exists. If you cannot state the input that makes it fail,
-# it is decoration. (Both prior versions passed their own author's eyeball test.)
+# FAIL for the reason it exists, and must be able to PASS when the deploy is
+# good. If you cannot state the input for each, it is decoration. (All three
+# prior versions passed their own author's eyeball test.)
+#   fails when: the edge still serves the old page -> MUST_APPEAR is missing.
+#   passes when: the edge serves the bytes just uploaded.
+#   asserts nothing (loudly) when: no string can be shown unique to one version.
 
 echo "Verifying deploy is LIVE (not just uploaded)..."
 UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
@@ -137,10 +153,29 @@ if [ -n "$CANARY_FILE" ]; then
   # never anything containing an @ or mailto (Cloudflare rewrites those at the
   # edge, which would make a correct deploy look broken).
   git -C "$SCRIPT_DIR" diff HEAD~1 HEAD -- "$CANARY_FILE" > "$ASSERT_DIR/d.diff" 2>/dev/null || true
+  # The two absolute references every candidate is validated against.
+  #   new.html = the bytes we just uploaded. Deliberately the WORKING TREE, not
+  #     HEAD, because the tree is what shipped. So the assertion is always about
+  #     what was actually uploaded, never about what HEAD claims. If the tree is
+  #     dirty, candidates the uploaded bytes don't satisfy are simply rejected;
+  #     any that survive are still true of the deployed file. (Do not upgrade
+  #     that to "a dirty tree cannot verify" -- tested 2026-07-20, it can, and
+  #     correctly so. This check proves liveness, not tree/HEAD agreement.)
+  #   old.html = the version the edge may still be serving. Absent (new page,
+  #     or first commit) is fine: it just means nothing old can contain our text.
+  cp "$SCRIPT_DIR/$CANARY_FILE" "$ASSERT_DIR/new.html" 2>/dev/null || true
+  git -C "$SCRIPT_DIR" show "HEAD~1:$CANARY_FILE" > "$ASSERT_DIR/old.html" 2>/dev/null || true
   python3 - "$ASSERT_DIR" <<'PY'
 import re, sys, pathlib
 d = pathlib.Path(sys.argv[1])
 diff = (d / "d.diff").read_text(encoding="utf-8", errors="replace")
+MAXLEN = 120                              # the length grep actually matches on
+
+def read(name):
+    p = d / name
+    return p.read_text(encoding="utf-8", errors="replace") if p.exists() else ""
+
+new_text, old_text = read("new.html"), read("old.html")
 
 def runs(prefix):
     """Longest contiguous TEXT run (no tags) from lines added/removed by the diff."""
@@ -159,12 +194,26 @@ def runs(prefix):
     out.sort(key=len, reverse=True)
     return out
 
-add, rem = runs("+"), runs("-")
-# A string only counts if it is unique to its side.
-appear = next((s for s in add if s not in rem), "")
-vanish = next((s for s in rem if s not in add), "")
-(d / "must_appear.txt").write_text(appear[:120], encoding="utf-8")
-(d / "must_vanish.txt").write_text(vanish[:120], encoding="utf-8")
+def pick(cands, must_contain, must_not_contain):
+    """First candidate that is REALLY unique to one version, tested as the exact
+    string grep will use. Truncate FIRST, then validate -- v3 validated the full
+    run and then handed grep a shortened prefix that was common to both versions,
+    which is how a correct deploy came to fail forever."""
+    for seg in cands:
+        s = seg[:MAXLEN]
+        if s in must_contain and s not in must_not_contain:
+            return s
+    return ""
+
+# If we cannot read what we deployed there is no absolute reference left, so
+# assert nothing rather than assert something unfounded.
+if new_text.strip():
+    appear = pick(runs("+"), new_text, old_text)
+    vanish = pick(runs("-"), old_text, new_text)
+else:
+    appear = vanish = ""
+(d / "must_appear.txt").write_text(appear, encoding="utf-8")
+(d / "must_vanish.txt").write_text(vanish, encoding="utf-8")
 PY
   MUST_APPEAR=$(cat "$ASSERT_DIR/must_appear.txt" 2>/dev/null || true)
   MUST_VANISH=$(cat "$ASSERT_DIR/must_vanish.txt" 2>/dev/null || true)
