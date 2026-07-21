@@ -6,3 +6,39 @@
 # Instead: /404.html exists at the project root, and CF Pages serves it with
 # HTTP 404 for unmatched paths automatically — provided the project isn't in
 # SPA mode (no `/* /index.html 200` rule + 404.html file present).
+
+# === Block non-site files from being served (added 2026-07-21) =================
+# WHY: `pages_build_output_dir = "."` means the ENTIRE repo root is the deploy
+# output, so every build/config/working file ships and is publicly readable.
+# Confirmed live on 2026-07-21: /deploy.sh, /wrangler.toml, /.gitignore,
+# /.atlas/atlas.db (a 340K SQLite DB), /.github/workflows/*.yml, /kit/CLAUDE.md,
+# /scripts/audit.py and the internal .md docs all returned 200 — on the apex
+# domain AND on the pages.dev preview URL.
+#
+# WHY REDIRECTS AND NOT AN IGNORE FILE: Cloudflare's own docs document NO upload
+# exclusion for `wrangler pages deploy` — no --exclude, no .cfignore, and
+# .assetsignore is a Workers Assets feature that Pages does not honour (the
+# existing .assetsignore lists *.toml, yet /wrangler.toml served 200). The only
+# files Pages itself withholds are _headers and _redirects. Redirects run BEFORE
+# static assets are served, so a 301 here means the bytes are never returned.
+#
+# LIMITS OF THIS FIX: mitigation, not removal. The files are still uploaded and
+# still exist in the deployment; this closes the public route only. The durable
+# fix is to stop shipping them — move site files under a dedicated output dir
+# (e.g. public/) and point pages_build_output_dir at it, so non-site files are
+# outside the deploy root entirely.
+#
+# 404 is not available here (see note above), so these 301 to the homepage.
+# Keep this list in sync when adding tooling to the repo root.
+/deploy.sh                         /  301
+/wrangler.toml                     /  301
+/DESIGN_NOTES.md                   /  301
+/AI_META_DIRECTIVES_RESEARCH.md    /  301
+/CLICKUP_AUTOMATIONS_REFERENCE.md  /  301
+/.gitignore                        /  301
+/.assetsignore                     /  301
+/.atlas/*                          /  301
+/.github/*                         /  301
+/scripts/*                         /  301
+/cwv-baselines/*                   /  301
+/kit/*                             /  301
