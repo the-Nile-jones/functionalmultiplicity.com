@@ -92,6 +92,15 @@
       definition: "Another term for alters. 'Parts work' refers to therapeutic approaches that engage with individual alters. FM uses this term interchangeably with alters.",
       source: "Clinical / Community"
     },
+    // Fusion needs its own entry because the Exocortex Instructions page turns on
+    // Fusion != Integration. Sharing the "integration" tooltip made that page show
+    // the Integration definition on the term whose distinction it was arguing for.
+    // Wording lifted from the page's own prose, not rewritten.
+    "fusion": {
+      label: "Fusion",
+      definition: "When the Members of a System become one. A valid path — but not a destination and not a default. Your System may not want it, and that is equally valid. The choice is theirs.",
+      source: "Clinical"
+    },
     "integration": {
       label: "Integration",
       definition: "The traditional therapeutic goal of merging alters into a single identity. FM explicitly rejects forced integration as the primary goal, pursuing functional coordination instead.",
