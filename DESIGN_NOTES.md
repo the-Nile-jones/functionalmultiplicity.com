@@ -2,7 +2,7 @@
 
 Living reference for design + accessibility principles. Future Claude sessions read this before changing visual or content patterns.
 
-Last updated: 2026-04-25
+Last updated: 2026-07-20
 
 ---
 
@@ -64,7 +64,8 @@ Every chapter ends with a Disclosure blockquote. `Claude` links to https://claud
 ## 6. Deploy
 
 - Cloudflare Pages auto-deploys on `git push origin main` (~60s propagation). No `wrangler` invocation needed for routine pushes.
-- `deploy.sh` runs the full pipeline (wrangler push + ClickUp live-copy backup) when you need ClickUp sync. It fetches `CLOUDFLARE_GLOBAL_API` from GSM (`gcloud secrets versions access latest --secret=CLOUDFLARE_GLOBAL_API --project=popos-and-mcp`).
+- `deploy.sh` runs the full pipeline: wrangler upload → `purge_everything` → **prove the public URL serves the deployed bytes** (exit 1 if not). It deploys from the **local working directory**, so the live site can be current while commits sit unpushed.
+  - **Corrected 2026-07-20** (this bullet described the pipeline as it stood before 2026-07-16 and was believed, and repeated, months after it stopped being true): there is **no ClickUp step** — that block was removed 2026-07-16 when ClickUp was deprecated. Secrets are the GSM pair **`CLOUDFLARE_API_KEY`** (deploy — confusingly named, it holds an API *token*, exported to wrangler as `CLOUDFLARE_API_TOKEN`) + **`CLOUDFLARE_PURGE_TOKEN`** (least-privilege purge), **not** `CLOUDFLARE_GLOBAL_API`. Verified against `deploy.sh:40-54` on 2026-07-20 — read the script before describing it, twice tonight a plausible name was written from memory and was wrong.
 
 ## 7. CSS Caveats
 
@@ -112,6 +113,17 @@ Current state (verified 2026-04-14): HTML pages = `max-age=3600, must-revalidate
 > **DELETED 2026-07-16** (Nile's call; ruleset now version 7, 0 rules). Rollback JSON: `scratchpad/cf-cache-ruleset.bak.json` — re-POST it to `/zones/{zone}/rulesets/{id}/rules` to restore.
 > ⚠️ **Honest limit on the verification:** `cf-cache-status` read **`DYNAMIC` both before and after** the deletion — i.e. **no observable change**. Either the rule wasn't doing what its description claimed, or `cf-cache-status` is not trustworthy on this zone. **It demonstrably lies here** — it read `DYNAMIC` throughout the 25 minutes a cache was serving stale HTML. **Do not use `cf-cache-status` as evidence on this zone.** If HTML edge-caching turns out to be wanted, prefer fixing it via `_headers` (in git, reviewable) over a dashboard rule (invisible, no history — which is exactly how this ambushed the deploy).
 > **Now enforced in code:** `deploy.sh` purges (`purge_everything`, via the least-privilege `CLOUDFLARE_PURGE_TOKEN`) and then **proves the public URL serves the deployed bytes, exiting 1 if not**. A deploy that isn't visible is not a deploy.
+>
+> **🔺 2026-07-20 — that enforcement claim was itself false, twice, and then wrong a third way. Three versions of the check:**
+>
+> | ver | how it "verified" | failure |
+> |---|---|---|
+> | v1 | public URL vs deployment URL, on a **fixed** canary page | when that page hadn't changed, both sides were identical → **false PASS** on a deploy that never shipped. Compared a file to itself. |
+> | v2 (`ae4d9ba`) | bare URL vs **cache-busted** URL of a page that *did* change | tests CONSISTENCY, not FRESHNESS. 21:05 — purge hadn't propagated, **both** fetches returned stale bytes, they agreed → **false PASS** while users were on old content. |
+> | v3 (`c86ad5f`) | derive from `git diff HEAD~1 HEAD` a text run unique to the new version and one unique to the old; require live to contain the former, not the latter | right idea, broken test: uniqueness was Python **list membership** (exact element equality) and was checked **before** truncating to the 120 chars grep actually uses. Two variants of one paragraph sharing a long prefix both passed it → the "must vanish" string was present in **both** versions → **permanent false FAILURE** on any revert or in-place line edit. |
+> | v3.1 | same idea, validated properly | each candidate is checked **at its final truncated length** against the deployed file and the previous one. Negative-tested on a revert, a block removal and an in-place reword; then proved on a live deploy (attempt 1 correctly STALE, attempt 2 pass). |
+>
+> **The rule this earns:** a verification step must be able to **FAIL for the reason it exists** *and* **PASS when the thing is good**. If you cannot state both inputs, it is decoration. All three broken versions passed their author's eyeball test — which is why the header comment in `deploy.sh` now states both inputs explicitly, and why the "liveness UNVERIFIED" branch exists instead of any unbacked success line.
 
 > **🧊 2026-07-16 — STUCK CACHE ENTRIES: six mechanisms failed. Open: Todoist `6h66rX7f2j98Q7xH`.**
 > Two backup files (`/our-story.html.bak-20260608-pre-harry-correction`, `/did-tooltip.js.bak-20260608-pre-fabricated-term-removal`) had been shipping to production for weeks — `.gitignore`'s `*.bak` only matches names *ending* in `.bak`, and `.assetsignore` (what wrangler actually honours) listed no backups at all. **Fixed forward:** `.assetsignore` now excludes `*.bak *.bak-* *.bak.* *~ *.orig *.rej`, glob-tested including negative cases. No future deploy can ship one.
@@ -239,3 +251,19 @@ python3 scripts/audit.py --live   # + HTTP + cache-header live checks
 Checks: internal link + anchor integrity, tooltip/DICT coverage, cache-bust consistency, stale "Handbook" naming, metadata sanity (canonical/og:url match, H1 count per page), skip-link targets.
 
 Report-only — no changes made. Re-run after any batch of HTML/CSS/DICT edits. See also the full audit report procedure documented in the conversation log from 2026-04-14 (ClickUp doc `8cr51kc-3317` Corrections section #2).
+
+## 18. Plural Pronoun Convention
+
+The homepage states the site's posture: *"functionalmultiplicity.com takes a **System-first perspective in the use of Plural language throughout**."* That is a commitment the prose has to keep.
+
+**The rule (Nile, 2026-07-20):** *"im a singlet now but want the communication to still be plural."* Singular first-person on these pages is **inconsistency, not intent** — the site's voice is Plural regardless of present System composition. Fix it forward when found.
+
+- **Capitalize plural pronouns when they refer to a System** — the site's own (`We / Us / Our / Ours / Ourselves`) *and the reader's* (`You / Your / Yours / Yourself / Yourselves`). The reader is a System too; that is the immersive point.
+- Applies to prose text nodes only. Never rewrite inside tags, attributes, slugs (`your-field-guide`), or JSON-LD. After any pass, verify the **markup is byte-identical** — extract `<[^>]*>` before and after and diff. If the tag sequence changed, the pass touched something it shouldn't have.
+- Copy-paste AI prompt strings **are** pluralized (his call, 2026-07-20) — a System pasting them gets `"Interview Us… Ask Us one question at a time."`
+
+### ⛔ Do NOT blind-regex `our-story.html`
+
+**38 singular tokens across 11 lines are deliberately left singular** — L129, L169–174, L181–182, L249, L277, the July-2022 psychosis narrative. There the singular is **load-bearing**: *"My System and I found each other"* names two parties and does not survive a swap; *"I directed my other Selves to take turns writing"* likewise. These need Nile's judgment sentence by sentence and have not been given it.
+
+A regex over first-person pronouns on this page will silently destroy meaning in exactly the passages that matter most. The 2026-07-20 pass used **15 asserted exact-string swaps** (abort if any match count ≠ 1) plus tag-aware capitalization — not a blanket substitution. Do the same.
