@@ -129,10 +129,32 @@ fi
 #       deploy could never verify. v3.1 validates the exact truncated string
 #       against the actual files: the deployed one and the previous one.
 #
+#   v3.2 (2026-07-21): the assertions were being inverted by a SHELL bug, not by
+#       the edge. `set -euo pipefail` (line 22) combined with
+#       `printf '%s' "$PAGE" | grep -q ...` is unsound: grep -q exits the instant
+#       it matches, which SIGPIPEs the still-writing printf, and pipefail then
+#       reports the whole PIPELINE as failed. So a successful MATCH returned
+#       non-zero -- `|| A_OK=0` fired on success, and `&& V_OK=0` never fired
+#       even when the old text WAS still on the page. That is where the
+#       impossible pair `new-text-present=0 old-text-gone=1` came from: a page
+#       that is apparently neither version. The vanish half failed in the
+#       DANGEROUS direction -- genuinely stale bytes would report "old text
+#       gone" and pass that check.
+#       Proven against the live page 2026-07-21: needle present (grep -c = 1),
+#       yet A_OK=0 on 5/5 runs under pipefail and A_OK=1 on 3/3 without it.
+#       Fix: no pipeline at all. The body is written to a file and grepped
+#       directly, which also leaves the artifact on disk to diagnose from.
+#       Diagnosis cost three wrong root-cause theories first (bot-blocking,
+#       apostrophe encoding, entity decoding) because a failure printed only
+#       THAT it failed. Hence the instrumentation below.
+#
 # Design rule for anyone editing this again: a verification step must be able to
 # FAIL for the reason it exists, and must be able to PASS when the deploy is
 # good. If you cannot state the input for each, it is decoration. (All three
 # prior versions passed their own author's eyeball test.)
+# Corollary added 2026-07-21: it must also distinguish "I could not look" from
+# "I looked and found nothing", and when it fails it must print enough to say
+# WHY -- a bare verdict sends the next reader down invented explanations.
 #   fails when: the edge still serves the old page -> MUST_APPEAR is missing.
 #   passes when: the edge serves the bytes just uploaded.
 #   asserts nothing (loudly) when: no string can be shown unique to one version.
@@ -251,19 +273,40 @@ for attempt in 1 2 3 4 5 6; do
     sleep 10; continue
   fi
 
-  PAGE=$(curl -sf -m 25 -A "$UA" "$SITE_URL$CANARY_PATH" || true)
-  if [ -z "$PAGE" ]; then
-    echo "  attempt $attempt: canary fetch failed"; sleep 10; continue
+  # Body and status together. `curl -f` used to swallow an HTTP error into an
+  # empty string, which made "the edge refused us" read identically to "the page
+  # is wrong" -- the same absence-as-answer trap the control fetch guards.
+  HTTP=$(curl -s -m 25 -A "$UA" -o "$ASSERT_DIR/page.html" \
+           -w '%{http_code}' "$SITE_URL$CANARY_PATH" || echo 000)
+  BYTES=$(wc -c < "$ASSERT_DIR/page.html" 2>/dev/null || echo 0)
+  if [ "$HTTP" != "200" ] || [ "$BYTES" -lt 500 ]; then
+    # NOT a staleness result. Say so in different words so it can never be
+    # mistaken for one.
+    echo "  attempt $attempt: COULD NOT READ page (HTTP $HTTP, ${BYTES}B) — inconclusive, not stale"
+    sleep 10; continue
   fi
 
+  # NO PIPELINE -- see v3.2. grep the file directly, and use explicit if-blocks
+  # rather than && / || chains so neither pipefail nor set -e can invert or
+  # short-circuit the result of a successful match.
   A_OK=1; V_OK=1
-  [ -n "$MUST_APPEAR" ] && { printf '%s' "$PAGE" | grep -qF -- "$MUST_APPEAR" || A_OK=0; }
-  [ -n "$MUST_VANISH" ] && { printf '%s' "$PAGE" | grep -qF -- "$MUST_VANISH" && V_OK=0; }
+  if [ -n "$MUST_APPEAR" ]; then
+    if ! grep -qF -- "$MUST_APPEAR" "$ASSERT_DIR/page.html"; then A_OK=0; fi
+  fi
+  if [ -n "$MUST_VANISH" ]; then
+    if grep -qF -- "$MUST_VANISH" "$ASSERT_DIR/page.html"; then V_OK=0; fi
+  fi
 
   if [ "$A_OK" = "1" ] && [ "$V_OK" = "1" ]; then
     OK=1; echo "  attempt $attempt: new text present, old text gone  ✓"; break
   fi
-  echo "  attempt $attempt: STALE — new-text-present=$A_OK old-text-gone=$V_OK"
+  echo "  attempt $attempt: STALE — new-text-present=$A_OK old-text-gone=$V_OK (HTTP $HTTP, ${BYTES}B)"
+  # A_OK=0 with V_OK=1 means the page is apparently NEITHER version, which is
+  # not a state a stale edge can produce. That combination indicates a broken
+  # check, not a broken deploy -- it is exactly what the v3.2 pipefail bug did.
+  if [ "$A_OK" = "0" ] && [ "$V_OK" = "1" ]; then
+    echo "  ⚠ impossible pair: page matches neither version — SUSPECT THE CHECK, not the deploy"
+  fi
   if [ "$attempt" = "2" ] && [ -n "$PURGE_TOKEN" ]; then
     echo "  -> re-purging (purge is eventually consistent; the first can silently no-op)"
     curl -s -m 30 -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
@@ -279,6 +322,35 @@ else
   echo "❌ NOT LIVE: $SITE_URL$CANARY_PATH is still serving the previous version."
   echo "   The upload succeeded but users are on old content."
   echo "   Purge manually, or wait out the edge TTL, then re-check."
+  echo ""
+  # ── Diagnostics ────────────────────────────────────────────────────────────
+  # Preserve the evidence. ASSERT_DIR is mktemp'd and destroyed by the EXIT trap,
+  # so without this copy every failure is unreproducible by the time anyone
+  # reads it -- which is how one bad verdict cost three wrong root-cause
+  # theories on 2026-07-21.
+  DIAG="$HOME/logs/fm-deploy-fail-$(date '+%Y%m%d-%H%M%S')"
+  mkdir -p "$DIAG"
+  cp "$ASSERT_DIR/page.html"       "$DIAG/live-page.html"       2>/dev/null || true
+  cp "$ASSERT_DIR/new.html"        "$DIAG/local-deployed.html"  2>/dev/null || true
+  cp "$ASSERT_DIR/old.html"        "$DIAG/local-previous.html"  2>/dev/null || true
+  printf '%s' "$MUST_APPEAR" > "$DIAG/must_appear.txt"
+  printf '%s' "$MUST_VANISH" > "$DIAG/must_vanish.txt"
+  {
+    echo "canary        : $CANARY_PATH"
+    echo "canary file   : ${CANARY_FILE:-none}"
+    echo "http / bytes  : ${HTTP:-?} / ${BYTES:-?}"
+    echo "A_OK (appear) : ${A_OK:-?}   V_OK (vanish) : ${V_OK:-?}"
+    echo "MUST_APPEAR   : ${#MUST_APPEAR} chars"
+    echo "MUST_VANISH   : ${#MUST_VANISH} chars"
+    echo "deployment    : ${DEPLOY_URL:-unknown}"
+  } | tee "$DIAG/summary.txt"
+  echo ""
+  echo "   Full assertion strings (what grep actually looked for):"
+  echo "     APPEAR |$MUST_APPEAR|"
+  echo "     VANISH |$MUST_VANISH|"
+  echo ""
+  echo "   Diagnostics saved: $DIAG"
+  echo "   Reproduce:  grep -cF -f $DIAG/must_appear.txt $DIAG/live-page.html"
   exit 1   # a deploy that isn't visible is not a success
 fi
 
